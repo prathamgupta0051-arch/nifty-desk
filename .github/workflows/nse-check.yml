@@ -1,0 +1,17 @@
+name: NSE connection check
+
+on:
+  workflow_dispatch:   # run by hand from the Actions tab whenever you want to test
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Call every NSE source fresh
+        shell: bash
+        run: python nse_check.py | tee -a "$GITHUB_STEP_SUMMARY"
