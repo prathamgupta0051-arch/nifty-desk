@@ -2,6 +2,7 @@ name: Daily market update
 
 on:
   schedule:
+    - cron: "30 2 * * 1-5"    # 08:00 IST, Mon-Fri: overnight US close, Fed, crude, gold, dollar before the open
     - cron: "0 14 * * 1-5"    # 19:30 IST, Mon-Fri: after NSE publishes the day's files
     - cron: "30 16 * * 1-5"   # 22:00 IST retry, picks up anything published late
   workflow_dispatch:          # "Run workflow" button for a manual update
