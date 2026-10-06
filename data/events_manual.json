@@ -1,0 +1,5 @@
+{
+  "_note": "Dates published once a year that have no reliable feed. Edit this file when RBI announces the next schedule; the dashboard picks it up within 30 minutes.",
+  "rbi_mpc_decisions": ["2026-04-08", "2026-06-05", "2026-08-05", "2026-10-07", "2026-12-04", "2027-02-05"],
+  "rbi_source": "RBI MPC calendar for FY2026-27 (meetings Apr 6-8, Jun 3-5, Aug 3-5, Oct 5-7, Dec 2-4, Feb 3-5); decision on the last day, 10:00 IST"
+}

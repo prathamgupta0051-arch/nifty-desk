@@ -1,0 +1,1608 @@
+<title>Nifty Positioning Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Single light theme by design */
+:root{
+  color-scheme:light;
+  --bg:#F5F7FA; --surface:#FFFFFF; --sunk:#F8FAFC; --ink:#111827; --muted:#6B7280; --faint:#9CA3AF; --line:#E5E7EB;
+  --accent:#2F5BEA; --accent-soft:#EEF2FF;
+  --bull:#16A34A; --bull-soft:#E8F7EE; --bear:#DC2626; --bear-soft:#FDECEC; --warn:#D97706; --warn-soft:#FEF3E2;
+  --font:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --display:var(--font); --body:var(--font); --mono:var(--font);
+  --radius:12px; --shadow:0 1px 2px rgba(16,24,40,.04);
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.5;font-variant-numeric:tabular-nums}
+h1,h2,h3{margin:0;line-height:1.2;text-wrap:balance;font-weight:700}
+a{color:var(--accent)}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.label{font-size:11.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.up{color:var(--bull)}.dn{color:var(--bear)}
+.scroll{overflow-x:auto}
+svg text{font-family:var(--font);fill:var(--muted);font-size:11px}
+
+/* ---------- shell ---------- */
+.app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+.side{background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:12px;align-items:center;padding:22px 20px;border-bottom:1px solid var(--line)}
+.logo{width:40px;height:40px;border-radius:10px;background:var(--accent);display:grid;place-items:center;flex:none}
+.brand b{display:block;font-size:15px}
+.brand span{font-size:12.5px;color:var(--muted)}
+.nav{display:flex;flex-direction:column;padding:12px 0;gap:2px;overflow-y:auto}
+.nav .grp{padding:14px 22px 6px}
+.nav a{display:flex;align-items:center;gap:12px;padding:10px 22px;color:#374151;text-decoration:none;font-weight:500;border-right:3px solid transparent}
+.nav a:hover{background:var(--sunk)}
+.nav a.on{background:var(--accent-soft);color:var(--accent);border-right-color:var(--accent);font-weight:600}
+.nav .ico{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;font-size:11.5px;font-weight:700;background:var(--sunk);color:var(--muted);border:1px solid var(--line);flex:none}
+.nav a.on .ico{background:var(--surface);color:var(--accent);border-color:#C7D2FE}
+.nav .dot{width:8px;height:8px;border-radius:50%;margin-left:auto;background:var(--faint)}
+.dot.bull{background:var(--bull)}.dot.bear{background:var(--bear)}.dot.neu{background:var(--warn)}.dot.info{background:var(--accent)}
+.side-foot{margin-top:auto;border-top:1px solid var(--line);padding:16px 20px;display:flex;flex-direction:column;gap:10px}
+.side-foot label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+
+.main{min-width:0;display:flex;flex-direction:column}
+.topbar{background:var(--surface);border-bottom:1px solid var(--line);padding:18px 32px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;position:sticky;top:0;z-index:5}
+.topbar h1{font-size:20px}
+.topbar .sub{color:var(--muted);font-size:13px}
+.topbar .right{margin-left:auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.content{padding:28px 32px 48px;display:flex;flex-direction:column;gap:22px;max-width:1440px;width:100%}
+.view[hidden]{display:none!important}
+.view{display:flex;flex-direction:column;gap:22px}
+
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 14px;border-radius:8px;font-size:13px;font-weight:500}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{color:#fff;opacity:.92}
+input[type=date].btn{padding:6px 10px}
+
+.live-tag{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--ink)}
+.live-tag .dot{width:8px;height:8px;border-radius:50%;background:var(--bull)}
+.live-tag.closed .dot{background:var(--faint)}
+.live-tag.err .dot{background:var(--bear)}
+@media (prefers-reduced-motion:no-preference){.live-tag:not(.closed):not(.err) .dot{animation:pulse 1.6s ease-in-out infinite}}
+@keyframes pulse{50%{opacity:.3}}
+.sample-tag{font-size:12.5px;font-weight:500;color:var(--warn);background:var(--warn-soft);padding:4px 10px;border-radius:999px}
+
+/* ---------- cards ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);min-width:0}
+.card-h{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px;border-bottom:1px solid var(--line)}
+.card-h h2{font-size:16px}
+.card-b{padding:20px 22px;display:flex;flex-direction:column;gap:16px}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}
+.kpi{padding:18px 22px;display:flex;flex-direction:column;gap:6px}
+.kpi b{font-size:26px;font-weight:700;letter-spacing:-.01em;line-height:1.15}
+.kpi .sub{font-size:13px;color:var(--muted);font-weight:500}
+.row{display:grid;gap:22px;align-items:start}
+.row.r-main{grid-template-columns:minmax(0,1fr) 360px}
+.row.r-half{grid-template-columns:1fr 1fr}
+
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;width:max-content}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill.bull{background:var(--bull-soft);color:var(--bull)}
+.pill.bear{background:var(--bear-soft);color:var(--bear)}
+.pill.neu{background:var(--warn-soft);color:var(--warn)}
+.pill.info{background:var(--accent-soft);color:var(--accent)}
+
+/* simple words */
+.simple-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.sq{padding:20px 22px;display:flex;flex-direction:column;gap:8px;font-size:14.5px;line-height:1.6;border-bottom:1px solid var(--line)}
+.sq:nth-child(odd){border-right:1px solid var(--line)}
+.sq:nth-last-child(-n+2){border-bottom:0}
+.sq h3{font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.sq p{margin:0}
+.s-big{font-size:18px;font-weight:700;line-height:1.35}
+.sq ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.s-gloss{margin:0;padding:14px 22px;font-size:12.5px;color:var(--muted);background:var(--sunk);border-top:1px solid var(--line);border-radius:0 0 var(--radius) var(--radius)}
+
+/* mood dial */
+.dial{display:flex;flex-direction:column;align-items:center;gap:2px;padding-top:6px}
+.dial svg{width:100%;max-width:280px;height:auto}
+.dial-num{font-size:40px;font-weight:800;line-height:1;margin-top:-8px}
+.dial-word{font-size:17px;font-weight:700}
+.dial-sub{font-size:12.5px;color:var(--muted)}
+.bars{display:flex;flex-direction:column;gap:11px;border-top:1px solid var(--line);padding-top:16px}
+.bar-row{display:grid;grid-template-columns:104px 1fr 44px;gap:12px;align-items:center;font-size:13.5px}
+.bar-row .v{text-align:right;font-weight:600}
+.track{position:relative;height:6px;background:#F1F3F6;border-radius:3px}
+.track::after{content:"";position:absolute;left:50%;top:-3px;width:1px;height:12px;background:var(--faint)}
+.fill{position:absolute;top:0;height:6px;border-radius:3px}
+.meta3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;border-top:1px solid var(--line);padding-top:14px}
+.meta3 div{display:flex;flex-direction:column;gap:2px}
+.meta3 b{font-size:15px}
+
+/* pipeline */
+.pipe-wrap{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr auto 1fr auto 1fr;align-items:stretch;padding:20px 22px}
+.tile{border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:8px;min-width:0;background:var(--surface)}
+.tile:hover{border-color:var(--accent);background:var(--accent-soft)}
+.t-n{font-size:12px;font-weight:700;color:var(--muted)}
+.t-name{font-weight:600;font-size:13.5px;line-height:1.25}
+.link{display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);padding:0 4px}
+.link span{writing-mode:vertical-rl;transform:rotate(180deg)}
+.link.ok{color:var(--bull)}.link.kill{color:var(--bear)}
+
+/* trade */
+.trade-name{font-size:20px;font-weight:700}
+.legs{display:flex;flex-direction:column;gap:8px}
+.leg{display:flex;gap:10px;align-items:center;font-weight:500}
+.leg .tag{font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px;min-width:44px;text-align:center}
+.tag.buy{background:var(--bull-soft);color:var(--bull)}
+.tag.sell{background:var(--bear-soft);color:var(--bear)}
+.kv{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;border-top:1px solid var(--line);padding-top:14px}
+.kv div{display:flex;flex-direction:column;gap:2px}
+.kv b{font-size:16px}
+.levels{display:flex;flex-direction:column}
+.lv{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.lv:last-child{border-bottom:0}
+.lv b{font-weight:600}
+.lv small{color:var(--muted);font-size:12px;margin-left:8px}
+.hint{font-size:12.5px;color:var(--muted);margin:0}
+
+/* ---------- step pages ---------- */
+.step-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;padding:20px 22px}
+.step-no{width:44px;height:44px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:800;font-size:18px;flex:none}
+.step-head h2{font-size:18px}
+.step-head .q{color:var(--muted);margin:2px 0 0}
+.step-head .sig{margin-left:auto;display:flex;align-items:center;gap:10px}
+.score{font-size:13px;color:var(--muted);font-weight:500}
+.reading{margin:0;font-size:15px;line-height:1.65;max-width:78ch}
+.reading b{font-weight:700}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.facts div{display:flex;flex-direction:column;gap:4px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--sunk)}
+.facts .label{font-size:11px}
+.facts b{font-size:17px;font-weight:700}
+.note{font-size:13px;color:var(--muted);background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:0;line-height:1.55}
+.inputs{display:flex;flex-direction:column;gap:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:flex;flex-direction:column;gap:5px;min-width:0}
+.field .label{font-size:11px}
+.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:8px 10px;font:inherit;font-size:13.5px}
+.field textarea{resize:vertical;min-height:64px}
+.field input:focus,.field select:focus,.field textarea:focus,td input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-soft)}
+.auto-note{font-size:12px;color:var(--accent);background:var(--accent-soft);border-radius:8px;padding:8px 10px;margin:0}
+
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:right;padding:10px 10px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--sunk)}
+th:first-child,td:first-child{text-align:left}
+td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+tr.hl td{background:var(--accent-soft)}
+td input{width:92px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-align:right;padding:4px 6px;border-radius:6px;font:inherit;font-size:13px}
+.tbl{border:1px solid var(--line);border-radius:10px;overflow:auto}
+
+.quad{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qc{border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:2px;color:var(--muted)}
+.qc b{font-size:14.5px;color:var(--ink)}
+.qc small{font-size:12.5px}
+.qc.on{border-width:2px}
+.qc.lb.on{border-color:var(--bull);background:var(--bull-soft)}
+.qc.sb.on{border-color:var(--bear);background:var(--bear-soft)}
+.qc.sc.on{border-color:var(--warn);background:var(--warn-soft)}
+.qc.lu.on{border-color:var(--accent);background:var(--accent-soft)}
+
+.fly{display:grid;grid-template-columns:62px 78px minmax(120px,1fr) 74px minmax(120px,1fr) 78px 62px;align-items:center;row-gap:5px;column-gap:8px;font-size:12.5px;min-width:640px}
+.fly .pc,.fly .chg{padding:3px 6px;border-radius:6px;white-space:nowrap}
+.fly .pc{font-weight:600;color:var(--muted)}
+.fly .r{text-align:right}
+.fly .sig-bear{background:var(--bear-soft);color:var(--bear)}
+.fly .sig-bull{background:var(--bull-soft);color:var(--bull)}
+.fly .strong{font-weight:800;box-shadow:inset 0 0 0 1.5px currentColor}
+.fly .k small{display:block;font-size:10.5px;font-weight:600;color:var(--muted);line-height:1.1}
+.fly .k.atm small{color:#DCE6FF}
+.ivsell{color:#B45309}.ivbuy{color:#7C3AED}
+.fly .k.atm small.ivsell,.fly .k.atm small.ivbuy{color:#fff}
+.fly .sig-neu{background:var(--sunk);color:var(--muted)}
+.bar.itm{opacity:.38}
+.wall-line{margin:0;font-size:13.5px;color:var(--ink);background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.legend{display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+.legend span{display:flex;align-items:center;gap:8px}
+.sw{width:12px;height:12px;border-radius:3px;flex:none;display:inline-block}
+.sw.bear{background:var(--bear-soft);box-shadow:inset 0 0 0 1.5px var(--bear)}
+.sw.bull{background:var(--bull-soft);box-shadow:inset 0 0 0 1.5px var(--bull)}
+.sig-list{display:flex;flex-direction:column}
+.sig-item small{display:block;color:var(--muted);font-size:12px;font-weight:500}
+.sig-item{display:grid;grid-template-columns:78px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.sig-item:last-child{border-bottom:0}
+.sig-item .k{font-weight:700}
+.sig-item p{margin:0;font-size:13.5px;line-height:1.45}
+.sig-item small{display:block;color:var(--muted);font-size:12.5px}
+.fly .h{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding-bottom:4px}
+.fly .k{text-align:center;font-weight:600;padding:3px 0;border-radius:6px;background:var(--sunk)}
+.fly .k.atm{background:var(--accent);color:#fff}
+.bar{height:16px;border-radius:4px}
+.barl{display:flex;justify-content:flex-end}
+.bar.ce{background:#F87171}
+.bar.pe{background:#4ADE80}
+.bar.max{box-shadow:0 0 0 2px var(--ink)}
+.chg{color:var(--muted)}
+.chg.l{text-align:right}
+
+.matrix{display:grid;grid-template-columns:70px repeat(3,1fr);gap:6px}
+.matrix .mh{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:4px}
+.cell{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:9px 10px;text-align:left;font-size:12.5px;line-height:1.3;min-height:54px}
+.cell:hover{border-color:var(--accent)}
+.cell.on{border:2px solid var(--accent);background:var(--accent-soft);font-weight:600}
+.cell.auto::after{content:" · model pick";color:var(--muted);font-weight:400;font-size:11px}
+
+.foot{font-size:12px;color:var(--muted);margin:0;max-width:100ch}
+
+/* ---------- market context ---------- */
+.mx-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.mx{padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.mx-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.mx-val{font-size:24px;font-weight:800;letter-spacing:-.01em}
+.mx-chg{display:flex;gap:14px;font-size:12.5px;color:var(--muted);flex-wrap:wrap}
+.mx-chg b{font-weight:600}
+.mx svg{width:100%;height:56px;display:block}
+.pbar{position:relative;height:6px;background:#F1F3F6;border-radius:3px}
+.pbar i{position:absolute;top:-3px;width:3px;height:12px;border-radius:2px;background:var(--ink)}
+.mx p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.5}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:var(--surface);padding:7px 12px;font-size:13px;color:var(--muted);font-weight:500}
+.seg button.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.rs-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.rs-search{border:1px solid var(--line);border-radius:8px;padding:7px 10px;font:inherit;font-size:13px;min-width:180px}
+.n50{font-size:10.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 6px;border-radius:4px;margin-left:6px}
+#rsTable td:nth-child(2){white-space:normal;min-width:180px}
+#rsTable thead th{position:sticky;top:0}
+#rsTable td.links{display:flex;gap:10px;justify-content:flex-end}
+#rsTable td.links a{font-weight:600;text-decoration:none}
+#rsTable td.links a:hover{text-decoration:underline}
+.cal{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.cal-day{border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;background:var(--sunk)}
+.cal-day b{font-size:13px}
+.cal-day span{font-size:12.5px;color:var(--ink)}
+.cal-day small{color:var(--muted);font-size:12px}
+
+.alert-strip{display:flex;align-items:center;gap:12px;flex-wrap:wrap;text-decoration:none;color:var(--ink);background:var(--bear-soft);border:1px solid #F5C2C2;border-radius:12px;padding:12px 18px;font-size:14px}
+.alert-strip.amber{background:var(--warn-soft);border-color:#F3D9AE}
+.alert-strip b{font-weight:700}
+.alert-strip .go{margin-left:auto;color:var(--accent);font-weight:600;font-size:13px}
+.alert-list{display:flex;flex-direction:column}
+.al{display:grid;grid-template-columns:22px 150px 1fr;gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid var(--line)}
+.al:last-child{border-bottom:0}
+.al .fl{font-size:16px;line-height:1.2}
+.al .who{font-weight:600}
+.al .what b{display:block}
+.al .what span{color:var(--muted);font-size:13px}
+.flag-red{color:var(--bear)}.flag-amber{color:var(--warn)}
+.mx.flagged-red{border:2px solid var(--bear);box-shadow:0 0 0 3px var(--bear-soft)}
+.mx.flagged-amber{border:2px solid #F0B35B}
+.mx-flags{display:flex;flex-direction:column;gap:4px;margin:-4px 0 2px}
+.mx-flag{font-size:12.5px;font-weight:600;padding:5px 9px;border-radius:7px}
+.mx-flag.red{background:var(--bear-soft);color:var(--bear)}
+.mx-flag.amber{background:var(--warn-soft);color:var(--warn)}
+.navcount{font-size:10.5px;font-weight:700;color:#fff;background:var(--bear);border-radius:999px;padding:0 6px;margin-left:auto;line-height:16px}
+.sec-bars{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.sec-row{display:grid;grid-template-columns:150px 1fr 74px;gap:10px;align-items:center;font-size:12.5px}
+.sec-row .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sec-row .v{text-align:right;font-weight:600}
+.sec-track{position:relative;height:14px}
+.sec-track::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--faint)}
+.sec-track i{position:absolute;top:0;height:14px;border-radius:3px}
+.ev-list{display:flex;flex-direction:column}
+.ev-day{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.ev-day:last-child{border-bottom:0}
+.ev-date b{display:block;font-size:15px}
+.ev-date small{color:var(--muted);font-size:12px}
+.ev-day.today .ev-date b{color:var(--accent)}
+.ev-items{display:flex;flex-direction:column;gap:10px}
+.ev{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:start}
+.ev .tm{font-size:12.5px;color:var(--muted);font-weight:600;padding-top:2px}
+.ev .tt{font-weight:600;font-size:14px}
+.ev .wy{display:block;color:var(--muted);font-size:12.5px;font-weight:400;margin-top:2px}
+.chip{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--sunk);border:1px solid var(--line);color:var(--muted);margin-right:6px;white-space:nowrap}
+.imp-High{background:var(--bear-soft);color:var(--bear);border-color:transparent}
+.imp-Medium{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+@media (max-width:620px){.ev-day{grid-template-columns:1fr}.sec-row{grid-template-columns:110px 1fr 64px}}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){.mx-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.mx-grid{grid-template-columns:1fr}}
+@media (max-width:1200px){
+  .kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .row.r-main{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .side{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}
+  .nav{flex-direction:row;overflow-x:auto;padding:6px 8px}
+  .nav .grp{display:none}
+  .nav a{padding:8px 12px;border-right:0;border-bottom:3px solid transparent;white-space:nowrap}
+  .nav a.on{border-bottom-color:var(--accent)}
+  .nav .dot{margin-left:4px}
+  .side-foot{flex-direction:row;flex-wrap:wrap;align-items:center;padding:10px 16px}
+  .brand{padding:14px 16px}
+  .topbar{position:static;padding:14px 16px}
+  .content{padding:18px 16px 40px}
+  .row.r-half{grid-template-columns:1fr}
+  .pipe-wrap{grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .pipe-wrap .link{display:none}
+}
+@media (max-width:560px){
+  .kpis{grid-template-columns:1fr 1fr}
+  .simple-grid{grid-template-columns:1fr}
+  .sq:nth-child(odd){border-right:0}
+  .sq:nth-last-child(2){border-bottom:1px solid var(--line)}
+  .pipe-wrap{grid-template-columns:1fr 1fr}
+  .grid2{grid-template-columns:1fr 1fr}
+  .kv{grid-template-columns:1fr 1fr}
+  .fly{grid-template-columns:52px 1fr 58px 1fr 52px;font-size:11px}
+  .step-head .sig{margin-left:0}
+}
+</style>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="side">
+    <div class="brand">
+      <div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div>
+      <div><b>Positioning Desk</b><span>Nifty · six-step framework</span></div>
+    </div>
+    <nav class="nav" id="nav">
+      <a href="#overview" data-view="overview"><span class="ico">◎</span>Overview</a>
+      <span class="grp label">Framework</span>
+      <a href="#step1" data-view="step1"><span class="ico">1</span>Price trend<span class="dot" id="nd1"></span></a>
+      <a href="#step2" data-view="step2"><span class="ico">2</span>OI &amp; FII positioning<span class="dot" id="nd2"></span></a>
+      <a href="#step3" data-view="step3"><span class="ico">3</span>Option chain<span class="dot" id="nd3"></span></a>
+      <a href="#step4" data-view="step4"><span class="ico">4</span>Put-call ratio<span class="dot" id="nd4"></span></a>
+      <a href="#step5" data-view="step5"><span class="ico">5</span>Volatility<span class="dot" id="nd5"></span></a>
+      <a href="#step6" data-view="step6"><span class="ico">6</span>Strategy &amp; Greeks<span class="dot" id="nd6"></span></a>
+      <span class="grp label">Market context</span>
+      <a href="#macro" data-view="macro"><span class="ico">$</span>Global macro<span class="dot" id="ndMacro"></span></a>
+      <a href="#flows" data-view="flows"><span class="ico">₹</span>FII &amp; DII flows<span class="dot" id="ndFlows"></span></a>
+      <a href="#results" data-view="results"><span class="ico">Q</span>Quarterly results<span class="dot" id="ndResults"></span></a>
+      <a href="#events" data-view="events"><span class="ico">◷</span>Event calendar<span class="dot" id="ndEvents"></span></a>
+    </nav>
+    <div class="side-foot">
+      <span class="live-tag closed" id="liveTag" hidden><span class="dot"></span><span id="liveTxt">Live</span></span>
+      <label id="freezeWrap" hidden><input id="freeze" type="checkbox"> Freeze numbers</label>
+      <button class="btn primary" id="refreshBtn" type="button" hidden>Refresh now</button>
+      <button class="btn" id="resetBtn" type="button">Load sample data</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div><h1 id="pageTitle">Overview</h1><div class="sub" id="pageSub">What the big players are doing, in one screen</div></div>
+      <div class="right">
+        <span class="sample-tag" id="sampleTag">Sample data · Aug 2026 case</span>
+        <label class="label" for="asof" style="display:flex;align-items:center;gap:8px">As of <input id="asof" data-k="asof" type="date" class="btn"></label>
+      </div>
+    </header>
+
+    <div class="content">
+
+    <!-- ================= OVERVIEW ================= -->
+    <section class="view" id="v-overview">
+      <div class="kpis">
+        <div class="card kpi"><span class="label">Nifty 50</span><b id="kSpot">—</b><span class="sub" id="kSpotSub"></span></div>
+        <div class="card kpi"><span class="label">Market view</span><b id="kBias">—</b><span class="sub" id="kBiasSub"></span></div>
+        <div class="card kpi"><span class="label">FII long %</span><b id="kFii">—</b><span class="sub" id="kFiiSub"></span></div>
+        <div class="card kpi"><span class="label">Put-call ratio</span><b id="kPcr">—</b><span class="sub" id="kPcrSub"></span></div>
+        <div class="card kpi"><span class="label">India VIX / IV</span><b id="kVix">—</b><span class="sub" id="kVixSub"></span></div>
+      </div>
+
+      <a class="alert-strip" id="ovAlerts" href="#macro" hidden></a>
+
+      <div class="row r-main">
+        <div class="card">
+          <div class="card-h"><h2>In simple words</h2><span class="pill" id="sConf">—</span></div>
+          <div class="simple-grid">
+            <div class="sq"><h3>What's happening?</h3><p class="s-big" id="sStatus">—</p><p id="sConfTxt"></p></div>
+            <div class="sq"><h3 id="sDoTitle">What does the model suggest?</h3><p class="s-big" id="sDo">—</p><p id="sMoney"></p></div>
+            <div class="sq"><h3>Why?</h3><ul id="sWhy"></ul></div>
+            <div class="sq"><h3>When is this view wrong?</h3><p id="sWrong"></p></div>
+          </div>
+          <p class="s-gloss"><b>Call</b> gains when the market goes up. <b>Put</b> gains when the market goes down. <b>FIIs</b> are big foreign funds. <b>Option sellers</b> are big players who collect money betting price will <i>not</i> cross a level.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-h"><span class="label">Market mood</span><span class="pill" id="convPill">—</span></div>
+          <div class="card-b">
+            <div class="dial">
+              <svg id="gauge" viewBox="0 0 280 150" aria-label="Bias dial"></svg>
+              <div class="dial-num" id="biasNum">—</div>
+              <div class="dial-word" id="biasWord">—</div>
+              <div class="dial-sub">Bias score, −100 bearish to +100 bullish</div>
+            </div>
+            <div class="bars" id="stepBars"></div>
+            <div class="meta3">
+              <div><span class="label">Agreeing</span><b id="agreeNum">—</b></div>
+              <div><span class="label">Vol regime</span><b id="regNum">—</b></div>
+              <div><span class="label">Model pick</span><b id="kPick">—</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h2>Framework chain</h2><span class="hint">Each step confirms or kills the one before it. Click a step to open it.</span></div>
+        <nav class="pipe-wrap" id="pipe" aria-label="Framework steps"></nav>
+      </div>
+
+      <div class="row r-half">
+        <div class="card">
+          <div class="card-h"><h2>Suggested trade</h2><a class="btn" href="#step6" style="text-decoration:none">Open strategy</a></div>
+          <div class="card-b">
+            <div class="trade-name" id="tradeName">—</div>
+            <p class="hint" id="tradeWhy"></p>
+            <div class="legs" id="tradeLegs"></div>
+            <div class="kv">
+              <div><span class="label" id="premLabel">Net premium</span><b id="kPrem">—</b></div>
+              <div><span class="label">Max profit</span><b id="kMaxP">—</b></div>
+              <div><span class="label">Max loss</span><b id="kMaxL">—</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-h"><h2>Key levels</h2><span class="hint" id="levelsSub"></span></div>
+          <div class="card-b"><div class="levels" id="levels"></div></div>
+        </div>
+      </div>
+      <p class="hint" id="summary"></p>
+    </section>
+
+    <!-- ================= STEP 1 ================= -->
+    <section class="view" id="v-step1" hidden>
+      <div class="card step-head">
+        <span class="step-no">1</span>
+        <div><h2>Price trend</h2><p class="q">Where is the market and what's the structure?</p></div>
+        <div class="sig"><span class="score" id="sc1"></span><span class="pill" id="pill1"></span></div>
+      </div>
+      <div class="row r-main">
+        <div class="card"><div class="card-b">
+          <p class="reading" id="read1"></p>
+          <span class="label">Spot against its moving averages</span>
+          <div class="scroll"><svg id="ladder" viewBox="0 0 700 92" style="width:100%;min-width:480px;height:auto;display:block"></svg></div>
+        </div></div>
+        <div class="card">
+          <div class="card-h"><h2>Inputs</h2></div>
+          <div class="card-b inputs">
+            <p class="auto-note live-only" hidden>Filled automatically from NSE. Edit to test a scenario.</p>
+            <div class="grid2">
+              <div class="field"><label class="label" for="spot">Nifty spot</label><input id="spot" data-k="spot" type="number" step="0.05"></div>
+              <div class="field"><label class="label" for="dma20">20 DMA</label><input id="dma20" data-k="dma20" type="number" step="0.05"></div>
+              <div class="field"><label class="label" for="dma50">50 DMA</label><input id="dma50" data-k="dma50" type="number" step="0.05"></div>
+              <div class="field"><label class="label" for="dma200">200 DMA</label><input id="dma200" data-k="dma200" type="number" step="0.05"></div>
+            </div>
+            <div class="field"><label class="label" for="structure">Swing structure</label>
+              <select id="structure" data-k="structure">
+                <option value="hhhl">Higher highs, higher lows (uptrend)</option>
+                <option value="range">Sideways range</option>
+                <option value="lhll">Lower highs, lower lows (downtrend)</option>
+              </select>
+            </div>
+            <p class="hint">Moving averages give location; swing structure gives direction.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STEP 2 ================= -->
+    <section class="view" id="v-step2" hidden>
+      <div class="card step-head">
+        <span class="step-no">2</span>
+        <div><h2>Open interest &amp; FII positioning</h2><p class="q">Who is positioned, and are they adding or exiting?</p></div>
+        <div class="sig"><span class="score" id="sc2"></span><span class="pill" id="pill2"></span></div>
+      </div>
+      <div class="row r-main">
+        <div class="card"><div class="card-b">
+          <p class="reading" id="read2"></p>
+          <div class="quad" id="quad">
+            <div class="qc lb"><span class="label">Price ↑ OI ↑</span><b>Long build-up</b><small>Fresh longs. Trend has real conviction.</small></div>
+            <div class="qc sb"><span class="label">Price ↓ OI ↑</span><b>Short build-up</b><small>Fresh shorts. The fall is being backed.</small></div>
+            <div class="qc sc"><span class="label">Price ↑ OI ↓</span><b>Short covering</b><small>Shorts running. Can reverse once covering ends.</small></div>
+            <div class="qc lu"><span class="label">Price ↓ OI ↓</span><b>Long unwinding</b><small>Longs exiting. Often a healthier dip.</small></div>
+          </div>
+          <div class="facts" id="facts2"></div>
+        </div></div>
+        <div class="card">
+          <div class="card-h"><h2>Inputs</h2></div>
+          <div class="card-b inputs">
+            <p class="auto-note live-only" hidden>Filled automatically from NSE. Edit to test a scenario.</p>
+            <div class="field" id="oiWinWrap" hidden><label class="label" for="oiWin">Compare against</label>
+              <select id="oiWin" data-k="oiWin"><option value="1">Previous session</option><option value="5">5 sessions ago</option><option value="10">10 sessions ago</option></select></div>
+            <div class="grid2">
+              <div class="field"><label class="label" for="futP0">Price (start)</label><input id="futP0" data-k="futP0" type="number" step="0.05"></div>
+              <div class="field"><label class="label" for="futP1">Price (end)</label><input id="futP1" data-k="futP1" type="number" step="0.05"></div>
+              <div class="field"><label class="label" for="oi0">Futures OI (start)</label><input id="oi0" data-k="oi0" type="number"></div>
+              <div class="field"><label class="label" for="oi1">Futures OI (end)</label><input id="oi1" data-k="oi1" type="number"></div>
+            </div>
+            <p class="hint">OI never moves alone. Read it against price; the combination is the signal.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-h"><h2>FII positioning</h2><span class="hint">Index futures · from NSE's <a href="https://www.nseindia.com/all-reports-derivatives" target="_blank" rel="noopener">participant-wise OI</a> report</span></div>
+        <div class="card-b">
+          <span class="label">FII long % of index-futures positions</span>
+          <div class="scroll"><svg id="fiiBar" viewBox="0 0 700 64" style="width:100%;min-width:480px;height:auto;display:block"></svg></div>
+          <div class="scroll" id="fiiHistWrap" hidden><svg id="fiiHist" viewBox="0 0 700 120" style="width:100%;min-width:480px;height:auto;display:block"></svg></div>
+          <div class="tbl">
+            <table id="partTable">
+              <thead><tr><th>Participant</th><th>Long</th><th>Short</th><th>Prev long</th><th>Prev short</th><th>Long %</th><th>Δ long % pts</th><th>Net contracts</th><th>Δ net</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="note">Every time the FII long-short ratio has dropped below 10%, short covering followed. The trigger is long % turning up, not just being low. Until it rises, FIIs are still short.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STEP 3 ================= -->
+    <section class="view" id="v-step3" hidden>
+      <div class="card step-head">
+        <span class="step-no">3</span>
+        <div><h2>Option chain</h2><p class="q">Where exactly are writers defending strikes?</p></div>
+        <div class="sig"><span class="score" id="sc3"></span><span class="pill" id="pill3"></span></div>
+      </div>
+      <div class="card"><div class="card-b">
+        <p class="reading" id="read3"></p>
+        <div class="facts" id="facts3"></div>
+      </div></div>
+      <div class="card">
+        <div class="card-h"><h2>Open interest by strike</h2><span class="hint">Bars: red = call writers (ceiling) · green = put writers (floor)</span></div>
+        <div class="card-b">
+          <p class="wall-line" id="wallLine"></p>
+          <div class="scroll"><div class="fly" id="fly"></div></div>
+          <div class="legend">
+            <span><i class="sw bear"></i>Highlighted in red: the change is bearish (call writers adding, or put writers leaving)</span>
+            <span><i class="sw bull"></i>Highlighted in green: the change is bullish (put writers adding, or call writers leaving)</span>
+            <span><b>Significant</b> = OI changed by 30% or more, and the change is at least 10% of the biggest OI in the chain. <b>Outlined</b> = 75% or more.</span>
+            <span><b>IV under each strike</b> = how far that strike's IV moved from what the index move alone predicts. <span class="ivsell">Negative</span> = selling pressure (writers), <span class="ivbuy">positive</span> = buying pressure. This is what separates writing from buying.</span>
+            <span><b>Faded bars</b> are in the money. Changes there are reactions to losses or profits, so they count for less than changes in front of the price.</span>
+          </div>
+        </div>
+      </div>
+      <div class="row r-half">
+        <div class="card">
+          <div class="card-h"><h2>Significant changes</h2><span class="pill" id="sigPill">—</span></div>
+          <div class="card-b"><p class="reading" id="sigRead" style="font-size:14px"></p><div class="sig-list" id="sigList"></div></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><h2>Chain data</h2></div>
+          <div class="card-b inputs">
+            <p class="auto-note live-only" hidden>Current expiry, filled from NSE.</p>
+            <div class="tbl">
+              <table id="chainTable">
+                <thead><tr><th>Strike</th><th>Call OI</th><th>Call Δ</th><th>Put OI</th><th>Put Δ</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <p class="hint">Source: <a href="https://www.nseindia.com/option-chain" target="_blank" rel="noopener">NSE option chain</a>. Contracts, nearest expiry.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STEP 4 ================= -->
+    <section class="view" id="v-step4" hidden>
+      <div class="card step-head">
+        <span class="step-no">4</span>
+        <div><h2>Put-call ratio</h2><p class="q">Is sentiment stretched, and is that a signal or a trap?</p></div>
+        <div class="sig"><span class="score" id="sc4"></span><span class="pill" id="pill4"></span></div>
+      </div>
+      <div class="row r-main">
+        <div class="card"><div class="card-b">
+          <p class="reading" id="read4"></p>
+          <div class="facts" id="facts4"></div>
+          <div class="scroll"><svg id="pcrChart" viewBox="0 0 700 200" style="width:100%;min-width:480px;height:auto;display:block"></svg></div>
+          <p class="note">PCR is a contrarian gauge at the extremes. Very high means everyone is already bullish (trap risk); very low means bears are crowded. In between, direction matters: a sliding PCR means bulls are giving up.</p>
+        </div></div>
+        <div class="card">
+          <div class="card-h"><h2>Inputs</h2></div>
+          <div class="card-b inputs">
+            <p class="auto-note live-only" hidden>End-of-day PCR across all Nifty expiries, from NSE bhavcopy.</p>
+            <div class="field"><label class="label" for="pcrHist">PCR, last sessions (oldest → today)</label>
+              <textarea id="pcrHist" data-k="pcrHist" rows="3"></textarea></div>
+            <div class="grid2">
+              <div class="field"><label class="label" for="pcrHi">Overheated above</label><input id="pcrHi" data-k="pcrHi" type="number" step="0.05"></div>
+              <div class="field"><label class="label" for="pcrLo">Oversold below</label><input id="pcrLo" data-k="pcrLo" type="number" step="0.05"></div>
+            </div>
+            <p class="hint">PCR = put OI ÷ call OI (the standard convention; the slide had it inverted). Higher means more put writing, so bulls are stronger.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STEP 5 ================= -->
+    <section class="view" id="v-step5" hidden>
+      <div class="card step-head">
+        <span class="step-no">5</span>
+        <div><h2>Implied volatility</h2><p class="q">Is premium cheap or expensive right now?</p></div>
+        <div class="sig"><span class="score" id="sc5"></span><span class="pill" id="pill5"></span></div>
+      </div>
+      <div class="row r-main">
+        <div class="card"><div class="card-b">
+          <p class="reading" id="read5"></p>
+          <div class="facts" id="facts5"></div>
+          <div class="scroll"><svg id="ivChart" viewBox="0 0 700 110" style="width:100%;min-width:480px;height:auto;display:block"></svg></div>
+          <p class="note">Rising volatility makes premiums expensive; falling volatility makes them cheap. IV at the low end of its range favours buying options, at the high end selling them. When IV keeps falling, bought premiums barely move; a sudden spike can hurt sold premiums.</p>
+        </div></div>
+        <div class="card">
+          <div class="card-h"><h2>Inputs</h2></div>
+          <div class="card-b inputs">
+            <p class="hint" id="ivSrc" hidden>Live mode uses India VIX as Nifty's IV. Percentile and range come from the last 250 sessions.</p>
+            <div class="grid2">
+              <div class="field"><label class="label" for="iv">Nifty IV %</label><input id="iv" data-k="iv" type="number" step="0.05"></div>
+              <div class="field"><label class="label" for="ivp">IV percentile %</label><input id="ivp" data-k="ivp" type="number" step="1" min="0" max="100"></div>
+              <div class="field"><label class="label" for="ivLo">1-year low</label><input id="ivLo" data-k="ivLo" type="number" step="0.05"></div>
+              <div class="field"><label class="label" for="ivHi">1-year high</label><input id="ivHi" data-k="ivHi" type="number" step="0.05"></div>
+            </div>
+            <div class="field"><label class="label" for="ivTrend">IV trend</label>
+              <select id="ivTrend" data-k="ivTrend"><option value="falling">Falling</option><option value="flat">Flat</option><option value="rising">Rising</option></select></div>
+            <p class="hint">IV percentile = share of the last year's sessions when IV was below today's level.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STEP 6 ================= -->
+    <section class="view" id="v-step6" hidden>
+      <div class="card step-head">
+        <span class="step-no">6</span>
+        <div><h2>Greeks &amp; strategy</h2><p class="q">Which instrument expresses this view at the least risk?</p></div>
+        <div class="sig"><span class="pill info" id="pill6">—</span></div>
+      </div>
+      <div class="row r-main">
+        <div class="card"><div class="card-b">
+          <p class="reading" id="read6"></p>
+          <span class="label">Payoff at expiry (₹, all lots)</span>
+          <div class="scroll"><svg id="payoff" viewBox="0 0 700 250" style="width:100%;min-width:480px;height:auto;display:block"></svg></div>
+          <div class="tbl"><table id="greekTable">
+            <thead><tr><th>Leg</th><th>Premium</th><th>Delta</th><th>Gamma</th><th>Theta /day</th><th>Vega /1%</th></tr></thead>
+            <tbody></tbody>
+          </table></div>
+          <p class="note">Black-Scholes estimates using one flat IV for every strike, so skew is ignored. Check live premiums before you act.</p>
+        </div></div>
+        <div class="card">
+          <div class="card-h"><h2>Structure</h2><button class="btn" id="autoBtn" type="button">Use model pick</button></div>
+          <div class="card-b inputs">
+            <span class="label">Direction × volatility</span>
+            <div class="matrix" id="matrix"></div>
+            <p class="hint">Click a cell to model a different structure. Credit spreads sell at the strikes writers defend in step 3.</p>
+            <div class="grid2">
+              <div class="field"><label class="label" for="dte">Days to expiry</label><input id="dte" data-k="dte" type="number" min="1" step="1"></div>
+              <div class="field"><label class="label" for="rate">Risk-free rate %</label><input id="rate" data-k="rate" type="number" step="0.05"></div>
+              <div class="field"><label class="label" for="lot">Lot size</label><input id="lot" data-k="lot" type="number" step="1"></div>
+              <div class="field"><label class="label" for="lots">Lots</label><input id="lots" data-k="lots" type="number" min="1" step="1"></div>
+              <div class="field"><label class="label" for="width">Spread width (pts)</label><input id="width" data-k="width" type="number" step="50"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= GLOBAL MACRO ================= -->
+    <section class="view" id="v-macro" hidden>
+      <div class="ctx-off card card-b" hidden><p class="reading">This page needs live data. It works when the dashboard runs on your Mac at <b>http://127.0.0.1:8765</b>.</p></div>
+      <div class="card">
+        <div class="card-h"><h2>What the world is telling Indian markets</h2><span class="pill" id="mxPill">—</span></div>
+        <div class="card-b"><p class="reading" id="mxRead">Loading global data…</p><p class="hint" id="mxUpd"></p></div>
+      </div>
+      <div class="card" id="mxAlertCard" hidden>
+        <div class="card-h"><h2>⚑ Changes to watch</h2><span class="hint">Checked every 15 minutes · your Mac also shows a notification for each new flag</span></div>
+        <div class="card-b"><div class="alert-list" id="mxAlerts"></div></div>
+      </div>
+      <div class="mx-grid" id="mxGrid"></div>
+      <p class="hint"><b>Flags:</b> red = a change that is bad for Indian stocks, amber = a big change worth watching. An indicator is flagged when it moves more than 2.5× its normal daily amount, hits a new 1-year high or low, or turns bad for India; the US 10-year is also flagged on a 0.15-point move in a week. The Fed is flagged when it changes rates, when 6-month Treasury bills sit more than 0.15% above or below the Fed rate (traders expect a hike or a cut), when that gap shifts 0.10% in a week, and in the 7 days before a decision.</p>
+      <p class="hint">Headwind / tailwind is judged on the last month's move: crude ±5%, gold ±5%, dollar index ±2%, USD/INR ±1%, US 10-year ±0.20 pts, India 10-year ±0.15 pts, S&amp;P 500 ±3%; US VIX above 25 is a headwind, below 15 a tailwind. The 1-year percentile shows where today's level sits in the past year (100 = highest). Source: CNBC market data, New York Fed.</p>
+    </section>
+
+    <!-- ================= FII / DII FLOWS ================= -->
+    <section class="view" id="v-flows" hidden>
+      <div class="ctx-off card card-b" hidden><p class="reading">This page needs live data. It works when the dashboard runs on your Mac at <b>http://127.0.0.1:8765</b>.</p></div>
+      <div class="kpis" id="flKpis"></div>
+      <div class="card">
+        <div class="card-h"><h2>In simple words</h2><span class="pill" id="flPill">—</span></div>
+        <div class="card-b"><p class="reading" id="flRead">Loading flows…</p></div>
+      </div>
+      <div class="row r-half">
+        <div class="card">
+          <div class="card-h"><h2>Daily net buying, ₹ crore</h2><span class="hint" id="flHistNote"></span></div>
+          <div class="card-b"><div class="scroll"><svg id="flBars" viewBox="0 0 640 240" style="width:100%;min-width:420px;height:auto;display:block"></svg></div></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><h2>FII derivatives positions</h2><span class="hint" id="flDerivDate"></span></div>
+          <div class="tbl" style="border:0;border-radius:0"><table id="flDeriv">
+            <thead><tr><th>Segment</th><th>Long</th><th>Short</th><th>Net</th><th>Δ net vs prev day</th><th>Long %</th><th>Δ long %</th></tr></thead><tbody></tbody></table></div>
+          <div class="card-b"><p class="hint">Contracts, from NSE's participant-wise OI report. Index calls long and index puts short are bullish bets; index puts long and index calls short are bearish.</p></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-h"><h2>Where FIIs are buying and selling, by sector</h2>
+          <div class="seg" id="secSeg"><button type="button" data-p="fort">Last fortnight</button><button type="button" data-p="month" class="on">Last month</button><button type="button" data-p="q">Last 3 months</button></div></div>
+        <div class="card-b">
+          <p class="reading" id="secRead">Loading sector data…</p>
+          <div class="row r-half" style="gap:28px">
+            <div><span class="label" id="secChartLabel">Net investment, ₹ crore</span><div id="secBars" class="sec-bars"></div></div>
+            <div><span class="label">FII portfolio weight by sector</span>
+              <div class="tbl" style="margin-top:8px"><table id="secTable"><thead><tr><th>Sector</th><th>Weight</th><th>Δ weight, 6 mo</th><th>3-month flow</th></tr></thead><tbody></tbody></table></div></div>
+          </div>
+          <p class="hint" id="secNote"></p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h2>FII long % in index futures · 2 years</h2><span class="hint">Below 10% has historically preceded short covering</span></div>
+        <div class="card-b"><div class="scroll"><svg id="flLong" viewBox="0 0 1000 220" style="width:100%;min-width:520px;height:auto;display:block"></svg></div></div>
+      </div>
+      <p class="hint">Cash-market figures are NSE's provisional FII/FPI and DII numbers across NSE, BSE and MSEI, published each evening. A day is flagged as significant when FII net flow is ₹3,000 crore or more, or at least 1.5× the average of the previous 20 days. NSE only publishes the latest day, so the daily history builds up from the day this page started collecting.</p>
+    </section>
+
+    <!-- ================= QUARTERLY RESULTS ================= -->
+    <section class="view" id="v-results" hidden>
+      <div class="ctx-off card card-b" hidden><p class="reading">This page needs live data. It works when the dashboard runs on your Mac at <b>http://127.0.0.1:8765</b>.</p></div>
+      <div class="kpis" id="rsKpis"></div>
+      <div class="card">
+        <div class="card-h"><h2>Results filed · last 7 days</h2>
+          <div class="rs-tools">
+            <div class="seg" id="rsSeg"><button type="button" data-f="all" class="on">All</button><button type="button" data-f="n50">Nifty 50</button><button type="button" data-f="big">Big moves</button></div>
+            <input id="rsSearch" type="search" placeholder="Search company" class="rs-search" aria-label="Search company">
+          </div>
+        </div>
+        <div class="tbl" style="border:0;border-radius:0;max-height:640px"><table id="rsTable">
+          <thead><tr><th>Filed</th><th>Company</th><th>Quarter</th><th>Revenue ₹ cr</th><th>YoY</th><th>Net profit ₹ cr</th><th>YoY</th><th>Margin</th><th>Read</th><th>Open</th></tr></thead><tbody></tbody></table></div>
+        <div class="card-b"><p class="hint">Figures come straight from each company's XBRL filing on NSE (consolidated where available), compared with the same quarter last year. Banks report interest earned as revenue. <b>Strong</b> = profit up 20%+ with revenue up; <b>Weak</b> = profit down 20%+ or a loss. Check for one-offs before acting. <b>P&amp;L</b> opens the results statement as filed on NSE, <b>PDF</b> the company's own results document (when it posted one), <b>Screener</b> the quarterly P&amp;L history on screener.in.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-h"><h2>Coming up · next 14 days</h2><span class="hint" id="rsCalNote"></span></div>
+        <div class="card-b"><div class="cal" id="rsCal"></div></div>
+      </div>
+    </section>
+
+    <!-- ================= EVENT CALENDAR ================= -->
+    <section class="view" id="v-events" hidden>
+      <div class="ctx-off card card-b" hidden><p class="reading">This page needs live data. It works when the dashboard runs on your Mac at <b>http://127.0.0.1:8765</b>.</p></div>
+      <div class="kpis" id="evKpis"></div>
+      <div class="card">
+        <div class="card-h"><h2>Next 45 days</h2>
+          <div class="seg" id="evSeg"><button type="button" data-c="all" class="on">All</button><button type="button" data-c="high">High impact</button><button type="button" data-c="india">India</button><button type="button" data-c="global">Global</button><button type="button" data-c="market">Expiry &amp; holidays</button></div></div>
+        <div class="card-b"><div class="ev-list" id="evList"></div></div>
+      </div>
+      <p class="hint" id="evNote"></p>
+    </section>
+
+    <p class="foot">Built from a classroom session by an SBI Securities trading desk. For learning how positioning data fits together; not investment advice.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+const DEF = {
+  asof:"2026-08-11",
+  spot:24520, dma20:24780, dma50:24950, dma200:24300, structure:"lhll",
+  futP0:24556, futP1:24541, oi0:13132470, oi1:13853580,
+  part:{
+    FII:{l:24800,s:224300,pl:27900,ps:218000},
+    DII:{l:72100,s:109800,pl:71500,ps:108900},
+    Pro:{l:45200,s:38400,pl:43800,ps:39900},
+    Client:{l:310600,s:180200,pl:301400,ps:186300}
+  },
+  chain:[
+    {k:24200,ce:18400,dce:-1200,pe:96500,dpe:-4800},
+    {k:24300,ce:26900,dce:800,pe:118300,dpe:-6100},
+    {k:24400,ce:41200,dce:3900,pe:132700,dpe:-9400},
+    {k:24500,ce:88600,dce:21300,pe:121900,dpe:-7800},
+    {k:24600,ce:142800,dce:34700,pe:64200,dpe:2100},
+    {k:24700,ce:168300,dce:29500,pe:38900,dpe:900},
+    {k:24800,ce:131500,dce:12200,pe:21400,dpe:-300},
+    {k:24900,ce:98700,dce:6400,pe:12800,dpe:200}
+  ],
+  pcrHist:"1.32, 1.35, 1.41, 1.38, 1.30, 1.24, 1.18, 1.12, 1.07, 1.03",
+  pcrHi:1.5, pcrLo:0.7,
+  iv:12.25, ivp:50, ivLo:9.8, ivHi:21.5, ivTrend:"falling",
+  dte:16, rate:6.5, lot:65, lots:1, width:200,
+  pickDir:null, pickReg:null, oiWin:"1"
+};
+const KEY="nifty-desk-v1";
+const clone=o=>JSON.parse(JSON.stringify(o));
+let S;
+try{ S=JSON.parse(localStorage.getItem(KEY)); }catch(e){ S=null; }
+if(!S||typeof S!=="object") S=clone(DEF);
+for(const k in DEF) if(!(k in S)) S[k]=clone(DEF[k]);
+
+const $=id=>document.getElementById(id);
+const num=v=>{v=parseFloat(v);return isFinite(v)?v:0};
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const fmt=(v,d=0)=>Number(v).toLocaleString("en-IN",{minimumFractionDigits:d,maximumFractionDigits:d});
+const sgnFmt=(v,d=2)=>(v>0?"+":v<0?"−":"")+fmt(Math.abs(v),d);
+const rupee=v=>(v<0?"−":"")+"₹"+fmt(Math.abs(v),0);
+const getP=(o,p)=>p.split(".").reduce((a,k)=>a==null?a:a[k],o);
+const setP=(o,p,v)=>{const ks=p.split(".");let a=o;for(let i=0;i<ks.length-1;i++)a=a[ks[i]];a[ks[ks.length-1]]=v;};
+const cls=s=>s>=0.35?"bull":s<=-0.35?"bear":"neu";
+const word=s=>s>=0.35?"Bullish":s<=-0.35?"Bearish":"Neutral";
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}};
+
+/* ---------- build editable tables ---------- */
+function buildTables(){
+  const pb=$("partTable").tBodies[0]; pb.innerHTML="";
+  Object.keys(S.part).forEach(p=>{
+    const tr=document.createElement("tr"); tr.id="pr-"+p;
+    tr.innerHTML=`<td><b>${p}</b></td>`+["l","s","pl","ps"].map(f=>`<td><input id="part-${p}-${f}" data-k="part.${p}.${f}" type="number" aria-label="${p} ${f}"></td>`).join("")+
+      `<td class="n" data-c="lp"></td><td class="n" data-c="dlp"></td><td class="n" data-c="net"></td><td class="n" data-c="dnet"></td>`;
+    pb.appendChild(tr);
+  });
+  const cb=$("chainTable").tBodies[0]; cb.innerHTML="";
+  S.chain.forEach((r,i)=>{
+    const tr=document.createElement("tr");
+    tr.innerHTML=["k","ce","dce","pe","dpe"].map(f=>`<td><input id="ch-${i}-${f}" data-k="chain.${i}.${f}" type="number" style="width:${f==="k"?76:84}px" aria-label="row ${i+1} ${f}"></td>`).join("");
+    cb.appendChild(tr);
+  });
+}
+function fillInputs(){
+  document.querySelectorAll("[data-k]").forEach(el=>{const v=getP(S,el.dataset.k); if(v!=null) el.value=v;});
+}
+
+/* ---------- Black-Scholes ---------- */
+function ncdf(x){const t=1/(1+0.2316419*Math.abs(x));const d=0.3989423*Math.exp(-x*x/2);let p=d*t*(0.3193815+t*(-0.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));return x>0?1-p:p;}
+const npdf=x=>Math.exp(-x*x/2)/Math.sqrt(2*Math.PI);
+function bs(type,S0,K,T,r,v){
+  const sq=Math.sqrt(T), d1=(Math.log(S0/K)+(r+v*v/2)*T)/(v*sq), d2=d1-v*sq, disc=Math.exp(-r*T);
+  const g=npdf(d1)/(S0*v*sq), vega=S0*npdf(d1)*sq/100;
+  if(type==="C") return {p:S0*ncdf(d1)-K*disc*ncdf(d2),d:ncdf(d1),g,vega,t:(-S0*npdf(d1)*v/(2*sq)-r*K*disc*ncdf(d2))/365};
+  return {p:K*disc*ncdf(-d2)-S0*ncdf(-d1),d:ncdf(d1)-1,g,vega,t:(-S0*npdf(d1)*v/(2*sq)+r*K*disc*ncdf(-d2))/365};
+}
+
+/* ---------- compute ---------- */
+function compute(){
+  const R={};
+  const spot=num(S.spot);
+  // Step 1
+  const mas=[["20 DMA",num(S.dma20)],["50 DMA",num(S.dma50)],["200 DMA",num(S.dma200)]];
+  const maS=mas.reduce((a,m)=>a+Math.sign(spot-m[1]),0)/3;
+  const st={hhhl:1,range:0,lhll:-1}[S.structure]||0;
+  R.s1=clamp(maS+st,-2,2); R.mas=mas;
+  const above=mas.filter(m=>spot>m[1]).map(m=>m[0]), below=mas.filter(m=>spot<=m[1]).map(m=>m[0]);
+  const stTxt={hhhl:"higher highs and higher lows",range:"a sideways range",lhll:"lower highs and lower lows"}[S.structure];
+  R.read1=`Spot <b>${fmt(spot,0)}</b> is ${below.length?`below the ${below.join(", ")}`:""}${below.length&&above.length?" and ":""}${above.length?`above the ${above.join(", ")}`:""}, with ${stTxt}. `+
+    (R.s1<=-0.35?"Structure is weak; rallies are likely sold into.":R.s1>=0.35?"Structure is constructive; dips are likely bought.":"Structure is undecided; wait for the next steps.");
+  R.short1=`price ${R.s1<=-0.35?"below key averages in a downtrend":R.s1>=0.35?"above key averages in an uptrend":"stuck in a range"}`;
+
+  // Step 2
+  const pc=(num(S.futP1)-num(S.futP0))/(num(S.futP0)||1)*100, oc=(num(S.oi1)-num(S.oi0))/(num(S.oi0)||1)*100;
+  let q; if(pc>=0&&oc>=0)q="lb"; else if(pc<0&&oc>=0)q="sb"; else if(pc>=0)q="sc"; else q="lu";
+  let qs={lb:1.25,sb:-1.25,sc:0.5,lu:-0.5}[q]; if(Math.abs(oc)<1) qs*=0.5;
+  const P={}; Object.entries(S.part).forEach(([k,v])=>{
+    const l=num(v.l),s=num(v.s),pl=num(v.pl),ps=num(v.ps);
+    const lp=l/((l+s)||1)*100, plp=pl/((pl+ps)||1)*100;
+    P[k]={lp,dlp:lp-plp,net:l-s,dnet:(l-s)-(pl-ps)};
+  });
+  const F=P.FII; let fs=0, ftxt;
+  if(F.dlp>=3){fs=0.75;ftxt=`FII long % jumped ${sgnFmt(F.dlp,1)} pts to ${fmt(F.lp,1)}%: short covering or fresh longs are under way.`;}
+  else if(F.dlp<=-3){fs=-0.75;ftxt=`FII long % fell ${sgnFmt(F.dlp,1)} pts to ${fmt(F.lp,1)}%: FIIs are actively adding shorts.`;}
+  else if(F.lp<15){fs=-0.5;ftxt=`FIIs are only ${fmt(F.lp,1)}% long (${sgnFmt(F.dlp,1)} pts). They remain heavily short with no sign of short covering yet.`;}
+  else if(F.lp>70){fs=0.5;ftxt=`FIIs are ${fmt(F.lp,1)}% long. They are positioned for upside.`;}
+  else ftxt=`FIIs are ${fmt(F.lp,1)}% long (${sgnFmt(F.dlp,1)} pts), a middle-of-the-range position.`;
+  R.s2=clamp(qs+fs,-2,2); R.q=q; R.pc=pc; R.oc=oc; R.P=P;
+  const qName={lb:"long build-up",sb:"short build-up",sc:"short covering",lu:"long unwinding"}[q];
+  R.read2=`Futures moved <b>${sgnFmt(pc,2)}%</b> while OI moved <b>${sgnFmt(oc,1)}%</b>, which reads as <b>${qName}</b>${Math.abs(oc)<1?" (weak, OI barely changed)":""}. ${ftxt}`+
+    (F.lp<10?" Long % is under 10, the zone where short covering has historically followed. Watch for it to turn up.":"");
+  R.short2=`${qName} in futures, FIIs ${fmt(F.lp,0)}% long`;
+
+  // Step 3
+  const nz=v=>v==null||v===""?null:num(v);
+  const ch=S.chain.map(r=>({k:num(r.k),ce:num(r.ce),pe:num(r.pe),dce:num(r.dce),dpe:num(r.dpe),
+    ivS:nz(r.ivS),cvol:nz(r.cvol),pvol:nz(r.pvol)})).filter(r=>r.k>0);
+  const tce=ch.reduce((a,r)=>a+r.ce,0), tpe=ch.reduce((a,r)=>a+r.pe,0);
+  const F3=classifyChain(ch,spot);
+  let s3=1.5*F3.net; let loc="";
+  if(F3.res&&spot>F3.res.k){s3+=0.5;loc=" Spot is above the biggest call wall, so call writers are trapped.";}
+  else if(F3.sup&&spot<F3.sup.k){s3-=0.5;loc=" Spot has slipped below the biggest put wall, so put writers are trapped.";}
+  R.s3=clamp(s3,-2,2); R.cbias=F3.net; R.ch=ch; R.F3=F3;
+  R.res=F3.res?F3.res.k:0; R.sup=F3.sup?F3.sup.k:0; R.chainPcr=tpe/(tce||1);
+  const lead=F3.items.filter(i=>i.sig&&i.view!=="neu").slice(0,2).map(i=>`${i.short} at ${fmt(i.k)}`);
+  R.read3=`Call writers defend <b>${fmt(R.res)}</b> above spot and put writers defend <b>${fmt(R.sup)}</b> below it. `+
+    (lead.length?`The biggest moves today: ${lead.join("; ")}. `:"")+
+    (F3.net<-0.3?"Weighted for who actually traded, the flows are <b>bearish</b>.":F3.net>0.3?"Weighted for who actually traded, the flows are <b>bullish</b>.":"Weighted for who actually traded, the flows are <b>balanced</b>.")+loc;
+  R.facts3=[["Ceiling (call wall above spot)",fmt(R.res)+wallMove(F3.resPrev,F3.res)],["Floor (put wall below spot)",fmt(R.sup)+wallMove(F3.supPrev,F3.sup)],["Range width",fmt(R.res-R.sup)+" pts"],["PCR of these strikes",fmt(R.chainPcr,2)]];
+  R.short3=`call wall at ${fmt(R.res)}, put floor at ${fmt(R.sup)}`;
+
+  // Step 4
+  const hist=String(S.pcrHist).split(/[\s,;]+/).map(parseFloat).filter(isFinite);
+  const p=hist.length?hist[hist.length-1]:1, ref=hist.length>5?hist[hist.length-6]:(hist[0]||p), d=p-ref;
+  const hi=num(S.pcrHi)||1.5, lo=num(S.pcrLo)||0.7;
+  let s4, t4;
+  if(p>=hi){s4=-1;t4=`PCR at <b>${fmt(p,2)}</b> is overheated. Everyone is already writing puts, which is a contrarian warning for longs.`;}
+  else if(p<=lo){s4=1;t4=`PCR at <b>${fmt(p,2)}</b> is oversold. Bears are crowded, which is a contrarian setup for a bounce.`;}
+  else if(d<=-0.15){s4=-1;t4=`PCR slid from <b>${fmt(ref,2)}</b> to <b>${fmt(p,2)}</b> over 5 sessions. Put writers are pulling back: bulls are giving up.`;}
+  else if(d>=0.15){s4=1;t4=`PCR climbed from <b>${fmt(ref,2)}</b> to <b>${fmt(p,2)}</b> over 5 sessions. Put writers are stepping in under the market.`;}
+  else {s4=p>1.1?0.3:p<0.85?-0.3:0;t4=`PCR is steady at <b>${fmt(p,2)}</b> (${sgnFmt(d,2)} over 5 sessions). Sentiment is not stretched and gives no strong signal.`;}
+  R.s4=s4; R.hist=hist; R.pcr=p; R.pcrRef=ref; R.pcrHi=hi; R.pcrLo=lo;
+  R.read4=t4; R.short4=`PCR ${fmt(ref,2)} → ${fmt(p,2)}`;
+
+  // Step 5
+  const iv=num(S.iv), ivLo=num(S.ivLo), ivHi=num(S.ivHi), ivp=num(S.ivp);
+  const ivr=clamp((iv-ivLo)/((ivHi-ivLo)||1)*100,0,100);
+  const reg=ivp<30?"low":ivp>70?"high":"mid";
+  R.reg=reg; R.ivr=ivr; R.ivp=ivp; R.iv=iv;
+  const trendTxt={falling:"IV has been falling, so bought options will struggle to gain even if direction is right.",flat:"IV is flat.",rising:"IV is rising, which lifts premiums and helps option buyers."}[S.ivTrend];
+  R.read5=`IV <b>${fmt(iv,2)}%</b> sits at the <b>${fmt(ivp,0)}th</b> percentile of the past year (IV rank ${fmt(ivr,0)}%). `+
+    ({low:"Premium is cheap, so option buying is preferred.",mid:"Premium is fairly priced. Spreads, which buy one option and sell another, keep vega risk small.",high:"Premium is expensive, so option selling is preferred."}[reg])+" "+trendTxt;
+  R.short5={low:"cheap premium",mid:"fair premium",high:"rich premium"}[reg];
+
+  // Direction
+  const tot=R.s1+R.s2+R.s3+R.s4; R.bias=tot/8*100;
+  R.dir=R.bias>=20?"bull":R.bias<=-20?"bear":"neu";
+  const sgn=R.dir==="bull"?1:R.dir==="bear"?-1:0;
+  const ss=[R.s1,R.s2,R.s3,R.s4];
+  R.agree=sgn===0?ss.filter(s=>Math.abs(s)<0.35).length:ss.filter(s=>Math.sign(s)===sgn&&Math.abs(s)>=0.35).length;
+  // links
+  R.links=[]; let run=0;
+  ss.forEach((s,i)=>{ if(i>0){ const rs=Math.abs(run)<0.35?0:Math.sign(run), cs=Math.abs(s)<0.35?0:Math.sign(s);
+      R.links.push(rs===0?"sets":cs===0?"neutral":cs===rs?"confirms":"kills"); }
+    run+=s; });
+  R.links.push("prices it","expresses");
+
+  // Step 6 strategy
+  const dir=S.pickDir||R.dir, rg=S.pickReg||reg;
+  R.pickDir=dir; R.pickReg=rg;
+  const atm=Math.round(spot/50)*50, w=Math.max(50,num(S.width)||200);
+  const sup=(R.sup&&R.sup<spot)?R.sup:atm-w/2, res=(R.res&&R.res>spot)?R.res:atm+w/2;
+  const L=(t,k,q)=>({t,k:Math.round(k/50)*50,q});
+  const book={
+    "bull-low":["Long call",[L("C",atm,1)],"Cheap premium and a bullish read: buy the ATM call outright."],
+    "bull-mid":["Bull call spread",[L("C",atm,1),L("C",atm+w,-1)],"Buy ATM call, sell a higher call to cut cost and vega."],
+    "bull-high":["Bull put spread",[L("P",sup,-1),L("P",sup-w,1)],"Collect rich premium by selling puts at the put-writer floor, hedged below."],
+    "neu-low":["Long straddle",[L("C",atm,1),L("P",atm,1)],"No direction, cheap premium: own both sides and wait for a move or an IV pickup."],
+    "neu-mid":["Iron butterfly",[L("C",atm,-1),L("P",atm,-1),L("C",atm+w,1),L("P",atm-w,1)],"Sell the ATM straddle, buy wings to cap risk. Profits if Nifty pins near ATM."],
+    "neu-high":["Iron condor",[L("P",sup,-1),L("P",sup-w,1),L("C",res,-1),L("C",res+w,1)],"Sell at the call wall and put floor from step 3, buy wings beyond them."],
+    "bear-low":["Long put",[L("P",atm,1)],"Cheap premium and a bearish read: buy the ATM put outright."],
+    "bear-mid":["Bear put spread",[L("P",atm,1),L("P",atm-w,-1)],"Buy ATM put, sell a lower put to cut cost and limit IV-crush damage."],
+    "bear-high":["Bear call spread",[L("C",res,-1),L("C",res+w,1)],"Sell calls at the call wall writers defend, hedged above. Rich premium works for you."]
+  };
+  R.book=book;
+  const [nm,legs,why]=book[dir+"-"+rg];
+  const T=Math.max(1,num(S.dte))/365, r=num(S.rate)/100, v=Math.max(0.01,iv/100), mult=Math.max(1,num(S.lot))*Math.max(1,num(S.lots));
+  let net=0,G={d:0,g:0,t:0,v:0};
+  legs.forEach(l=>{const o=bs(l.t,spot,l.k,T,r,v);l.o=o;net+=l.q*o.p;G.d+=l.q*o.d;G.g+=l.q*o.g;G.t+=l.q*o.t;G.v+=l.q*o.vega;});
+  const ks=legs.map(l=>l.k).concat(spot), x0=Math.min(...ks)*0.965, x1=Math.max(...ks)*1.035;
+  const pay=x=>(legs.reduce((a,l)=>a+l.q*(l.t==="C"?Math.max(0,x-l.k):Math.max(0,l.k-x)),0)-net)*mult;
+  const N=240, pts=[]; for(let i=0;i<=N;i++){const x=x0+(x1-x0)*i/N;pts.push([x,pay(x)]);}
+  const ys=pts.map(p=>p[1]); let maxP=Math.max(...ys), maxL=Math.min(...ys);
+  const slopeL=pts[0][1]-pts[1][1], slopeR=pts[N][1]-pts[N-1][1];
+  R.openP=(slopeL>1e-6||slopeR>1e-6); R.openL=(slopeL<-1e-6||slopeR<-1e-6);
+  const be=[]; for(let i=1;i<=N;i++){const a=pts[i-1],b=pts[i]; if((a[1]<0)!==(b[1]<0)){be.push(a[0]+(0-a[1])*(b[0]-a[0])/(b[1]-a[1]));}}
+  Object.assign(R,{tradeName:nm,legs,why,net,G,mult,pts,maxP,maxL,be,x0,x1,atm});
+  return R;
+}
+
+/* ---------- render ---------- */
+function setPill(el,s){el.className="pill "+cls(s);el.textContent=word(s);}
+function render(){
+  const R=compute();
+  const bw=$("biasWord"); bw.textContent={bull:"Bullish",bear:"Bearish",neu:"Neutral"}[R.dir]; bw.style.color=`var(--${R.dir==="neu"?"warn":R.dir})`;
+  const conv=R.agree>=4?"High conviction":R.agree===3?"Medium conviction":"Low conviction · mixed signals";
+  $("convPill").className="pill "+(R.agree>=4?R.dir:R.agree===3?"info":"neu"); $("convPill").textContent=conv;
+  $("biasNum").textContent=sgnFmt(R.bias,0); $("agreeNum").textContent=R.agree+" / 4";
+  $("regNum").textContent={low:"Low IV",mid:"Mid IV",high:"High IV"}[R.reg];
+  $("summary").textContent=`${cap(R.short1)}; ${R.short2}; ${R.short3}; ${R.short4}; ${R.short5}.`+(R.agree<3?" The steps disagree: size down or wait for confirmation.":"");
+  drawGauge(R.bias);
+
+  // trade card
+  $("tradeName").textContent=R.tradeName; $("tradeWhy").textContent=R.why;
+  $("tradeLegs").innerHTML=R.legs.map(l=>`<div class="leg"><span class="tag ${l.q>0?"buy":"sell"}">${l.q>0?"BUY":"SELL"}</span><span>NIFTY ${fmt(l.k)} ${l.t==="C"?"CE":"PE"}</span><span class="muted">@ ${fmt(l.o.p,1)}</span></div>`).join("");
+  $("premLabel").textContent=R.net>=0?"Net debit":"Net credit";
+  $("kPrem").textContent=rupee(Math.abs(R.net)*R.mult);
+  $("kMaxP").textContent=R.openP?"Open-ended":rupee(R.maxP);
+  $("kMaxL").textContent=R.openL?"Open-ended":rupee(R.maxL);
+
+  // pipeline
+  const steps=[["Price trend",R.s1],["OI & FII positioning",R.s2],["Option chain",R.s3],["PCR",R.s4],["IV",null],["Greeks + strategy",null]];
+  let h="";
+  steps.forEach((s,i)=>{
+    let c,label;
+    if(i===4){c="info";label={low:"Cheap premium",mid:"Fair premium",high:"Rich premium"}[R.reg];}
+    else if(i===5){c="info";label=R.tradeName;}
+    else {c=cls(s[1]);label=word(s[1]);}
+    h+=`<a class="tile ${c}" href="#step${i+1}" style="text-decoration:none"><span class="t-n">${i+1}</span><span class="t-name">${s[0]}</span><span class="pill ${c}">${label}</span></a>`;
+    if(i<5){const lk=R.links[i];h+=`<div class="link ${lk==="confirms"?"ok":lk==="kills"?"kill":""}"><span>${lk} →</span></div>`;}
+  });
+  $("pipe").innerHTML=h;
+
+  // step 1
+  setPill($("pill1"),R.s1); $("sc1").textContent="score "+sgnFmt(R.s1,2);
+  $("read1").innerHTML=R.read1; drawLadder(R);
+  // step 2
+  setPill($("pill2"),R.s2); $("sc2").textContent="score "+sgnFmt(R.s2,2);
+  $("read2").innerHTML=R.read2;
+  document.querySelectorAll("#quad .qc").forEach(e=>e.classList.toggle("on",e.classList.contains(R.q)));
+  $("facts2").innerHTML=facts([["Futures price change",`<span class="${R.pc>=0?"up":"dn"}">${sgnFmt(R.pc,2)}%</span>`],["Futures OI change",`<span class="${R.oc>=0?"up":"dn"}">${sgnFmt(R.oc,1)}%</span>`],["OI added",sgnFmt(num(S.oi1)-num(S.oi0),0)],["FII long %",fmt(R.P.FII.lp,2)+"%"]]);
+  Object.entries(R.P).forEach(([k,v])=>{const tr=$("pr-"+k); if(!tr)return; tr.classList.toggle("hl",k==="FII");
+    const set=(c,t,col)=>{const td=tr.querySelector(`[data-c="${c}"]`);td.innerHTML=t;td.className="n "+(col||"");};
+    set("lp",fmt(v.lp,1)+"%"); set("dlp",sgnFmt(v.dlp,1),v.dlp>0?"up":v.dlp<0?"dn":""); set("net",sgnFmt(v.net,0),v.net>0?"up":"dn"); set("dnet",sgnFmt(v.dnet,0),v.dnet>0?"up":v.dnet<0?"dn":"");});
+  drawFii(R);
+  // step 3
+  setPill($("pill3"),R.s3); $("sc3").textContent="score "+sgnFmt(R.s3,2);
+  $("read3").innerHTML=R.read3; $("facts3").innerHTML=facts(R.facts3); drawFly(R);
+  // step 4
+  setPill($("pill4"),R.s4); $("sc4").textContent="score "+sgnFmt(R.s4,2);
+  $("read4").innerHTML=R.read4;
+  $("facts4").innerHTML=facts([["PCR today",fmt(R.pcr,2)],["5 sessions ago",fmt(R.pcrRef,2)],["Change",`<span class="${R.pcr-R.pcrRef>=0?"up":"dn"}">${sgnFmt(R.pcr-R.pcrRef,2)}</span>`],["Zone",R.pcr>=R.pcrHi?"Overheated":R.pcr<=R.pcrLo?"Oversold":"Normal"]].concat(LIVE&&LIVE.pcrLive?[["Live PCR · this expiry",fmt(LIVE.pcrLive,2)]]:[]));
+  drawPcr(R);
+  // step 5
+  const p5=$("pill5"); p5.className="pill "+{low:"bull",mid:"info",high:"bear"}[R.reg]; p5.textContent={low:"Buy options",mid:"Use spreads",high:"Sell options"}[R.reg];
+  $("sc5").textContent="IVP "+fmt(R.ivp,0)+"%";
+  $("read5").innerHTML=R.read5;
+  $("facts5").innerHTML=facts([["ATM IV",fmt(R.iv,2)+"%"],["IV percentile",fmt(R.ivp,0)+"%"],["IV rank",fmt(R.ivr,0)+"%"],["Trend",cap(S.ivTrend)]].concat(LIVE&&LIVE.atmIv?[["ATM IV · option chain",fmt(LIVE.atmIv,2)+"%"]]:[]));
+  drawIv(R);
+  // step 6
+  $("pill6").textContent=R.tradeName;
+  const manual=!!(S.pickDir||S.pickReg);
+  $("read6").innerHTML=`${manual?"You're modelling":"The model picks"} a <b>${R.tradeName.toLowerCase()}</b> for a <b>${{bull:"bullish",bear:"bearish",neu:"neutral"}[R.pickDir]}</b> view in a <b>${R.pickReg}-IV</b> regime. `+
+    `Net position: delta <b>${sgnFmt(R.G.d*R.mult,1)}</b>, theta <b>${rupee(R.G.t*R.mult)}</b>/day, vega <b>${rupee(R.G.v*R.mult)}</b> per IV point`+
+    (R.be.length?`, breakeven${R.be.length>1?"s":""} at <b>${R.be.map(b=>fmt(b,0)).join(" and ")}</b>.`:".");
+  const gb=$("greekTable").tBodies[0];
+  gb.innerHTML=R.legs.map(l=>`<tr><td>${l.q>0?"Buy":"Sell"} ${fmt(l.k)} ${l.t==="C"?"CE":"PE"}</td><td class="n">${fmt(l.o.p,2)}</td><td class="n">${sgnFmt(l.q*l.o.d,3)}</td><td class="n">${sgnFmt(l.q*l.o.g*1000,3)}</td><td class="n">${sgnFmt(l.q*l.o.t,2)}</td><td class="n">${sgnFmt(l.q*l.o.vega,2)}</td></tr>`).join("")+
+    `<tr class="hl"><td><b>Net per unit</b></td><td class="n"><b>${sgnFmt(R.net,2)}</b></td><td class="n"><b>${sgnFmt(R.G.d,3)}</b></td><td class="n"><b>${sgnFmt(R.G.g*1000,3)}</b></td><td class="n"><b>${sgnFmt(R.G.t,2)}</b></td><td class="n"><b>${sgnFmt(R.G.v,2)}</b></td></tr>`+
+    `<tr><td class="muted">× ${fmt(R.mult)} units (₹)</td><td class="n">${rupee(R.net*R.mult)}</td><td class="n">${sgnFmt(R.G.d*R.mult,1)}</td><td class="n muted">gamma ×1000</td><td class="n">${rupee(R.G.t*R.mult)}</td><td class="n">${rupee(R.G.v*R.mult)}</td></tr>`;
+  drawMatrix(R); drawPayoff(R); renderSimple(R); renderOverview(R);
+  $("sampleTag").hidden=!!LIVE||JSON.stringify(S)!==JSON.stringify(DEF);
+  drawFiiHist();
+}
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const facts=arr=>arr.map(([k,v])=>`<div><span class="label">${k}</span><b>${v}</b></div>`).join("");
+
+/* ---------- drawings ---------- */
+function drawGauge(b){
+  const cx=140,cy=132,r=104, P=v=>{const t=Math.PI*(1-(v+100)/200);return [cx+r*Math.cos(t),cy-r*Math.sin(t)];};
+  const seg=[[-100,-60,"#DC2626"],[-60,-20,"#F97316"],[-20,20,"#EAB308"],[20,60,"#4ADE80"],[60,100,"#16A34A"]];
+  let s="";
+  seg.forEach(([a,c,col])=>{const p=P(a+1.5),q=P(c-1.5);s+=`<path d="M${p[0]},${p[1]} A${r},${r} 0 0 1 ${q[0]},${q[1]}" fill="none" stroke="${col}" stroke-width="18"/>`;});
+  [[-100,"−100"],[0,"0"],[100,"+100"]].forEach(([v,t])=>{const tt=Math.PI*(1-(v+100)/200),x=cx+(r+22)*Math.cos(tt),y=cy-(r+22)*Math.sin(tt);s+=`<text x="${x}" y="${y+4}" text-anchor="middle">${t}</text>`;});
+  const v=clamp(b,-100,100),t=Math.PI*(1-(v+100)/200),nx=cx+(r-30)*Math.cos(t),ny=cy-(r-30)*Math.sin(t);
+  s+=`<line x1="${cx}" y1="${cy}" x2="${nx}" y2="${ny}" stroke="#1F2937" stroke-width="3.5" stroke-linecap="round"/><circle cx="${cx}" cy="${cy}" r="8" fill="#1F2937"/>`;
+  $("gauge").innerHTML=s;
+}
+function drawLadder(R){
+  const spot=num(S.spot), vals=R.mas.map(m=>m[1]).concat(spot);
+  let lo=Math.min(...vals), hi=Math.max(...vals); const pad=(hi-lo)*0.12||100; lo-=pad; hi+=pad;
+  const X=v=>30+(v-lo)/(hi-lo)*640;
+  let s=`<line x1="30" x2="670" y1="46" y2="46" stroke="var(--line)" stroke-width="2"/>`;
+  const step=niceStep((hi-lo)/6);
+  for(let t=Math.ceil(lo/step)*step;t<=hi;t+=step) s+=`<line x1="${X(t)}" x2="${X(t)}" y1="42" y2="50" stroke="var(--faint)"/><text x="${X(t)}" y="86" text-anchor="middle">${fmt(t)}</text>`;
+  R.mas.forEach((m,i)=>{const x=X(m[1]),up=i%2===0;const y=up?18:74;
+    s+=`<line x1="${x}" x2="${x}" y1="${up?24:52}" y2="${up?40:68}" stroke="var(--muted)" stroke-dasharray="2 2"/><circle cx="${x}" cy="46" r="5" fill="var(--surface)" stroke="var(--muted)" stroke-width="2"/>`+
+    `<text x="${x}" y="${up?16:66}" text-anchor="middle" style="fill:var(--ink)">${m[0]} ${fmt(m[1])} (${sgnFmt((spot-m[1])/m[1]*100,1)}%)</text>`;});
+  const c=R.s1>=0.35?"var(--bull)":R.s1<=-0.35?"var(--bear)":"var(--warn)";
+  s+=`<circle cx="${X(spot)}" cy="46" r="8" fill="${c}"/><text x="${X(spot)}" y="33" text-anchor="middle" style="fill:${c};font-weight:600">SPOT</text>`;
+  $("ladder").innerHTML=s;
+}
+function niceStep(r){const p=Math.pow(10,Math.floor(Math.log10(r)));const n=r/p;return (n<1.5?1:n<3.5?2:n<7.5?5:10)*p;}
+function drawFii(R){
+  const X=v=>20+v/100*660; const F=R.P.FII, pl=F.lp-F.dlp;
+  let s=`<rect x="20" y="22" width="660" height="14" rx="2" fill="var(--sunk)" stroke="var(--line)"/>`;
+  s+=`<rect x="20" y="22" width="${X(10)-20}" height="14" fill="var(--bear-soft)"/>`;
+  [0,10,50,75,100].forEach(v=>{s+=`<line x1="${X(v)}" x2="${X(v)}" y1="36" y2="42" stroke="var(--faint)"/><text x="${X(v)}" y="54" text-anchor="middle">${v}%</text>`;});
+  s+=`<text x="20" y="14" style="fill:var(--bear)">Red band: under 10% long, where short covering has followed</text><line x1="${X(20)}" x2="${X(20)}" y1="18" y2="40" stroke="var(--warn)" stroke-dasharray="3 2"/><text x="${X(20)-8}" y="54" style="fill:var(--warn)">20% · ceiling since April</text>`;
+  s+=`<circle cx="${X(pl)}" cy="29" r="5" fill="var(--surface)" stroke="var(--muted)" stroke-width="2"/>`;
+  s+=`<circle cx="${X(F.lp)}" cy="29" r="7" fill="${F.dlp>=0?"var(--bull)":"var(--bear)"}"/>`;
+  $("fiiBar").innerHTML=s;
+}
+/* Option-chain flow classifier.
+   1. Moneyness: OTM/ATM strikes are levels being defended; ITM changes are reactions to losses or profits.
+   2. Who acted: OI change read against the strike's IV pressure (ivS = IV vs yesterday's smile at the
+      same moneyness, minus the market-wide shift). OI up + IV down = writing, OI up + IV up = buying,
+      OI down + IV up = writers covering, OI down + IV down = buyers exiting.
+   3. Weight: by type of flow, depth in the money, and how much of the day's volume stayed as OI. */
+const IV_EDGE=0.1;
+const FLOW={
+  C:{ write:{otm:["bear",1.0,"Fresh call writing","a ceiling is being built at K"],itm:["bear",0.5,"Calls sold below spot","writers expect Nifty to stay under K"]},
+      buy:{otm:["bull",0.5,"Call buying","traders are betting on a move above K"],itm:["bull",0.3,"In-the-money call buying","bullish bets or hedges"]},
+      cover:{otm:["bull",0.7,"Call writers covering","the ceiling at K is giving way"],itm:["bull",0.5,"Ceiling broken","call writers at K gave up after Nifty went through"]},
+      exit:{otm:["bear",0.3,"Call buyers exiting","traders are giving up on a move above K"],itm:["bear",0.3,"Call profit-booking","holders cashed in after the rise"]} },
+  P:{ write:{otm:["bull",1.0,"Fresh put writing","a floor is being built at K"],itm:["bull",0.5,"Puts sold above spot","writers expect a recovery to K"]},
+      buy:{otm:["bear",0.5,"Put buying","protection or bets on a fall below K"],itm:["bear",0.3,"In-the-money put buying","bearish bets or hedges"]},
+      cover:{otm:["bear",0.7,"Put writers covering","the floor at K is giving way"],itm:["bear",0.5,"Floor broken","put writers at K gave up after Nifty fell through"]},
+      exit:{otm:["bull",0.3,"Put buyers exiting","traders are dropping protection below K"],itm:["bull",0.3,"Put profit-booking","bears cashed in after the fall"]} }
+};
+function classifyChain(ch,spot){
+  const mx=Math.max(1,...ch.map(r=>Math.max(r.ce,r.pe))), mxd=Math.max(1,...ch.map(r=>Math.max(Math.abs(r.dce),Math.abs(r.dpe))));
+  const hasIv=ch.some(r=>r.ivS!=null);
+  const items=[];
+  ch.forEach(r=>{
+    ["C","P"].forEach(sd=>{
+      const oi=sd==="C"?r.ce:r.pe, d=sd==="C"?r.dce:r.dpe, vol=sd==="C"?r.cvol:r.pvol, other=sd==="C"?r.dpe:r.dce;
+      if(!d) return;
+      const prev=oi-d, pct=prev>0?d/prev*100:(d>0?Infinity:0);
+      const sig=Math.abs(d)>=0.1*mx&&Math.abs(pct)>=30;
+      const itmPts=sd==="C"?spot-r.k:r.k-spot;            // >0 means in the money
+      const zone=Math.abs(r.k-spot)<=50?"ATM":itmPts>0?"ITM":"OTM";
+      let act, assumed=false;
+      if(r.ivS!=null){
+        act=r.ivS<=-IV_EDGE?(d>0?"write":"exit"):r.ivS>=IV_EDGE?(d>0?"buy":"cover"):null;
+      } else { act=d>0?"write":"cover"; assumed=true; }   // no IV data (sample mode): classic writer assumption
+      let view="neu", w=0, name="Unclear", why="IV barely moved, so writers and buyers can't be told apart";
+      if(act){ const f=FLOW[sd][act][zone==="ITM"?"itm":"otm"]; [view,w,name,why]=[f[0],f[1],f[2],f[3].replace("K",fmt(r.k))]; }
+      const notes=[];
+      if(zone==="ITM"&&itmPts>200){w*=0.5;notes.push("deep in the money");}
+      if(vol&&Math.abs(d)/vol<0.01){w*=0.5;notes.push("mostly intraday churn");}
+      if(r.ivS!=null&&Math.abs(other)>Math.abs(d)){w*=0.6;notes.push("IV read shared with the bigger move on the other side");}
+      if(assumed) notes.push("assumed writer flow, no IV data");
+      const tier=w>=0.7?"High":w>=0.4?"Medium":w>0?"Low":"None";
+      items.push({k:r.k,sd,side:sd==="C"?"Calls":"Puts",d,pct,prev,sig,strong:sig&&Math.abs(pct)>=75,zone,act,view,w,tier,name,why,notes,ivS:r.ivS,
+        short:name.charAt(0).toLowerCase()+name.slice(1),score:(view==="bull"?1:view==="bear"?-1:0)*w*Math.abs(d)/mxd});
+    });
+  });
+  const tot=items.reduce((a,i)=>a+Math.abs(i.score),0)||1, net=items.reduce((a,i)=>a+i.score,0)/tot;
+  // Walls only count in front of the price: calls at or above spot, puts at or below it
+  const wall=(key,okK,useNow)=>{let best=null;ch.forEach(r=>{if(!okK(r.k))return;const v=useNow?r[key]:r[key]-r["d"+key];if(!best||v>best.v)best={k:r.k,v};});return best;};
+  const upC=k=>k>=spot-50, dnP=k=>k<=spot+50;
+  items.sort((a,b)=>Math.abs(b.d)*Math.max(b.w,0.05)-Math.abs(a.d)*Math.max(a.w,0.05));
+  return {items,net,hasIv,res:wall("ce",upC,true),resPrev:wall("ce",upC,false),sup:wall("pe",dnP,true),supPrev:wall("pe",dnP,false)};
+}
+function wallMove(a,b){ if(!a||!b||a.k===b.k) return ""; return ` (from ${fmt(a.k)})`; }
+const pctFmt=p=>p===Infinity?"new":(p>0?"+":p<0?"−":"")+fmt(Math.abs(p),Math.abs(p)<10?1:0)+"%";
+const ACT={write:"Writing",buy:"Buying",cover:"Writers covering",exit:"Buyers exiting"};
+function drawFly(R){
+  const ch=R.ch, F3=R.F3, spot=num(S.spot);
+  const mx=Math.max(1,...ch.map(r=>Math.max(r.ce,r.pe)));
+  const atmK=ch.reduce((a,r)=>Math.abs(r.k-spot)<Math.abs(a-spot)?r.k:a,ch[0]?ch[0].k:0);
+  const it={}; F3.items.forEach(i=>it[i.k+i.sd]=i);
+  const cl=x=>x&&x.sig&&x.view!=="neu"?` sig-${x.view}${x.strong?" strong":""}`:x&&x.sig?" sig-neu":"";
+  const tip=x=>x?`${x.side} ${fmt(x.k)} · ${x.zone} · ${x.act?ACT[x.act]:"Unclear"}${x.notes.length?" · "+x.notes.join(", "):""}`:"";
+  let h=`<span class="h r">Call %Δ</span><span class="h r">Call ΔOI</span><span class="h r">Call OI · resistance</span><span class="h" style="text-align:center">Strike · IV</span><span class="h">Put OI · support</span><span class="h">Put ΔOI</span><span class="h">Put %Δ</span>`;
+  ch.forEach(r=>{
+    const c=it[r.k+"C"], p=it[r.k+"P"], citm=r.k<spot-50, pitm=r.k>spot+50;
+    const ivs=r.ivS==null?"":`<small class="${r.ivS<=-IV_EDGE?"ivsell":r.ivS>=IV_EDGE?"ivbuy":""}" title="IV vs expected at this strike: negative = selling pressure, positive = buying pressure">${r.ivS>0?"+":r.ivS<0?"−":""}${Math.abs(r.ivS).toFixed(2)}</small>`;
+    h+=`<span class="pc r${cl(c)}" title="${tip(c)}">${c?pctFmt(c.pct):"0%"}</span>`+
+       `<span class="chg r${cl(c)}" title="${tip(c)}">${sgnFmt(r.dce,0)}</span>`+
+       `<div class="barl"><div class="bar ce${r.k===R.res?" max":""}${citm?" itm":""}" style="width:${r.ce/mx*100}%" title="Call OI ${fmt(r.ce)}${citm?" · in the money":""}"></div></div>`+
+       `<span class="k${r.k===atmK?" atm":""}">${fmt(r.k)}${ivs}</span>`+
+       `<div><div class="bar pe${r.k===R.sup?" max":""}${pitm?" itm":""}" style="width:${r.pe/mx*100}%" title="Put OI ${fmt(r.pe)}${pitm?" · in the money":""}"></div></div>`+
+       `<span class="chg${cl(p)}" title="${tip(p)}">${sgnFmt(r.dpe,0)}</span>`+
+       `<span class="pc${cl(p)}" title="${tip(p)}">${p?pctFmt(p.pct):"0%"}</span>`;
+  });
+  $("fly").innerHTML=h;
+
+  // wall migration + market-wide IV
+  const mv=(a,b,name)=>!a||!b?"":a.k===b.k?`${name} held at <b>${fmt(b.k)}</b>`:`${name} moved ${b.k<a.k?"down":"up"} <b>${fmt(a.k)} → ${fmt(b.k)}</b>`;
+  const mkt=LIVE&&LIVE.ivMkt!=null?LIVE.ivMkt:null;
+  $("wallLine").innerHTML=[mv(F3.resPrev,F3.res,"Ceiling"),mv(F3.supPrev,F3.sup,"Floor"),
+    mkt==null?"":`Options overall got <b>${mkt>=0?"pricier":"cheaper"} (${mkt>=0?"+":"−"}${Math.abs(mkt).toFixed(2)} IV pts)</b>${mkt>=0.3?", a sign of hedging demand":mkt<=-0.3?", a sign of premium selling":""}`].filter(Boolean).join(" · ");
+
+  const items=F3.items.filter(i=>i.sig);
+  const W=v=>items.filter(i=>i.view===v).reduce((a,i)=>a+i.w*Math.abs(i.d),0);
+  const wb=W("bear"), wu=W("bull"), pill=$("sigPill");
+  const nb=items.filter(i=>i.view==="bear").length, nu=items.filter(i=>i.view==="bull").length, nn=items.length-nb-nu;
+  if(!items.length){pill.className="pill neu";pill.textContent="Nothing significant";
+    $("sigRead").textContent="No strike moved enough to stand out. Writers are holding their positions.";$("sigList").innerHTML="";return;}
+  const lean=wb>wu*1.25?"bear":wu>wb*1.25?"bull":"neu";
+  pill.className="pill "+lean; pill.textContent=lean==="bear"?"Weighted: bearish":lean==="bull"?"Weighted: bullish":"Weighted: mixed";
+  $("sigRead").innerHTML=`${items.length} significant change${items.length>1?"s":""}: <b>${nb}</b> bearish, <b>${nu}</b> bullish${nn?`, <b>${nn}</b> unclear`:""}. `+
+    `After weighting for who traded and where, the bearish side carries <b>${Math.round(wb/((wb+wu)||1)*100)}%</b> of the weight.`+
+    (F3.hasIv?"":" No IV data in sample mode, so every OI rise is assumed to be writing.");
+  $("sigList").innerHTML=items.map(i=>`<div class="sig-item"><span class="k">${fmt(i.k)}<small>${i.side} · ${i.zone}</small></span>`+
+    `<p><b>${i.name}</b>: ${i.why}.<small>${sgnFmt(i.d,0)} (${pctFmt(i.pct)})${i.ivS!=null?` · IV ${i.ivS>0?"+":i.ivS<0?"−":""}${Math.abs(i.ivS).toFixed(2)} vs expected`:""} · weight ${i.tier.toLowerCase()}${i.notes.length?" · "+i.notes.join(", "):""}</small></p>`+
+    `<span class="pill ${i.view}">${i.view==="bear"?"Bearish":i.view==="bull"?"Bullish":"Unclear"}</span></div>`).join("");
+}
+function drawPcr(R){
+  const H=R.hist.length?R.hist:[1]; const W=700,Ht=200,l=44,rr=16,t=14,b=30;
+  let lo=Math.min(0.5,...H)-0.05, hi=Math.max(1.7,...H)+0.05;
+  const X=i=>l+(H.length<2?0.5:i/(H.length-1))*(W-l-rr), Y=v=>t+(hi-v)/(hi-lo)*(Ht-t-b);
+  let s=`<rect x="${l}" y="${Y(hi)}" width="${W-l-rr}" height="${Y(R.pcrHi)-Y(hi)}" fill="var(--bear-soft)"/>`+
+        `<rect x="${l}" y="${Y(R.pcrLo)}" width="${W-l-rr}" height="${Y(lo)-Y(R.pcrLo)}" fill="var(--bull-soft)"/>`;
+  s+=`<text x="${W-rr-4}" y="${Y(hi)+13}" text-anchor="end" style="fill:var(--bear)">overheated · contrarian bearish</text><text x="${W-rr-4}" y="${Y(lo)-5}" text-anchor="end" style="fill:var(--bull)">oversold · contrarian bullish</text>`;
+  const st=0.25; for(let v=Math.ceil(lo/st)*st;v<=hi;v+=st){s+=`<line x1="${l}" x2="${W-rr}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${l-6}" y="${Y(v)+4}" text-anchor="end">${v.toFixed(2)}</text>`;}
+  s+=`<line x1="${l}" x2="${W-rr}" y1="${Y(1)}" y2="${Y(1)}" stroke="var(--faint)" stroke-dasharray="4 3"/>`;
+  const line=H.map((v,i)=>`${X(i)},${Y(v)}`).join(" ");
+  s+=`<polygon points="${X(0)},${Y(lo)} ${line} ${X(H.length-1)},${Y(lo)}" fill="var(--accent)" opacity=".08"/>`;
+  s+=`<polyline points="${line}" fill="none" stroke="var(--accent)" stroke-width="2.25" stroke-linejoin="round"/>`;
+  const PD=LIVE&&LIVE.pcrDates&&LIVE.pcrDates.length===H.length?LIVE.pcrDates:null;
+  H.forEach((v,i)=>{const lab=PD?shortDate(PD[i]):(i===H.length-1?"today":"t−"+(H.length-1-i));s+=`<text x="${X(i)}" y="${Ht-10}" text-anchor="middle">${lab}</text>`;});
+  const lx=X(H.length-1), ly=Y(H[H.length-1]);
+  s+=`<circle cx="${lx}" cy="${ly}" r="5" fill="var(--accent)" stroke="var(--surface)" stroke-width="2"/><text x="${lx-8}" y="${ly-10}" text-anchor="end" style="fill:var(--ink);font-weight:600">${fmt(H[H.length-1],2)}</text>`;
+  $("pcrChart").innerHTML=s;
+}
+function drawIv(R){
+  const X=v=>30+v/100*640; const lo=num(S.ivLo), hi=num(S.ivHi);
+  let s=`<text x="30" y="14">IV RANGE (1 YEAR)</text>`;
+  s+=`<rect x="30" y="22" width="${X(30)-30}" height="14" fill="var(--bull-soft)"/><rect x="${X(30)}" y="22" width="${X(70)-X(30)}" height="14" fill="var(--accent-soft)"/><rect x="${X(70)}" y="22" width="${670-X(70)}" height="14" fill="var(--bear-soft)"/>`;
+  s+=`<text x="${X(15)}" y="33" text-anchor="middle" style="fill:var(--bull)">buy options</text><text x="${X(50)}" y="33" text-anchor="middle" style="fill:var(--accent)">spreads</text><text x="${X(85)}" y="33" text-anchor="middle" style="fill:var(--bear)">sell options</text>`;
+  s+=`<text x="30" y="52">${fmt(lo,1)}% low</text><text x="670" y="52" text-anchor="end">${fmt(hi,1)}% high</text>`;
+  s+=`<polygon points="${X(R.ivr)-6},14 ${X(R.ivr)+6},14 ${X(R.ivr)},22" fill="var(--ink)"/><text x="${X(R.ivr)}" y="10" text-anchor="middle" style="fill:var(--ink);font-weight:600">IV rank ${fmt(R.ivr,0)}%</text>`;
+  s+=`<text x="30" y="74">IV PERCENTILE</text><rect x="30" y="80" width="640" height="12" rx="2" fill="var(--sunk)" stroke="var(--line)"/>`;
+  s+=`<rect x="30" y="80" width="${X(R.ivp)-30}" height="12" rx="2" fill="var(--accent)" opacity=".75"/><text x="${Math.min(X(R.ivp)+6,640)}" y="90" style="fill:var(--ink);font-weight:600">${fmt(R.ivp,0)}%</text>`;
+  [30,70].forEach(v=>s+=`<line x1="${X(v)}" x2="${X(v)}" y1="76" y2="96" stroke="var(--faint)" stroke-dasharray="2 2"/>`);
+  s+=`<text x="30" y="108">${fmt(R.ivp,0)}% of the past year's sessions had lower IV than today</text>`;
+  $("ivChart").innerHTML=s;
+}
+function drawMatrix(R){
+  const dirs=[["bull","Bullish"],["neu","Neutral"],["bear","Bearish"]], regs=[["low","Low IV"],["mid","Mid IV"],["high","High IV"]];
+  let h=`<span></span>`+regs.map(r=>`<span class="mh">${r[1]}</span>`).join("");
+  dirs.forEach(d=>{h+=`<span class="mh">${d[1]}</span>`;
+    regs.forEach(r=>{const on=R.pickDir===d[0]&&R.pickReg===r[0], auto=R.dir===d[0]&&R.reg===r[0];
+      h+=`<button type="button" class="cell${on?" on":""}${auto?" auto":""}" data-d="${d[0]}" data-r="${r[0]}">${R.book[d[0]+"-"+r[0]][0]}</button>`;});});
+  $("matrix").innerHTML=h;
+}
+function drawPayoff(R){
+  const W=700,H=250,l=70,r=16,t=16,b=34;
+  const ys=R.pts.map(p=>p[1]); let lo=Math.min(0,...ys), hi=Math.max(0,...ys); const pad=(hi-lo)*0.1||1000; lo-=pad; hi+=pad;
+  const X=x=>l+(x-R.x0)/(R.x1-R.x0)*(W-l-r), Y=y=>t+(hi-y)/(hi-lo)*(H-t-b);
+  const z=Y(0);
+  let s=`<defs><clipPath id="cpUp"><rect x="0" y="0" width="${W}" height="${z}"/></clipPath><clipPath id="cpDn"><rect x="0" y="${z}" width="${W}" height="${H}"/></clipPath></defs>`;
+  const ys2=niceStep((hi-lo)/5); for(let v=Math.ceil(lo/ys2)*ys2;v<=hi;v+=ys2) s+=`<line x1="${l}" x2="${W-r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${l-6}" y="${Y(v)+4}" text-anchor="end">${v===0?"0":(v>0?"+":"−")+fmtK(Math.abs(v))}</text>`;
+  const xs=niceStep((R.x1-R.x0)/6); for(let v=Math.ceil(R.x0/xs)*xs;v<=R.x1;v+=xs) s+=`<text x="${X(v)}" y="${H-12}" text-anchor="middle">${fmt(v)}</text>`;
+  const line=R.pts.map(p=>`${X(p[0])},${Y(p[1])}`).join(" ");
+  const poly=`${X(R.x0)},${z} ${line} ${X(R.x1)},${z}`;
+  s+=`<polygon points="${poly}" fill="var(--bull)" opacity=".18" clip-path="url(#cpUp)"/><polygon points="${poly}" fill="var(--bear)" opacity=".18" clip-path="url(#cpDn)"/>`;
+  s+=`<line x1="${l}" x2="${W-r}" y1="${z}" y2="${z}" stroke="var(--faint)"/>`;
+  s+=`<polyline points="${line}" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round"/>`;
+  const sp=num(S.spot); s+=`<line x1="${X(sp)}" x2="${X(sp)}" y1="${t}" y2="${H-b}" stroke="var(--accent)" stroke-dasharray="4 3"/><text x="${X(sp)+5}" y="${t+10}" style="fill:var(--accent);font-weight:600">spot ${fmt(sp)}</text>`;
+  R.be.forEach(bx=>{s+=`<circle cx="${X(bx)}" cy="${z}" r="4" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="${X(bx)}" y="${z+16}" text-anchor="middle" style="fill:var(--ink)">BE ${fmt(bx)}</text>`;});
+  $("payoff").innerHTML=s;
+}
+const fmtK=v=>v>=100000?(v/100000).toFixed(v>=1e6?0:1)+"L":v>=1000?(v/1000).toFixed(v>=10000?0:1)+"k":fmt(v);
+
+
+
+/* ---------- live mode (when served by desk_server.py) ---------- */
+let LIVE=null, pollT=null;
+const shortDate=d=>{const x=new Date(d+"T00:00:00");return x.toLocaleDateString("en-IN",{day:"numeric",month:"short"});};
+const DATA_KEYS=["spot","dma20","dma50","dma200","structure","part","pcrHist","iv","ivp","ivLo","ivHi","ivTrend","dte","lot","asof"];
+function applyWindow(){
+  const f=LIVE&&LIVE.futHist; if(!f||f.length<2) return;
+  const n=Math.min(f.length-1,parseInt(S.oiWin,10)||1), a=f[f.length-1-n], b=f[f.length-1];
+  S.futP0=a.close; S.futP1=b.close; S.oi0=a.oi; S.oi1=b.oi;
+}
+function applyLive(p){
+  LIVE=p;
+  DATA_KEYS.forEach(k=>{if(p[k]!=null) S[k]=clone(p[k]);});
+  if(p.chain&&p.chain.length){S.chain=clone(p.chain);}
+  applyWindow();
+  buildTables(); fillInputs(); render();
+}
+function setLiveTag(p,err){
+  const t=$("liveTag"); t.hidden=false; ["freezeWrap","refreshBtn","oiWinWrap","ivSrc"].forEach(id=>$(id).hidden=false);
+  if(p&&p.static){ $("refreshBtn").hidden=true; $("freezeWrap").hidden=true;
+    t.className="live-tag closed"; $("liveTxt").textContent="Updated daily after close · "+p.updated.replace(/:\d\d IST$/," IST"); return; }
+  document.querySelectorAll(".live-only").forEach(e=>e.hidden=false);
+  t.className="live-tag"+(err?" err":p&&!p.marketOpen?" closed":"");
+  $("liveTxt").textContent=err?err:p.loading?"Fetching from NSE…":(p.marketOpen?"Live · ":"Market closed · ")+p.updated.replace(/^\d+ \w+ \d+, /,"")+(p.errors&&p.errors.length?" · "+p.errors.length+" source(s) failed":"");
+  if(p&&p.errors&&p.errors.length) t.title=p.errors.join("\n");
+}
+async function poll(){
+  clearTimeout(pollT);
+  let next=30000;
+  try{
+    const r=await fetch("api/data",{cache:"no-store"});
+    if(!r.ok) throw new Error("no server");
+    const p=await r.json();
+    if(p.loading){setLiveTag(p);next=4000;}
+    else{
+      setLiveTag(p);
+      if(!$("freeze").checked&&(!LIVE||LIVE.updated!==p.updated)) applyLive(p);
+      next=p.marketOpen?30000:120000;
+    }
+  }catch(e){
+    if(LIVE) setLiveTag(null,"Server not reachable · showing last data");
+    else return; // opened as a static page (e.g. the artifact): stay on sample data
+  }
+  pollT=setTimeout(poll,next);
+}
+function drawFiiHist(){
+  const w=$("fiiHistWrap"), h=LIVE&&LIVE.fiiHist;
+  if(!h||h.length<2){w.hidden=true;return;} w.hidden=false;
+  const W=700,Ht=120,l=40,r=16,t=20,b=24, vs=h.map(x=>x.lp);
+  let lo=Math.min(0,...vs), hi=Math.max(25,...vs)+2;
+  const X=i=>l+i/(h.length-1)*(W-l-r), Y=v=>t+(hi-v)/(hi-lo)*(Ht-t-b);
+  let s=`<text x="${l}" y="12">FII LONG % · LAST ${h.length} SESSIONS</text>`;
+  s+=`<rect x="${l}" y="${Y(10)}" width="${W-l-r}" height="${Y(lo)-Y(10)}" fill="var(--bear-soft)"/>`;
+  [0,10,20].forEach(v=>{s+=`<line x1="${l}" x2="${W-r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${l-6}" y="${Y(v)+4}" text-anchor="end">${v}%</text>`;});
+  const line=h.map((x,i)=>`${X(i)},${Y(x.lp)}`).join(" ");
+  s+=`<polyline points="${line}" fill="none" stroke="var(--accent)" stroke-width="2.25" stroke-linejoin="round"/>`;
+  h.forEach((x,i)=>{ if(i===0||i===h.length-1||i%3===0) s+=`<text x="${X(i)}" y="${Ht-6}" text-anchor="middle">${shortDate(x.d)}</text>`;});
+  const e=h[h.length-1]; s+=`<circle cx="${X(h.length-1)}" cy="${Y(e.lp)}" r="5" fill="var(--accent)" stroke="var(--surface)" stroke-width="2"/><text x="${X(h.length-1)-8}" y="${Y(e.lp)-9}" text-anchor="end" style="fill:var(--ink);font-weight:600">${fmt(e.lp,1)}%</text>`;
+  $("fiiHist").innerHTML=s;
+}
+
+
+/* ---------- overview widgets ---------- */
+function renderOverview(R){
+  const spot=num(S.spot), c=v=>`var(--${v==="neu"?"warn":v})`;
+  $("kSpot").textContent=fmt(spot,2);
+  if(LIVE&&LIVE.spotPrev){const ch=spot-LIVE.spotPrev,p=ch/LIVE.spotPrev*100;$("kSpotSub").innerHTML=`<span class="${ch>=0?"up":"dn"}">${sgnFmt(ch,2)} (${sgnFmt(p,2)}%)</span> today`;}
+  else $("kSpotSub").innerHTML=`<span class="${spot>=num(S.dma20)?"up":"dn"}">${sgnFmt((spot-num(S.dma20))/num(S.dma20)*100,1)}%</span> vs 20 DMA`;
+  const kb=$("kBias"); kb.textContent={bull:"Bullish",bear:"Bearish",neu:"Neutral"}[R.dir]; kb.style.color=c(R.dir);
+  $("kBiasSub").textContent=`Score ${sgnFmt(R.bias,0)} · ${R.agree} of 4 agree`;
+  const F=R.P.FII; $("kFii").textContent=fmt(F.lp,1)+"%";
+  $("kFiiSub").innerHTML=`<span class="${F.dlp>=0?"up":"dn"}">${sgnFmt(F.dlp,1)} pts</span> vs previous day`;
+  $("kPcr").textContent=fmt(R.pcr,2);
+  $("kPcrSub").innerHTML=`<span class="${R.pcr-R.pcrRef>=0?"up":"dn"}">${sgnFmt(R.pcr-R.pcrRef,2)}</span> over 5 sessions`;
+  $("kVix").textContent=fmt(R.iv,2);
+  $("kVixSub").textContent=`IVP ${fmt(R.ivp,0)}% · ${{low:"cheap",mid:"fair",high:"expensive"}[R.reg]} premium`;
+  $("kPick").textContent=R.tradeName;
+  const rows=[["Price trend",R.s1],["OI & FII",R.s2],["Option chain",R.s3],["PCR",R.s4]];
+  $("stepBars").innerHTML=rows.map(([n,s])=>{const w=Math.abs(s)/2*50,l=s<0?50-w:50,col=s>=0.35?"var(--bull)":s<=-0.35?"var(--bear)":"var(--warn)";
+    return `<div class="bar-row"><span>${n}</span><div class="track"><div class="fill" style="left:${l}%;width:${Math.max(w,1)}%;background:${col}"></div></div><span class="v" style="color:${col}">${sgnFmt(s,1)}</span></div>`;}).join("");
+  const lv=[["Call wall · resistance",R.res,"bear"],["Put floor · support",R.sup,"bull"],["20 DMA",num(S.dma20)],["50 DMA",num(S.dma50)],["200 DMA",num(S.dma200)]]
+    .concat(R.be.map(b=>["Trade breakeven",b,"info"])).filter(x=>x[1]>0);
+  lv.push(["Nifty spot",spot,"spot"]); lv.sort((a,b)=>b[1]-a[1]);
+  $("levels").innerHTML=lv.map(([n,v,t])=>t==="spot"
+    ?`<div class="lv" style="background:var(--accent-soft);margin:0 -10px;padding:10px;border-radius:8px"><b style="color:var(--accent)">${n}</b><b style="color:var(--accent)">${fmt(v,2)}</b></div>`
+    :`<div class="lv"><span>${t&&t!=="info"?`<span class="pill ${t}" style="margin-right:8px">${t==="bear"?"Ceiling":"Floor"}</span>`:""}${n}</span><span><b>${fmt(v,0)}</b><small>${sgnFmt((v-spot)/spot*100,1)}%</small></span></div>`).join("");
+  $("levelsSub").textContent="High to low · % from spot";
+  [R.s1,R.s2,R.s3,R.s4].forEach((s,i)=>$("nd"+(i+1)).className="dot "+cls(s));
+  $("nd5").className="dot info"; $("nd6").className="dot info";
+}
+const VIEWS={overview:["Overview","What the big players are doing, in one screen"],step1:["Price trend","Step 1 · Where is the market and what's the structure?"],step2:["OI & FII positioning","Step 2 · Who is positioned, and are they adding or exiting?"],step3:["Option chain","Step 3 · Where exactly are writers defending strikes?"],step4:["Put-call ratio","Step 4 · Is sentiment stretched, a signal or a trap?"],step5:["Volatility","Step 5 · Is premium cheap or expensive right now?"],step6:["Strategy & Greeks","Step 6 · Which instrument expresses this view at the least risk?"]};
+function showView(){
+  let v=(location.hash||"").slice(1); if(!VIEWS[v]) v="overview";
+  Object.keys(VIEWS).forEach(k=>$("v-"+k).hidden=k!==v);
+  document.querySelectorAll("#nav a").forEach(a=>a.classList.toggle("on",a.dataset.view===v));
+  $("pageTitle").textContent=VIEWS[v][0]; $("pageSub").textContent=VIEWS[v][1];
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",showView);
+
+/* ---------- market context: macro, FII/DII flows, quarterly results ---------- */
+Object.assign(VIEWS,{macro:["Global macro","Crude, gold, yields, dollar, rupee and the Fed: headwinds or tailwinds for India"],
+  flows:["FII & DII flows","Who bought and sold Indian stocks today, and how unusual it was"],
+  results:["Quarterly results","Results filed on NSE, with year-on-year growth"]});
+let CTXD=null, rsFilter="all";
+const crore=v=>v==null?"—":fmt(v/1e7,0);
+const pp=(v,d=1)=>v==null||!isFinite(v)?"—":(v>0?"+":v<0?"−":"")+fmt(Math.abs(v),d)+"%";
+const viewPill=v=>v==="head"?'<span class="pill bear">Headwind</span>':v==="tail"?'<span class="pill bull">Tailwind</span>':'<span class="pill neu">Neutral</span>';
+function spark(hist,col){
+  if(!hist||hist.length<2) return '<svg viewBox="0 0 300 56"></svg>';
+  const v=hist.map(h=>h[1]), lo=Math.min(...v), hi=Math.max(...v), X=i=>2+i/(v.length-1)*296, Y=x=>4+(hi-x)/((hi-lo)||1)*48;
+  const pts=v.map((x,i)=>`${X(i).toFixed(1)},${Y(x).toFixed(1)}`).join(" ");
+  return `<svg viewBox="0 0 300 56" preserveAspectRatio="none"><polygon points="2,56 ${pts} 298,56" fill="${col}" opacity=".08"/><polyline points="${pts}" fill="none" stroke="${col}" stroke-width="1.8" vector-effect="non-scaling-stroke"/><circle cx="${X(v.length-1)}" cy="${Y(v[v.length-1])}" r="3" fill="${col}"/></svg>`;
+}
+function fmtLevel(i){
+  const v=i.last, d=i.key==="spx"?0:(i.key==="usdinr"||i.key.endsWith("10y"))?2:2;
+  if(i.unit==="%") return fmt(v,2)+"%";
+  if(i.unit==="₹") return "₹"+fmt(v,2);
+  if(i.unit.startsWith("$")) return "$"+fmt(v,i.key==="gold"?0:2);
+  return fmt(v,d);
+}
+function renderMacro(m){
+  if(!m){return;}
+  const cls=m.verdict==="Headwinds"?"bear":m.verdict==="Tailwinds"?"bull":"neu";
+  $("mxPill").className="pill "+cls; $("mxPill").textContent=m.verdict;
+  $("ndMacro").className="dot "+cls;
+  const heads=m.items.filter(i=>i.view==="head").map(i=>i.label.toLowerCase()).concat(m.fed&&m.fed.view==="head"?["Fed policy"]:[]);
+  const tails=m.items.filter(i=>i.view==="tail").map(i=>i.label.toLowerCase()).concat(m.fed&&m.fed.view==="tail"?["Fed policy"]:[]);
+  $("mxRead").innerHTML=`<b>${m.heads} of ${m.total}</b> global indicators are working against Indian stocks right now, and <b>${m.tails}</b> are helping.`+
+    (heads.length?` Headwinds: ${heads.join(", ")}.`:"")+(tails.length?` Tailwinds: ${tails.join(", ")}.`:"")+
+    (m.verdict==="Headwinds"?" When the backdrop looks like this, FIIs tend to stay cautious on India, which fits a bearish read from the framework.":m.verdict==="Tailwinds"?" A supportive backdrop like this usually helps FII inflows.":" The backdrop is mixed, so it doesn't push strongly either way.");
+  $("mxUpd").textContent="Updated "+m.updated;
+  let h=m.items.map(i=>{
+    const col=i.view==="head"?"var(--bear)":i.view==="tail"?"var(--bull)":"var(--accent)";
+    const d1=i.kind==="abs"?(i.chg==null?"—":(i.chg>=0?"+":"−")+fmt(Math.abs(i.chg),3)+" pts"):pp(i.chgPct,2);
+    const m1=i.c1m==null?"—":i.kind==="abs"?(i.c1m>=0?"+":"−")+fmt(Math.abs(i.c1m),2)+" pts":pp(i.c1m,1);
+    const m3=i.c3m==null?"—":i.kind==="abs"?(i.c3m>=0?"+":"−")+fmt(Math.abs(i.c3m),2)+" pts":pp(i.c3m,1);
+    const top=(i.flags||[]).length?((i.flags.some(f=>f.level==="red"))?" flagged-red":" flagged-amber"):"";
+    const fl=(i.flags||[]).map(f=>`<div class="mx-flag ${f.level}">⚑ ${f.title}</div>`).join("");
+    return `<div class="card mx${top}">${fl?`<div class="mx-flags">${fl}</div>`:""}<div class="mx-top"><div><span class="label">${i.label}</span><div class="mx-val">${fmtLevel(i)}</div></div>${viewPill(i.view)}</div>
+      <div class="mx-chg"><span>1D <b>${d1}</b></span><span>1M <b>${m1}</b></span><span>3M <b>${m3}</b></span></div>
+      ${spark(i.hist,col)}
+      ${i.pctl==null?"":`<div><div class="pbar"><i style="left:calc(${i.pctl}% - 1px)"></i></div><div class="mx-chg" style="justify-content:space-between;margin-top:4px"><span>1-year low</span><span>${i.pctl}th percentile</span><span>high</span></div></div>`}
+      <p>${i.why}</p></div>`;}).join("");
+  const f=m.fed;
+  const ffl=(f&&f.flags)||[], ftop=ffl.length?(ffl.some(x=>x.level==="red")?" flagged-red":" flagged-amber"):"";
+  const ex=f&&f.expect;
+  if(f) h+=`<div class="card mx${ftop}">${ffl.length?`<div class="mx-flags">${ffl.map(x=>`<div class="mx-flag ${x.level}">⚑ ${x.title}</div>`).join("")}</div>`:""}<div class="mx-top"><div><span class="label">US Fed funds rate</span><div class="mx-val">${fmt(f.lo,2)}–${fmt(f.hi,2)}%</div></div>${viewPill(f.view)}</div>
+      <div class="mx-chg"><span>Effective <b>${fmt(f.effr,2)}%</b></span><span>6 months ago <b>${fmt(f.lo6m,2)}–${fmt(f.hi6m,2)}%</b></span></div>
+      ${ex?`<div class="mx-chg"><span>Market expects <b class="${ex.view==="hike"?"dn":ex.view==="cut"?"up":""}">${ex.view==="hike"?"a HIKE":ex.view==="cut"?"a CUT":"no change"}</b></span><span>6-month bill <b>${fmt(ex.bill6m,2)}%</b> (${ex.spread>=0?"+":"−"}${fmt(Math.abs(ex.spread),2)}% vs Fed)</span></div>`:""}
+      ${spark(f.hist.map(x=>[x.d,x.c]),f.view==="head"?"var(--bear)":f.view==="tail"?"var(--bull)":"var(--accent)")}<p>${f.why}</p></div>`;
+  $("mxGrid").innerHTML=h;
+  const F=m.flags||[], reds=F.filter(x=>x.level==="red");
+  $("mxAlertCard").hidden=!F.length;
+  $("mxAlerts").innerHTML=F.map(x=>`<div class="al"><span class="fl flag-${x.level}">⚑</span><span class="who">${x.label}</span><span class="what"><b>${x.title}</b><span>${x.detail}</span></span></div>`).join("");
+  const nav=document.querySelector('#nav a[data-view="macro"]'); let nc=nav.querySelector(".navcount");
+  if(F.length){ if(!nc){nc=document.createElement("span");nc.className="navcount";nav.appendChild(nc);} nc.textContent=F.length; nc.style.background=reds.length?"var(--bear)":"var(--warn)"; $("ndMacro").style.display="none"; }
+  else if(nc){ nc.remove(); $("ndMacro").style.display=""; }
+  const st=$("ovAlerts");
+  if(F.length){ st.hidden=false; st.className="alert-strip"+(reds.length?"":" amber");
+    st.innerHTML=`<span class="${reds.length?"flag-red":"flag-amber"}" style="font-size:18px">⚑</span><span><b>${F.length} global change${F.length>1?"s":""} to watch:</b> ${F.slice(0,3).map(x=>`${x.label}: ${x.title.charAt(0).toLowerCase()+x.title.slice(1)}`).join(" · ")}${F.length>3?` · +${F.length-3} more`:""}</span><span class="go">Open Global macro →</span>`; }
+  else st.hidden=true;
+}
+function renderFlows(F){
+  if(!F) return;
+  const t=F.today;
+  if(t){
+    const fn=t.fii.net, dn=(t.dii||{}).net;
+    const k=[["FII net today",`<span class="${fn>=0?"up":"dn"}">${fn>=0?"+":"−"}₹${fmt(Math.abs(fn),0)} cr</span>`,`bought ₹${fmt(t.fii.buy,0)} cr · sold ₹${fmt(t.fii.sell,0)} cr`],
+      ["DII net today",dn==null?"—":`<span class="${dn>=0?"up":"dn"}">${dn>=0?"+":"−"}₹${fmt(Math.abs(dn),0)} cr</span>`,t.absorb!=null?`absorbed ${fmt(t.absorb,0)}% of FII selling`:"domestic funds"],
+      ["FII net as % of turnover",pp(t.fiiNetPct,1),"how one-sided FII trading was"],
+      ["vs previous day",t.prevNet==null?"—":`<span class="${fn-t.prevNet>=0?"up":"dn"}">${fn-t.prevNet>=0?"+":"−"}₹${fmt(Math.abs(fn-t.prevNet),0)} cr</span>`,t.prevNet==null?"history starts today":`prev ${t.prevNet>=0?"+":"−"}₹${fmt(Math.abs(t.prevNet),0)} cr`],
+      ["FII this month",`<span class="${t.mtd>=0?"up":"dn"}">${t.mtd>=0?"+":"−"}₹${fmt(Math.abs(t.mtd),0)} cr</span>`,`DII ${t.mtdDii>=0?"+":"−"}₹${fmt(Math.abs(t.mtdDii),0)} cr · ${t.streak} day ${t.sign<0?"selling":"buying"} streak`]];
+    $("flKpis").innerHTML=k.map(([a,b,c])=>`<div class="card kpi"><span class="label">${a}</span><b>${b}</b><span class="sub">${c}</span></div>`).join("");
+    const pill=$("flPill"); pill.className="pill "+(t.big?(fn<0?"bear":"bull"):"neu");
+    pill.textContent=t.big?(fn<0?"Significant FII selling":"Significant FII buying"):"Normal-sized day";
+    $("ndFlows").className="dot "+(fn<0?"bear":"bull");
+    const dd=new Date(t.d+"T00:00:00").toLocaleDateString("en-IN",{day:"numeric",month:"short"});
+    $("flRead").innerHTML=`On ${dd}, foreign investors <b>${fn<0?"sold":"bought"} a net ₹${fmt(Math.abs(fn),0)} crore</b> of Indian shares` +
+      (t.fiiNetPct!=null?`; ${fmt(Math.abs(t.fiiNetPct),0)}% of everything they traded was on the ${fn<0?"sell":"buy"} side`:"")+". "+
+      (dn!=null?`Domestic institutions ${dn>=0?"bought":"sold"} ₹${fmt(Math.abs(dn),0)} crore${fn<0&&dn>0?`, more than ${t.absorb>=100?"fully":"partly"} soaking up the foreign selling`:""}. `:"")+
+      (t.streak>1?`This is the <b>${t.streak}${["th","st","nd","rd"][(t.streak%10>3||[11,12,13].includes(t.streak%100))?0:t.streak%10]} straight day</b> of FII ${t.sign<0?"selling":"buying"}. `:"")+
+      (t.big?"The size is unusual, so treat it as a real signal.":t.days>=5?"The size is within the normal range of the last few weeks.":"");
+    if(F.deriv){const ix=F.deriv.rows[0]; $("flRead").innerHTML+=` In futures, FIIs are only <b>${fmt(ix.longPct,1)}% long</b> on index futures (${ix.dLongPct>=0?"+":"−"}${fmt(Math.abs(ix.dLongPct),1)} pts on the day).`;}
+  }
+  // bars
+  const H=F.hist||[], W=640, Ht=240, l=56, r=10, tp=14, b=34, svg=$("flBars");
+  $("flHistNote").textContent=H.length<2?"Builds up one day at a time":`${H.length} sessions`;
+  if(H.length){
+    const vals=H.flatMap(h=>[h.fii.net,(h.dii||{}).net||0]); const mx=Math.max(1000,...vals.map(Math.abs));
+    const Y=v=>tp+(mx-v)/(2*mx)*(Ht-tp-b), bw=Math.min(28,(W-l-r)/H.length/2.4);
+    let g=`<line x1="${l}" x2="${W-r}" y1="${Y(0)}" y2="${Y(0)}" stroke="var(--faint)"/>`;
+    [mx,mx/2,-mx/2,-mx].forEach(v=>g+=`<line x1="${l}" x2="${W-r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${l-6}" y="${Y(v)+4}" text-anchor="end">${v>0?"+":"−"}${fmt(Math.abs(v),0)}</text>`);
+    H.forEach((h,i)=>{const cx=l+(i+.5)*(W-l-r)/H.length;
+      [[h.fii.net,"#2a78d6",-bw/2-1],[(h.dii||{}).net||0,"#eb6834",bw/2+1]].forEach(([v,c,o])=>{const y=Math.min(Y(v),Y(0)),hh=Math.abs(Y(v)-Y(0));g+=`<rect x="${cx+o-bw/2}" y="${y}" width="${bw}" height="${Math.max(1,hh)}" rx="2" fill="${c}"><title>${h.d} ${c==="#2a78d6"?"FII":"DII"} ${v>=0?"+":"−"}₹${fmt(Math.abs(v),0)} cr</title></rect>`;});
+      if(i===0||i===H.length-1||i%5===0) g+=`<text x="${cx}" y="${Ht-14}" text-anchor="middle">${new Date(h.d+"T00:00:00").toLocaleDateString("en-IN",{day:"numeric",month:"short"})}</text>`;});
+    g+=`<rect x="${W-150}" y="2" width="10" height="10" rx="2" fill="#2a78d6"/><text x="${W-136}" y="11">FII/FPI</text><rect x="${W-80}" y="2" width="10" height="10" rx="2" fill="#eb6834"/><text x="${W-66}" y="11">DII</text>`;
+    svg.innerHTML=g;
+  }
+  // derivatives table
+  if(F.deriv){$("flDerivDate").textContent="as of "+F.deriv.d;
+    $("flDeriv").tBodies[0].innerHTML=F.deriv.rows.map(x=>`<tr><td>${x.name}</td><td>${fmt(x.long)}</td><td>${fmt(x.short)}</td><td class="${x.net>=0?"up":"dn"}">${sgnFmt(x.net,0)}</td><td class="${x.dNet>=0?"up":"dn"}">${sgnFmt(x.dNet,0)}</td><td>${fmt(x.longPct,1)}%</td><td class="${x.dLongPct>=0?"up":"dn"}">${sgnFmt(x.dLongPct,2)}</td></tr>`).join("");}
+  // FII long % history
+  const L=F.fiiLongHist||[];
+  if(L.length>2){const W2=1000,H2=220,l2=40,r2=14,t2=14,b2=28, v=L.map(x=>x[1]), hi=Math.max(30,...v)+2;
+    const X=i=>l2+i/(L.length-1)*(W2-l2-r2), Y=x=>t2+(hi-x)/hi*(H2-t2-b2);
+    let g=`<rect x="${l2}" y="${Y(10)}" width="${W2-l2-r2}" height="${Y(0)-Y(10)}" fill="var(--bear-soft)"/>`;
+    [0,10,20,30].filter(x=>x<=hi).forEach(x=>g+=`<line x1="${l2}" x2="${W2-r2}" y1="${Y(x)}" y2="${Y(x)}" stroke="var(--line)"/><text x="${l2-6}" y="${Y(x)+4}" text-anchor="end">${x}%</text>`);
+    let lm=""; L.forEach((x,i)=>{const m=x[0].slice(0,7); if(m!==lm&&(+x[0].slice(5,7))%3===1) g+=`<text x="${X(i)}" y="${H2-8}" text-anchor="middle">${new Date(x[0]+"T00:00:00").toLocaleDateString("en-IN",{month:"short",year:"2-digit"})}</text>`; lm=m;});
+    g+=`<polyline points="${L.map((x,i)=>X(i)+","+Y(x[1])).join(" ")}" fill="none" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round"/>`;
+    const e=L[L.length-1]; g+=`<circle cx="${X(L.length-1)}" cy="${Y(e[1])}" r="5" fill="#2a78d6" stroke="#fff" stroke-width="2"/><text x="${X(L.length-1)-8}" y="${Y(e[1])-9}" text-anchor="end" style="fill:var(--ink);font-weight:600">${fmt(e[1],1)}%</text>`;
+    $("flLong").innerHTML=g;}
+}
+function rsRead(x){
+  if(x.pat!=null&&x.pat<0) return '<span class="pill bear">Loss</span>';
+  if(x.patYoY==null) return '<span class="pill neu">—</span>';
+  if(x.patYoY>=20&&(x.revYoY==null||x.revYoY>0)) return '<span class="pill bull">Strong</span>';
+  if(x.patYoY<=-20) return '<span class="pill bear">Weak</span>';
+  return '<span class="pill neu">In line</span>';
+}
+function renderResults(R){
+  if(!R) return;
+  const rows=R.rows||[];
+  const up=rows.filter(x=>x.patYoY!=null&&x.patYoY>0).length, dn=rows.filter(x=>x.patYoY!=null&&x.patYoY<=0).length;
+  const n50=rows.filter(x=>x.n50);
+  const nextN50=(R.calendar||[]).filter(c=>c.n50);
+  $("rsKpis").innerHTML=[["Results in 7 days",fmt(rows.length),`updated ${R.updated.split(", ")[1]||""}`],
+    ["Profit grew",`<span class="up">${up}</span>`,"vs same quarter last year"],["Profit fell",`<span class="dn">${dn}</span>`,"or turned to loss"],
+    ["Nifty 50 reported",fmt(n50.length),n50.map(x=>x.sym).slice(0,4).join(", ")||"none yet"],
+    ["Next Nifty 50 result",nextN50.length?nextN50[0].sym:"—",nextN50.length?new Date(nextN50[0].d+"T00:00:00").toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short"}):"none in 14 days"]]
+    .map(([a,b,c])=>`<div class="card kpi"><span class="label">${a}</span><b>${b}</b><span class="sub">${c}</span></div>`).join("");
+  $("ndResults").className="dot "+(up>=dn?"bull":"bear");
+  const q=($("rsSearch").value||"").trim().toLowerCase();
+  const show=rows.filter(x=>(rsFilter==="all"||(rsFilter==="n50"&&x.n50)||(rsFilter==="big"&&x.patYoY!=null&&Math.abs(x.patYoY)>=25))&&(!q||(x.name+" "+x.sym).toLowerCase().includes(q)));
+  const yo=v=>v==null?"—":`<span class="${v>=0?"up":"dn"}">${pp(v,0)}</span>`;
+  $("rsTable").tBodies[0].innerHTML=show.length?show.map(x=>`<tr><td>${x.t.slice(0,6)} <small>${x.t.slice(12,17)}</small></td><td><b>${x.sym}</b>${x.n50?'<span class="n50">NIFTY 50</span>':""}<br><small>${x.name||""}</small></td><td>${x.qe.slice(3)}</td>`+
+    `<td>${crore(x.rev)}</td><td>${yo(x.revYoY)}</td><td class="${x.pat!=null&&x.pat<0?"dn":""}">${crore(x.pat)}</td><td>${yo(x.patYoY)}</td><td>${x.margin==null?"—":fmt(x.margin,1)+"%"}</td><td>${rsRead(x)}</td>`+
+    `<td class="links">${x.ixbrl?`<a href="${x.ixbrl}" target="_blank" rel="noopener" title="The results statement as filed on NSE">P&amp;L</a>`:""}${x.pdf?`<a href="${x.pdf}" target="_blank" rel="noopener" title="The company's results PDF">PDF</a>`:""}<a href="${x.screener}" target="_blank" rel="noopener" title="Quarterly P&amp;L on screener.in">Screener</a></td></tr>`).join(""):
+    `<tr><td colspan="10" class="muted" style="text-align:center;padding:24px">${rows.length?"No results match this filter.":"No results filed in the last 7 days yet. Results season brings dozens a day."}</td></tr>`;
+  const byDay={}; (R.calendar||[]).forEach(c=>(byDay[c.d]=byDay[c.d]||[]).push(c));
+  $("rsCalNote").textContent=`${(R.calendar||[]).length} companies scheduled`;
+  $("rsCal").innerHTML=Object.entries(byDay).map(([d,cs])=>`<div class="cal-day"><b>${new Date(d+"T00:00:00").toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short"})}</b>`+
+    cs.slice(0,8).map(c=>`<span>${c.sym}${c.n50?'<span class="n50">NIFTY 50</span>':""}</span>`).join("")+(cs.length>8?`<small>+${cs.length-8} more</small>`:"")+`</div>`).join("")||'<p class="hint">No board meetings for results in the next 14 days.</p>';
+}
+Object.assign(VIEWS,{events:["Event calendar","RBI, Fed, data releases, expiries and holidays that can move Nifty"]});
+let secPeriod="month", evFilter="all";
+function renderSectors(S){
+  if(!S){ $("secRead").textContent="Sector data from NSDL isn't available yet."; return; }
+  const key={fort:"lastFortnight",month:"lastMonth",q:"last3m"}[secPeriod];
+  const lab={fort:S.periods[S.periods.length-1],month:S.periods.slice(-2).join(" and "),q:"the last 3 months"}[secPeriod];
+  const rows=[...S.rows].filter(r=>r[key]!=null).sort((a,b)=>a[key]-b[key]);
+  const net=rows.reduce((a,r)=>a+r[key],0);
+  const sells=rows.filter(r=>r[key]<0).slice(0,3), buys=rows.filter(r=>r[key]>0).slice(-3).reverse();
+  const nm=r=>r.name.replace(" and Auto Components","").replace(", Gas & Consumable Fuels"," & gas").replace("Fast Moving Consumer Goods","FMCG");
+  $("secRead").innerHTML=`Over ${lab}, FIIs ${net<0?"sold":"bought"} a net <b>₹${fmt(Math.abs(net),0)} crore</b> of Indian equities. `+
+    (sells.length?`Biggest exits: <b class="dn">${sells.map(r=>`${nm(r)} (−₹${fmt(-r[key],0)} cr)`).join(", ")}</b>. `:"")+
+    (buys.length?`Biggest buys: <b class="up">${buys.map(r=>`${nm(r)} (+₹${fmt(r[key],0)} cr)`).join(", ")}</b>.`:"");
+  const gainers=[...S.rows].sort((a,b)=>b.weightChg-a.weightChg).slice(0,2), losers=[...S.rows].sort((a,b)=>a.weightChg-b.weightChg).slice(0,2);
+  $("secRead").innerHTML+=` Over ${S.months} months their portfolio tilted toward ${gainers.map(nm).join(" and ")} and away from ${losers.map(nm).join(" and ")}.`;
+  $("secChartLabel").textContent="Net investment, ₹ crore · "+lab;
+  const mx=Math.max(1,...rows.map(r=>Math.abs(r[key])));
+  const show=rows.filter(r=>Math.abs(r[key])>=mx*0.02);
+  $("secBars").innerHTML=show.map(r=>{const v=r[key],w=Math.abs(v)/mx*50,l=v<0?50-w:50;
+    return `<div class="sec-row" title="${r.name}"><span class="nm">${nm(r)}</span><div class="sec-track"><i style="left:${l}%;width:${Math.max(w,.5)}%;background:${v<0?"var(--bear)":"var(--bull)"}"></i></div><span class="v ${v<0?"dn":"up"}">${v<0?"−":"+"}${fmt(Math.abs(v),0)}</span></div>`;}).join("")+
+    (rows.length>show.length?`<p class="hint" style="margin-top:4px">${rows.length-show.length} sectors with very small flows not shown.</p>`:"");
+  $("secTable").tBodies[0].innerHTML=[...S.rows].sort((a,b)=>b.weight-a.weight).slice(0,12).map(r=>`<tr><td>${nm(r)}</td><td>${fmt(r.weight,1)}%</td><td class="${r.weightChg>=0?"up":"dn"}">${r.weightChg>=0?"+":"−"}${fmt(Math.abs(r.weightChg),2)} pts</td><td class="${r.last3m>=0?"up":"dn"}">${r.last3m>=0?"+":"−"}₹${fmt(Math.abs(r.last3m),0)} cr</td></tr>`).join("");
+  $("secNote").innerHTML=`Source: NSDL fortnightly sector-wise FPI data (BSE sector classification), equity only, as of ${S.asof}. Published twice a month, a few days after each fortnight ends.`+(S.mid?` A newer half-month file shows net ${S.mid.net<0?"selling":"buying"} of ₹${fmt(Math.abs(S.mid.net),0)} cr for ${S.mid.period.replace("Net Investment ","")}.`:"");
+}
+const EV_GROUP={india:["RBI","CPI","GDP","IIP","Results"],global:["Fed","Global data"],market:["Expiry","Holiday"]};
+function renderEvents(E){
+  if(!E) return;
+  const today=new Date(); today.setHours(0,0,0,0);
+  const dd=d=>Math.round((new Date(d+"T00:00:00")-today)/864e5);
+  const lab=d=>new Date(d+"T00:00:00").toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short"});
+  const away=d=>{const n=dd(d);return n===0?"today":n===1?"tomorrow":`in ${n} days`;};
+  const k=[["Next RBI policy",E.next.RBI],["Next Fed decision",E.next.Fed],["Next India CPI",E.next.CPI],["Next monthly expiry",E.nextMonthly],["Next market holiday",E.next.Holiday]];
+  $("evKpis").innerHTML=k.map(([a,e])=>`<div class="card kpi"><span class="label">${a}</span><b>${e?lab(e.d):"—"}</b><span class="sub">${e?away(e.d)+(e.cat==="Holiday"?" · "+e.title.replace("Market holiday: ",""):""):"not in the next 45 days"}</span></div>`).join("");
+  const soon=E.events.filter(e=>e.impact==="High"&&dd(e.d)>=0&&dd(e.d)<=2);
+  $("ndEvents").className="dot "+(soon.length?"bear":"info");
+  const ev=E.events.filter(e=>evFilter==="all"||(evFilter==="high"&&e.impact==="High")||(EV_GROUP[evFilter]||[]).includes(e.cat));
+  const by={}; ev.forEach(e=>(by[e.d]=by[e.d]||[]).push(e));
+  $("evList").innerHTML=Object.entries(by).map(([d,es])=>`<div class="ev-day${dd(d)===0?" today":""}"><div class="ev-date"><b>${lab(d)}</b><small>${away(d)}</small></div><div class="ev-items">`+
+    es.map(e=>`<div class="ev"><span class="tm">${e.time||"—"}</span><span class="tt">${e.title}${e.forecast?` <small class="muted">· forecast ${e.forecast}${e.previous?`, previous ${e.previous}`:""}</small>`:""}${e.why?`<span class="wy">${e.why}</span>`:""}</span><span><span class="chip">${e.cat}</span><span class="chip imp-${e.impact}">${e.impact}</span></span></div>`).join("")+`</div></div>`).join("")||'<p class="hint">Nothing in this filter.</p>';
+  $("evNote").innerHTML=`Times are IST. RBI dates: ${E.rbiSource||"edit data/events_manual.json"}. Fed meetings from federalreserve.gov (decision lands around midnight IST, so the next Indian session reacts). Global releases from the Forex Factory calendar (this week; next week's list appears over the weekend). India CPI, IIP and GDP follow MOSPI's usual schedule, so check the exact date nearer the time. Expiries and holidays from NSE. Updated ${E.updated}.`;
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("#secSeg button"); if(b){secPeriod=b.dataset.p;document.querySelectorAll("#secSeg button").forEach(x=>x.classList.toggle("on",x===b));if(CTXD&&CTXD.flows) renderSectors(CTXD.flows.sectors);}
+  const c=e.target.closest("#evSeg button"); if(c){evFilter=c.dataset.c;document.querySelectorAll("#evSeg button").forEach(x=>x.classList.toggle("on",x===c));if(CTXD) renderEvents(CTXD.events);}
+});
+async function pollCtx(){
+  try{
+    const r=await fetch("api/context",{cache:"no-store"}); if(!r.ok) throw 0;
+    const j=await r.json(); CTXD=j;
+    renderMacro(j.macro); renderFlows(j.flows); renderResults(j.results); renderEvents(j.events);
+    if(j.flows) renderSectors(j.flows.sectors);
+    if(!j.macro) $("mxRead").textContent="Fetching global data… (the first load takes about a minute)";
+    if(!j.results) $("rsKpis").innerHTML='<div class="card kpi"><span class="label">Results</span><b>Loading…</b><span class="sub">first load takes a few minutes</span></div>';
+    setTimeout(pollCtx,(j.macro&&j.flows&&j.results&&j.events)?120000:10000);
+  }catch(e){ document.querySelectorAll(".ctx-off").forEach(x=>x.hidden=false); $("mxRead").textContent="Not available in this view."; }
+}
+document.addEventListener("click",e=>{const b=e.target.closest("#rsSeg button"); if(!b) return;
+  rsFilter=b.dataset.f; document.querySelectorAll("#rsSeg button").forEach(x=>x.classList.toggle("on",x===b)); if(CTXD) renderResults(CTXD.results);});
+document.addEventListener("input",e=>{ if(e.target.id==="rsSearch"&&CTXD) renderResults(CTXD.results); });
+
+/* ---------- plain-English box ---------- */
+function renderSimple(R){
+  const F=R.P.FII, k=l=>fmt(l.k), L=R.legs;
+  $("sStatus").textContent={bear:"The market looks weak right now. Big players are betting on a fall.",bull:"The market looks strong right now. Big players are betting on a rise.",neu:"The market has no clear direction right now."}[R.dir];
+  const cp=$("sConf");
+  if(R.agree>=4){cp.className="pill "+(R.dir==="neu"?"neu":R.dir);cp.textContent="Strong signal";$("sConfTxt").textContent="All 4 checks point the same way, so the signal is strong.";}
+  else if(R.agree===3){cp.className="pill info";cp.textContent="Fairly good signal";$("sConfTxt").textContent="3 of the 4 checks agree, so the signal is fairly good.";}
+  else {cp.className="pill neu";cp.textContent="Weak signal";$("sConfTxt").textContent="The checks disagree with each other. Best to wait, or trade very small.";}
+
+  const manual=!!(S.pickDir||S.pickReg);
+  $("sDoTitle").textContent=manual?"The trade you picked":"What does the model suggest?";
+  const T={
+    "Long call":()=>`Buy the ${k(L[0])} call. You make money if Nifty goes up.`,
+    "Bull call spread":()=>`Buy the ${k(L[0])} call and sell the ${k(L[1])} call. You make money if Nifty rises toward ${k(L[1])}.`,
+    "Bull put spread":()=>`Sell the ${k(L[0])} put and buy the ${k(L[1])} put. You collect money now and keep it if Nifty stays above ${k(L[0])}.`,
+    "Long straddle":()=>`Buy both the ${k(L[0])} call and the ${k(L[1])} put. You make money if Nifty makes a big move, up or down.`,
+    "Iron butterfly":()=>`Sell the ${k(L[0])} call and put, and buy the ${k(L[2])} call and ${k(L[3])} put as protection. You keep most of the money if Nifty stays near ${k(L[0])}.`,
+    "Iron condor":()=>`Sell the ${k(L[0])} put and ${k(L[2])} call, and buy the ${k(L[1])} put and ${k(L[3])} call as protection. You keep the money if Nifty stays between ${k(L[0])} and ${k(L[2])}.`,
+    "Long put":()=>`Buy the ${k(L[0])} put. You make money if Nifty falls.`,
+    "Bear put spread":()=>`Buy the ${k(L[0])} put and sell the ${k(L[1])} put. You make money if Nifty falls toward ${k(L[1])}.`,
+    "Bear call spread":()=>`Sell the ${k(L[0])} call and buy the ${k(L[1])} call. You collect money now and keep it if Nifty stays below ${k(L[0])}.`
+  };
+  $("sDo").textContent=R.tradeName+": "+T[R.tradeName]();
+  const cost=Math.abs(R.net)*R.mult;
+  $("sMoney").innerHTML=(R.net>=0?`You pay <b>${rupee(cost)}</b> upfront.`:`You receive <b>${rupee(cost)}</b> upfront.`)+
+    ` Worst case you lose <b>${R.openL?"an unlimited amount":rupee(Math.abs(R.maxL))}</b>. Best case you make <b>${R.openP?"more the further Nifty moves":rupee(R.maxP)}</b>.`+
+    ` ${{low:"Options are cheap now, so buying them is fine.",mid:"Options are fairly priced, so buying one and selling another keeps the cost low and the risk capped.",high:"Options are expensive now, so selling them works in your favour."}[R.pickReg]}`;
+
+  const why=[];
+  why.push(R.s1<=-0.35?"<b>Price:</b> Nifty is below its recent averages and keeps making lower tops. Sellers are in control.":R.s1>=0.35?"<b>Price:</b> Nifty is above its recent averages and keeps making higher tops. Buyers are in control.":"<b>Price:</b> Nifty is moving sideways. No clear winner yet.");
+  const qT={sb:"new bets on a fall are being added in futures",lb:"new bets on a rise are being added in futures",sc:"sellers are closing their bets, which pushes price up for now",lu:"buyers are closing their bets, a calm exit rather than panic"}[R.q];
+  const fT=F.dlp>=3?`FIIs are switching toward bets on a rise`:F.dlp<=-3?`FIIs are adding even more bets on a fall`:F.lp<15?`FIIs have only ${fmt(F.lp,0)}% of their bets on a rise, and they are not buying back yet`:F.lp>70?`FIIs have ${fmt(F.lp,0)}% of their bets on a rise`:`FIIs are split between up and down`;
+  why.push(`<b>Big players:</b> ${cap(qT)}, and ${fT}.`);
+  why.push(`<b>Option sellers:</b> they are guarding ${fmt(R.res)} as a ceiling and ${fmt(R.sup)} as a floor. `+(R.cbias<-0.3?"They are strengthening the ceiling, so rising is hard.":R.cbias>0.3?"They are strengthening the floor, so falling is hard.":"Both sides are equally strong."));
+  why.push("<b>Mood (PCR):</b> "+(R.pcr>=R.pcrHi?"almost everyone is already bullish, which often comes before a drop.":R.pcr<=R.pcrLo?"almost everyone is already bearish, which often comes before a bounce.":R.s4<0?`it dropped from ${fmt(R.pcrRef,2)} to ${fmt(R.pcr,2)}. Traders who bet the market won't fall are backing off.`:R.s4>0?`it rose from ${fmt(R.pcrRef,2)} to ${fmt(R.pcr,2)}. More traders are betting the market won't fall.`:"normal. No strong signal."));
+  $("sWhy").innerHTML=why.map(w=>`<li>${w}</li>`).join("");
+
+  $("sWrong").innerHTML=R.dir==="bear"?`If Nifty closes above <b>${fmt(R.res)}</b> (the ceiling option sellers are guarding), or FIIs suddenly start buying back (their long % jumps), the fall is off. Exit and rethink.`:
+    R.dir==="bull"?`If Nifty closes below <b>${fmt(R.sup)}</b> (the floor option sellers are guarding), or FIIs start adding bets on a fall (their long % drops), the rise is off. Exit and rethink.`:
+    `If Nifty breaks out of the <b>${fmt(R.sup)}–${fmt(R.res)}</b> range, a direction has been chosen. Re-run the checks.`;
+}
+
+/* ---------- events ---------- */
+document.addEventListener("input",e=>{
+  const k=e.target.dataset&&e.target.dataset.k; if(!k) return;
+  const el=e.target; setP(S,k,el.type==="number"?(el.value===""?"":parseFloat(el.value)):el.value);
+  if(k==="oiWin"&&LIVE){applyWindow();fillInputs();}
+  save(); render();
+});
+document.addEventListener("click",e=>{
+  const c=e.target.closest(".cell"); if(!c) return;
+  S.pickDir=c.dataset.d; S.pickReg=c.dataset.r; save(); render();
+});
+$("autoBtn").addEventListener("click",()=>{S.pickDir=null;S.pickReg=null;save();render();});
+$("resetBtn").addEventListener("click",()=>{S=clone(DEF);save();buildTables();fillInputs();render();});
+
+$("refreshBtn").addEventListener("click",async()=>{try{await fetch("api/refresh");}catch(e){} $("liveTxt").textContent="Refreshing…"; setTimeout(poll,4000);});
+$("freeze").addEventListener("change",()=>{ if(!$("freeze").checked) poll(); });
+buildTables(); fillInputs(); render(); showView(); poll(); pollCtx();
+})();
+</script>

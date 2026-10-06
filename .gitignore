@@ -1,0 +1,12 @@
+# local-only
+__pycache__/
+logs/
+site/
+.DS_Store
+# large or regenerated caches
+data/bt/
+data/btfut/
+data/bhavopt/
+data/hist/
+data/macro/
+data/alerts_seen.json
