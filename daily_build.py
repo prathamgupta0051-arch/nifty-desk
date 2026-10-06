@@ -61,8 +61,12 @@ def main():
         status["steps"]["framework"] += " (showing last good data)"
     with open(data_path, "w") as f:
         json.dump(payload or {"loading": True, "errors": [status["steps"]["framework"]]}, f)
+    ctx = cf.snapshot()
     with open(os.path.join(SITE, "api", "context"), "wb") as f:
-        f.write(cf.snapshot())
+        f.write(ctx)
+    # committed copy, so the morning-note routine can read every tab straight from the repository
+    with open(os.path.join(ds.DATA, "published_context.json"), "wb") as f:
+        f.write(ctx)
     with open(os.path.join(HERE, "nifty-desk.html"), "rb") as f:
         page = f.read()
     head = (b"<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"

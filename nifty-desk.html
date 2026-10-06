@@ -258,6 +258,16 @@ td input{width:92px;border:1px solid var(--line);background:var(--surface);color
 .cal-day span{font-size:12.5px;color:var(--ink)}
 .cal-day small{color:var(--muted);font-size:12px}
 
+.note .mn-head{margin:0;font-size:19px;font-weight:700;line-height:1.4;max-width:80ch}
+.mn-body{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 28px}
+.mn-sec h3{font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.mn-sec p{margin:0 0 8px;font-size:14.5px;line-height:1.65}
+.mn-watch{background:var(--accent-soft);border-radius:10px;padding:14px 18px}
+.mn-watch h3{font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.mn-watch ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.mn-src summary{cursor:pointer;font-size:12.5px;color:var(--muted)}
+.mn-src ul{margin:6px 0 0;padding-left:18px;font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:2px}
+@media (max-width:900px){.mn-body{grid-template-columns:1fr}}
 .alert-strip{display:flex;align-items:center;gap:12px;flex-wrap:wrap;text-decoration:none;color:var(--ink);background:var(--bear-soft);border:1px solid #F5C2C2;border-radius:12px;padding:12px 18px;font-size:14px}
 .alert-strip.amber{background:var(--warn-soft);border-color:#F3D9AE}
 .alert-strip b{font-weight:700}
@@ -388,6 +398,16 @@ td input{width:92px;border:1px solid var(--line);background:var(--surface);color
       </div>
 
       <a class="alert-strip" id="ovAlerts" href="#macro" hidden></a>
+
+      <section class="card note" id="mnCard" hidden>
+        <div class="card-h"><h2 id="mnTitle">Morning note</h2><span class="hint" id="mnBy"></span></div>
+        <div class="card-b">
+          <p class="mn-head" id="mnHead"></p>
+          <div class="mn-body" id="mnBody"></div>
+          <div class="mn-watch" id="mnWatch"></div>
+          <details class="mn-src"><summary>Sources</summary><ul id="mnSrc"></ul></details>
+        </div>
+      </section>
 
       <div class="row r-main">
         <div class="card">
@@ -1530,6 +1550,25 @@ document.addEventListener("click",e=>{
   const b=e.target.closest("#secSeg button"); if(b){secPeriod=b.dataset.p;document.querySelectorAll("#secSeg button").forEach(x=>x.classList.toggle("on",x===b));if(CTXD&&CTXD.flows) renderSectors(CTXD.flows.sectors);}
   const c=e.target.closest("#evSeg button"); if(c){evFilter=c.dataset.c;document.querySelectorAll("#evSeg button").forEach(x=>x.classList.toggle("on",x===c));if(CTXD) renderEvents(CTXD.events);}
 });
+/* ---------- morning note, written each weekday by a scheduled Claude routine ---------- */
+const NOTE_URL="https://raw.githubusercontent.com/prathamgupta0051-arch/nifty-desk/claude/morning-note/note.json";
+const esc=t=>String(t==null?"":t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const mdLite=t=>esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+async function loadNote(){
+  try{
+    const r=await fetch(NOTE_URL+"?t="+Date.now(),{cache:"no-store"}); if(!r.ok) return;
+    const n=await r.json(); if(!n||!n.date) return;
+    const age=(Date.now()-new Date(n.date+"T00:00:00+05:30"))/864e5; if(age>4) return;
+    $("mnTitle").textContent="Morning note · "+new Date(n.date+"T00:00:00").toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short"});
+    $("mnBy").textContent="Written by Claude"+(n.generated?" at "+esc(n.generated):"")+" from this dashboard's data and the morning's news. Not investment advice.";
+    $("mnHead").innerHTML=mdLite(n.headline);
+    $("mnBody").innerHTML=(n.sections||[]).map(x=>`<div class="mn-sec"><h3>${esc(x.title)}</h3>${String(x.body||"").split(/\n+/).filter(Boolean).map(p=>`<p>${mdLite(p)}</p>`).join("")}</div>`).join("");
+    $("mnWatch").innerHTML=(n.watch&&n.watch.length)?`<h3>What to watch today</h3><ul>${n.watch.map(w=>`<li>${mdLite(w)}</li>`).join("")}</ul>`:"";
+    $("mnWatch").hidden=!(n.watch&&n.watch.length);
+    $("mnSrc").innerHTML=(n.sources||[]).map(x=>{const u=String(x.url||"");return `<li>${/^https?:\/\//.test(u)?`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(x.title||u)}</a>`:esc(x.title||u)}</li>`;}).join("");
+    $("mnCard").hidden=false;
+  }catch(e){}
+}
 async function pollCtx(){
   try{
     const r=await fetch("api/context",{cache:"no-store"}); if(!r.ok) throw 0;
@@ -1603,6 +1642,6 @@ $("resetBtn").addEventListener("click",()=>{S=clone(DEF);save();buildTables();fi
 
 $("refreshBtn").addEventListener("click",async()=>{try{await fetch("api/refresh");}catch(e){} $("liveTxt").textContent="Refreshing…"; setTimeout(poll,4000);});
 $("freeze").addEventListener("change",()=>{ if(!$("freeze").checked) poll(); });
-buildTables(); fillInputs(); render(); showView(); poll(); pollCtx();
+buildTables(); fillInputs(); render(); showView(); poll(); pollCtx(); loadNote();
 })();
 </script>
