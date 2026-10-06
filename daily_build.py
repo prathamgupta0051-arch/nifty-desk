@@ -69,9 +69,9 @@ def main():
         f.write(ctx)
     with open(os.path.join(HERE, "nifty-desk.html"), "rb") as f:
         page = f.read()
-    head = (b"<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"
-            b"<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,viewport-fit=cover\">"
-            b"<style>body{margin:0}[hidden]{display:none!important}</style></head><body>")
+    with open(os.path.join(HERE, "brand", "head.html"), "rb") as f:
+        head = f.read()
+    shutil.copytree(os.path.join(HERE, "brand"), os.path.join(SITE, "brand"), dirs_exist_ok=True)
     with open(os.path.join(SITE, "index.html"), "wb") as f:
         f.write(head + page + b"</body></html>")
     rep = os.path.join(HERE, "backtest", "report.html")

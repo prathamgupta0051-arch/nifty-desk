@@ -15,7 +15,7 @@ from urllib.request import Request, build_opener, HTTPCookieProcessor, HTTPSHand
 from urllib.error import HTTPError, URLError
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DATA = os.path.join(HERE, "data")
+DATA = os.environ.get("DESK_DATA") or os.path.join(HERE, "data")  # the Mac service sets DESK_DATA to keep its files out of the repo
 PAGE = os.path.join(HERE, "nifty-desk.html")
 PORT = int(os.environ.get("DESK_PORT", "8765"))
 IST = timezone(timedelta(hours=5, minutes=30))
@@ -601,10 +601,14 @@ class Handler(BaseHTTPRequestHandler):
         if path in ("/", "/index.html", "/nifty-desk.html"):
             with open(PAGE, "rb") as f:
                 html = f.read()
-            head = (b"<!doctype html><html><head><meta charset=\"utf-8\">"
-                    b"<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,viewport-fit=cover\">"
-                    b"<style>body{margin:0}[hidden]{display:none!important}</style></head><body>")
+            with open(os.path.join(HERE, "brand", "head.html"), "rb") as f:
+                head = f.read()
             self.send(200, head + html + b"</body></html>", "text/html; charset=utf-8")
+        elif path.startswith("/brand/") and "/.." not in path and os.path.isfile(os.path.join(HERE, path.lstrip("/"))):
+            ext = path.rsplit(".", 1)[-1]
+            ctype = {"png": "image/png", "webmanifest": "application/manifest+json", "html": "text/html"}.get(ext, "application/octet-stream")
+            with open(os.path.join(HERE, path.lstrip("/")), "rb") as f:
+                self.send(200, f.read(), ctype)
         elif path == "/api/data":
             with state_lock:
                 body = json.dumps(STATE).encode()
