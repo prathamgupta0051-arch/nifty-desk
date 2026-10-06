@@ -1,0 +1,72 @@
+{
+ "date": "2026-10-07",
+ "generated": "00:44 IST",
+ "headline": "The RBI announces its rate decision at 10:00 am today, and most economists expect its first rate rise since 2023. The dashboard is **neutral (+6)**: the price trend is still down, but options traders turned more hopeful after Nifty's 1% bounce to 22,776.",
+ "sections": [
+  {
+   "title": "The big picture",
+   "body": "The data shows Nifty closed at **22,776** yesterday, up 1% for a second day of gains. Even after the bounce, Nifty is still below its 20-day average (23,147), its 50-day average (23,824) and its 200-day average (24,318), and recent peaks and dips are each lower than the ones before. Price-trend score: −2, the lowest possible.\nThe other checks disagree. In futures, the price rose while open contracts fell 1.2%, a sign that people who bet on a fall were closing those bets. But foreign funds (FIIs) are still mostly betting on a fall, so this check scores 0. In options, sellers added many new puts at 22,300–22,600. They earn money only if Nifty stays above those levels, so this reads as a floor being built (+1.5). The put-call ratio (bets on a fall compared with bets on a rise) jumped from 0.71 to 1.06 in five sessions, which the dashboard reads as bullish (+1).\nAdded up, the bias score is **+6 out of ±100: neutral**, with the checks pulling in opposite directions, so confidence is low. My read: a relief bounce inside a downtrend, not yet a turn, because no level that defines the downtrend has broken."
+  },
+  {
+   "title": "What big investors are doing",
+   "body": "The data shows FIIs **sold ₹2,961 crore** of shares yesterday, while domestic funds (DIIs, such as Indian mutual funds) **bought ₹5,089 crore**, which more than covered the selling. The FII sale is just under the dashboard's ₹3,000 crore 'big day' mark, and the dashboard has only one day of saved cash data, so it can't measure a streak yet.\nThe longer record shows a trend. NSDL data shows FIIs sold most sectors in the second half of September: financial services −₹6,943 crore, oil and gas −₹4,469 crore, autos −₹3,542 crore, telecom −₹2,423 crore and metals −₹2,322 crore. Since March, they have sold about ₹1.18 lakh crore of financial stocks.\nIn index futures, FIIs hold only **8.5% of their positions as bets on a rise**, up from 8.0% last week. Two years ago it was near 80%. Below 10% is the zone where FIIs have usually started closing their bets on a fall, which pushes prices up. That hasn't happened yet; a clear rise in this number would be the first sign."
+  },
+  {
+   "title": "What the world is telling India",
+   "body": "The dashboard rates the global backdrop as **Headwinds** (4 of 10 signals hurt India, 1 helps). The biggest problem is US interest rates. The US 10-year bond pays **5.27%**, higher than on almost any day in the past year and up about 0.5 points in a month. That gives foreign money less reason to buy Indian shares. The dollar is up 2.7% in a month, and the rupee is weak at **₹96.29 per dollar**., which shrinks foreign investors' returns.\nOil is the second worry: Brent is **$100.8 a barrel**, up 29% in three months, and India imports most of its oil. Some relief: it is down 4% this week, as Middle East exports recover and Europe discusses releasing emergency fuel stocks.\nThe Fed has raised rates to 3.75–4.00% over six months. Dashboard flags: 6-month US bills pay 4.30%, so markets still expect another US rise, but that expectation eased this week. News reports agree: a weak jobs report cut the odds of an October hike to about 20%. US stocks rose about 0.7–0.9% to **a record high** on Tuesday, helped by lower oil and bond rates. That hasn't stopped FII selling in India."
+  },
+  {
+   "title": "Company results",
+   "body": "No Nifty 50 company reported in the last 7 days. The dashboard's filings are small companies, many with late June-quarter results; no pattern stands out. The real results season starts with **TCS on Thursday, October 8**. Early business updates look good: HDFC Bank's loans grew 16.3% and its deposits 18.8%, which helped bank shares on Monday."
+  },
+  {
+   "title": "What could change the picture",
+   "body": "**Today, 10:00 am: the RBI decision.** The repo rate is 5.25%. In a Business Standard poll, 8 of 10 economists expect a rise to 5.50%, and a Reuters poll put it near 60%. Inflation was 4.82% in August, above the RBI's 4% target. A rise is mostly expected, so the RBI's hints about more rises may matter more. A tougher message could hit banks and rate-sensitive shares; a pause would surprise.\nLater: US Fed meeting minutes (11:30 pm tonight), TCS results (Oct 8), India inflation data and HCL Tech results (Oct 12), the weekly expiry (Oct 13) and results from HDFC Bank, ICICI Bank and Axis Bank (Oct 17).\nLevels: options traders have built the ceiling at **23,000** and the floor at **22,700** (it moved up from 22,500). A close above 23,000 and the 20-day average (23,147) would start to repair the trend. A fall back below 22,700 and then 22,500 would mean yesterday's new floor failed"
+  },
+  {
+   "title": "Bottom line",
+   "body": "The dashboard is **neutral (+6)** with low confidence. The price trend is clearly down, but options traders and domestic funds are supporting the market, and FIIs are so heavily positioned for a fall that a sharp rebound is possible if they start buying back. Expected swings are moderate: India VIX is about 13.6, at the 64th percentile of the past year. The main risk is today's RBI decision, along with high US bond rates and $100 oil, which keep FIIs selling."
+  }
+ ],
+ "watch": [
+  "10:00 am IST: RBI rate decision and the Governor's comments on further rises",
+  "Whether Nifty holds the new 22,700 put floor and can break 23,000",
+  "FII and DII cash figures this evening: does domestic buying keep covering FII selling?",
+  "FII long % in index futures (now 8.5%): a rise of 3+ points would signal short covering",
+  "11:30 pm IST: US Fed meeting minutes; Brent near $100"
+ ],
+ "sources": [
+  {
+   "title": "Business Standard: Sensex +685, Nifty ends at 22,776 ahead of RBI (Oct 6)",
+   "url": "https://www.business-standard.com/amp/markets/news/stock-market-live-october-6-bse-sensex-today-nifty50-gift-nifty-crude-oil-prices-srit-india-ipo-listing-126100600087_1.html"
+  },
+  {
+   "title": "Business Standard: RBI MPC Oct 5-7, will RBI hike the repo rate?",
+   "url": "https://www.business-standard.com/finance/news/rbi-mpc-meeting-october-2026-monetary-policy-repo-rate-hike-retail-inflation-126100200188_1.html"
+  },
+  {
+   "title": "CNBC: S&P 500 rises to record high as oil and yields move lower",
+   "url": "https://www.cnbc.com/2026/10/05/stock-market-today-live-updates.html"
+  },
+  {
+   "title": "Yahoo Finance: S&P 500, Nasdaq touch all-time highs as bond yields retreat (Oct 6)",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-october-6-dow-sp-500-nasdaq-080526166.html"
+  },
+  {
+   "title": "Vantage Markets: S&P 500 near record as jobs miss cuts Fed hike bets",
+   "url": "https://www.vantagemarkets.com/market-analysis/why-sp500-rose-near-record-fed-hike-bets-faded-october-6-2026/"
+  },
+  {
+   "title": "EnergyNow: Oil slides as emergency fuel reserve talks offset Middle East risks",
+   "url": "https://energynow.com/2026/10/oil-prices-slide-as-emergency-fuel-reserve-talks-offset-middle-east-supply-risks/"
+  },
+  {
+   "title": "TradingView/Moody's: Bank stocks jump on Q2 business updates",
+   "url": "https://www.tradingview.com/news/moodys:159802afb176b:0-hdfc-bank-yes-bank-au-sfb-bank-stocks-jump-bank-nifty-up-over-1-q2-business-updates-share-price-rally-explained/"
+  },
+  {
+   "title": "Nifty Positioning Desk data (NSE, NSDL, CNBC, NY Fed), built 07 Oct 2026 00:25 IST",
+   "url": "https://github.com/prathamgupta0051-arch/nifty-desk"
+  }
+ ]
+}
