@@ -40,27 +40,50 @@ Prefer primary or established sources: NSE, RBI, the US Federal Reserve, the US 
 - Don't give buy/sell instructions or trade recommendations. You can describe what the dashboard's model suggests and how confident the data is.
 - Aim for 500–800 words in total. Depth comes from reasoning, not length.
 
-**Structure.** Write the note as JSON in exactly this shape:
+**Structure.** The note is read on a phone in two minutes, so organise it for scanning: short bullet points, not paragraphs. Each bullet is one idea in 1–2 sentences: the fact, then why it matters. Tag every bullet with its **tone for Indian stocks**:
+- `"good"`: helps Indian stocks (shown in green)
+- `"bad"`: hurts Indian stocks (shown in red)
+- `"mixed"`: cuts both ways, or a risk to watch (shown in amber)
+- `"neutral"`: plain context (shown in grey)
+
+Judge tone by the effect on Indian stocks, not on the thing itself. For example, a falling crude price is "good".
+
+Write the note as JSON in exactly this shape:
 
 ```json
 {
+  "version": 2,
   "date": "YYYY-MM-DD (today, IST)",
   "generated": "08:50 IST (the time you finished, IST)",
   "headline": "One or two sentences: the single most important thing about today's market, in plain English.",
-  "sections": [
-    {"title": "The big picture", "body": "2-3 short paragraphs separated by \n. What the dashboard's six checks say overall, how strongly they agree, and what that means."},
-    {"title": "What big investors are doing", "body": "FII and DII money yesterday, which sectors FIIs are moving in and out of, and FII positions in futures. Is it a one-day blip or a trend?"},
-    {"title": "What the world is telling India", "body": "Crude, dollar, rupee, US bond rates, the Fed, US stocks, overnight moves and every active flag, explained simply, with why each matters for Indian stocks."},
-    {"title": "Company results", "body": "Notable results from the last few days (especially Nifty 50 companies): what was strong, what was weak, and any pattern across sectors. Say so briefly if there were none."},
-    {"title": "What could change the picture", "body": "The upcoming events that matter most in the next 1-2 weeks, and the levels or signals that would show the current view is wrong."},
-    {"title": "Bottom line", "body": "3-4 sentences tying it together: the overall read, how confident the data is, and the main risk to that read."}
+  "mood": {"label": "Positive | Negative | Mixed | Neutral", "tone": "good | bad | mixed | neutral",
+           "confidence": "Low | Medium | High", "why": "One sentence: what the dashboard's checks add up to and how much they agree."},
+  "key_points": [
+    {"tone": "bad", "text": "3-5 bullets: the most important takeaways. Someone who reads only these should understand today's market."}
   ],
-  "watch": ["3-5 short bullets: specific things to watch today, with times in IST where known"],
+  "sections": [
+    {"id": "picture", "title": "The big picture", "tone": "mixed",
+     "summary": "One plain sentence summing up this section.",
+     "points": [{"tone": "bad", "text": "..."}, {"tone": "good", "text": "..."}]},
+    {"id": "investors", "title": "What big investors are doing", "tone": "...", "summary": "...", "points": [...]},
+    {"id": "world", "title": "What the world is telling India", "tone": "...", "summary": "...", "points": [...]},
+    {"id": "results", "title": "Company results", "tone": "...", "summary": "...", "points": [...]},
+    {"id": "ahead", "title": "What could change the picture", "tone": "...", "summary": "...", "points": [...]}
+  ],
+  "levels": {"ceiling": 23000, "floor": 22700, "note": "One sentence: what a close above the ceiling or below the floor would mean."},
+  "watch": [{"time": "10:00", "text": "RBI rate decision. A tougher message would hurt banks."}, {"time": "", "text": "..."}],
+  "bottom_line": "3-4 sentences: the overall read, how confident the data is, and the main risk to that read.",
   "sources": [{"title": "Short description", "url": "https://..."}]
 }
 ```
 
-You may use **double asterisks** for bold on a few key phrases; no other formatting. Use `\n` only to separate paragraphs inside a body.
+Rules for the shape:
+- Each section has **3–5 points**. The section's `tone` is its overall effect on Indian stocks.
+- "What could change the picture" covers the events in the next 1–2 weeks that matter most, and what would prove today's read wrong.
+- `levels` uses the dashboard's option-chain ceiling and floor. Leave `levels` out if they're missing.
+- `watch` has 3–5 items, each with an IST time where known (otherwise `""`).
+- Use **double asterisks** for bold only on the single key number or phrase in a point, at most one per point. No other formatting, and no line breaks inside strings.
+- Aim for 450–700 words in total. Depth comes from reasoning, not length.
 
 ## 4. Publish it
 

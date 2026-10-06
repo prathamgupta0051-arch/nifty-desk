@@ -258,16 +258,57 @@ td input{width:92px;border:1px solid var(--line);background:var(--surface);color
 .cal-day span{font-size:12.5px;color:var(--ink)}
 .cal-day small{color:var(--muted);font-size:12px}
 
-.mnote .mn-head{margin:0;font-size:19px;font-weight:700;line-height:1.4;max-width:80ch}
-.mn-body{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 28px}
-.mn-sec h3{font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
-.mn-sec p{margin:0 0 8px;font-size:14.5px;line-height:1.65}
-.mn-watch{background:var(--accent-soft);border-radius:10px;padding:14px 18px}
-.mn-watch h3{font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
-.mn-watch ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:14px}
-.mn-src summary{cursor:pointer;font-size:12.5px;color:var(--muted)}
-.mn-src ul{margin:6px 0 0;padding-left:18px;font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:2px}
-@media (max-width:900px){.mn-body{grid-template-columns:1fr}}
+.mnote{overflow:hidden}
+.mn-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:18px 22px 0}
+.mn-kicker{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.mn-by{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.mn-hero{padding:10px 22px 16px;border-bottom:1px solid var(--line)}
+.mn-head{margin:0;font-size:21px;font-weight:700;line-height:1.38;max-width:62ch;text-wrap:pretty}
+.mn-why{margin:8px 0 0;font-size:14px;color:var(--muted);max-width:80ch}
+.mn-keys{padding:16px 22px;display:flex;flex-direction:column;gap:9px;background:var(--sunk);border-bottom:1px solid var(--line)}
+.mn-keys .kh{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.pt{display:grid;grid-template-columns:14px 1fr;gap:8px;align-items:start;font-size:14.5px;line-height:1.55}
+.pt b{font-weight:700}
+.tone{display:inline-block;width:9px;height:9px;border-radius:50%;margin-top:6px;background:var(--faint)}
+.mn-legend .tone{margin:0 5px 0 12px;vertical-align:middle}
+.mn-legend .tone:first-child{margin-left:0}
+.tone.good{background:var(--bull)}.tone.bad{background:var(--bear)}.tone.mixed{background:#E0A43A}.tone.neutral{background:#B6BCC6}
+.pt.good b{color:var(--bull)}.pt.bad b{color:var(--bear)}.pt.mixed b{color:var(--warn)}
+.mn-sections{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:18px 22px}
+.mn-sec{border:1px solid var(--line);border-left:4px solid #B6BCC6;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;background:var(--surface)}
+.mn-sec.good{border-left-color:var(--bull)}.mn-sec.bad{border-left-color:var(--bear)}.mn-sec.mixed{border-left-color:#E0A43A}
+.mn-sec .sh{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.mn-sec h3{margin:0;font-size:16px;font-weight:700;color:var(--ink)}
+.mn-sec .sum{margin:0;font-size:14.5px;font-weight:600;line-height:1.5;color:var(--ink)}
+.mn-sec .pts{display:flex;flex-direction:column;gap:7px}
+.mn-sec .pt{font-size:14px;color:#374151}
+.mn-sec p.para{margin:0;font-size:14px;line-height:1.6;color:#374151}
+.tp{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.tp.good{background:var(--bull-soft);color:var(--bull)}.tp.bad{background:var(--bear-soft);color:var(--bear)}
+.tp.mixed{background:var(--warn-soft);color:var(--warn)}.tp.neutral{background:var(--sunk);color:var(--muted);border:1px solid var(--line)}
+.mn-row{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:14px;padding:0 22px 18px}
+.mn-row:empty{display:none}
+.mn-watch,.mn-levels{border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.mn-watch h4,.mn-levels h4{margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.wt{display:grid;grid-template-columns:58px 1fr;gap:10px;padding:7px 0;border-top:1px solid var(--line);font-size:14px;line-height:1.5}
+.wt:first-of-type{border-top:0;padding-top:0}
+.wt .t{font-weight:700;color:var(--accent);font-size:13px;padding-top:1px}
+.lvl{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-radius:8px;margin-bottom:8px;font-size:14px}
+.lvl b{font-size:18px}
+.lvl.ceil{background:var(--bear-soft);color:var(--bear)}.lvl.floor{background:var(--bull-soft);color:var(--bull)}
+.mn-levels p{margin:4px 0 0;font-size:13px;color:var(--muted);line-height:1.5}
+.mn-bottom{margin:0 22px 18px;padding:16px 18px;border-radius:10px;background:var(--accent-soft);font-size:15px;line-height:1.6}
+.mn-bottom h4{margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.mn-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 22px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.mn-src summary{cursor:pointer}
+.mn-src ul{margin:6px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:2px}
+@media (max-width:900px){.mn-sections,.mn-row{grid-template-columns:1fr}}
+@media (max-width:620px){
+  .mn-top{padding:14px 14px 0}.mn-hero{padding:8px 14px 14px}.mn-head{font-size:17px}
+  .mn-keys{padding:14px}.mn-sections{padding:14px;gap:10px}.mn-row{padding:0 14px 14px;gap:10px}
+  .mn-bottom{margin:0 14px 14px;padding:14px;font-size:14px}.mn-foot{padding:10px 14px}
+  .pt,.mn-sec .pt{font-size:13.5px}.mn-sec h3{font-size:15px}.mn-sec .sum{font-size:14px}
+}
 .alert-strip{display:flex;align-items:center;gap:12px;flex-wrap:wrap;text-decoration:none;color:var(--ink);background:var(--bear-soft);border:1px solid #F5C2C2;border-radius:12px;padding:12px 18px;font-size:14px}
 .alert-strip.amber{background:var(--warn-soft);border-color:#F3D9AE}
 .alert-strip b{font-weight:700}
@@ -401,8 +442,6 @@ html,body{overflow-x:hidden}
   .cell{padding:7px;font-size:11.5px;min-height:46px}
   .alert-strip{padding:10px 12px;font-size:13px;gap:8px}
   .alert-strip .go{margin-left:0}
-  .mnote .mn-head{font-size:16px}
-  .mn-sec p{font-size:14px}
   .mx{padding:14px}
   .mx-val{font-size:21px}
   .al{grid-template-columns:18px 1fr;gap:8px}
@@ -479,11 +518,20 @@ html,body{overflow-x:hidden}
       <a class="alert-strip" id="ovAlerts" href="#macro" hidden></a>
 
       <section class="card mnote" id="mnCard" hidden>
-        <div class="card-h"><h2 id="mnTitle">Morning note</h2><span class="hint" id="mnBy"></span></div>
-        <div class="card-b">
-          <p class="mn-head" id="mnHead"></p>
-          <div class="mn-body" id="mnBody"></div>
-          <div class="mn-watch" id="mnWatch"></div>
+        <div class="mn-top">
+          <div><span class="mn-kicker" id="mnTitle">Morning note</span><span class="mn-by" id="mnBy"></span></div>
+          <span class="pill" id="mnMood" hidden></span>
+        </div>
+        <div class="mn-hero"><p class="mn-head" id="mnHead"></p><p class="mn-why" id="mnWhy" hidden></p></div>
+        <div class="mn-keys" id="mnKeys" hidden></div>
+        <div class="mn-sections" id="mnBody"></div>
+        <div class="mn-row" id="mnRow">
+          <div class="mn-watch" id="mnWatch" hidden></div>
+          <div class="mn-levels" id="mnLevels" hidden></div>
+        </div>
+        <div class="mn-bottom" id="mnBottom" hidden></div>
+        <div class="mn-foot">
+          <span class="mn-legend"><i class="tone good"></i>Good for Indian stocks <i class="tone bad"></i>Bad <i class="tone mixed"></i>Mixed / watch <i class="tone neutral"></i>Context</span>
           <details class="mn-src"><summary>Sources</summary><ul id="mnSrc"></ul></details>
         </div>
       </section>
@@ -1633,17 +1681,36 @@ document.addEventListener("click",e=>{
 const NOTE_URL="https://raw.githubusercontent.com/prathamgupta0051-arch/nifty-desk/claude/morning-note/note.json";
 const esc=t=>String(t==null?"":t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const mdLite=t=>esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+const TONES={good:"Good for stocks",bad:"Bad for stocks",mixed:"Mixed",neutral:"Context"};
+const toneOf=t=>TONES[t]?t:"neutral";
+const ptHTML=p=>{const t=toneOf(p&&p.tone);return `<div class="pt ${t}"><i class="tone ${t}"></i><span>${mdLite(p&&p.text!=null?p.text:p)}</span></div>`;};
 async function loadNote(){
   try{
     const r=await fetch(NOTE_URL+"?t="+Date.now(),{cache:"no-store"}); if(!r.ok) return;
     const n=await r.json(); if(!n||!n.date) return;
     const age=(Date.now()-new Date(n.date+"T00:00:00+05:30"))/864e5; if(age>4) return;
-    $("mnTitle").textContent="Morning note · "+new Date(n.date+"T00:00:00").toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short"});
-    $("mnBy").textContent="Written by Claude"+(n.generated?" at "+esc(n.generated):"")+" from this dashboard's data and the morning's news. Not investment advice.";
+    $("mnTitle").textContent="Morning note · "+new Date(n.date+"T00:00:00").toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"short"});
+    $("mnBy").textContent="Written by Claude"+(n.generated?" at "+n.generated:"")+" from this dashboard and the morning's news · not investment advice";
     $("mnHead").innerHTML=mdLite(n.headline);
-    $("mnBody").innerHTML=(n.sections||[]).map(x=>`<div class="mn-sec"><h3>${esc(x.title)}</h3>${String(x.body||"").split(/\n+/).filter(Boolean).map(p=>`<p>${mdLite(p)}</p>`).join("")}</div>`).join("");
-    $("mnWatch").innerHTML=(n.watch&&n.watch.length)?`<h3>What to watch today</h3><ul>${n.watch.map(w=>`<li>${mdLite(w)}</li>`).join("")}</ul>`:"";
-    $("mnWatch").hidden=!(n.watch&&n.watch.length);
+    const m=n.mood;
+    $("mnMood").hidden=!m; if(m){const t=toneOf(m.tone);$("mnMood").className="pill "+({good:"bull",bad:"bear",mixed:"neu",neutral:"info"}[t]);$("mnMood").textContent=`${esc(m.label)}${m.confidence?" · "+esc(m.confidence)+" confidence":""}`;}
+    $("mnWhy").hidden=!(m&&m.why); if(m&&m.why) $("mnWhy").innerHTML=mdLite(m.why);
+    const K=n.key_points||[]; $("mnKeys").hidden=!K.length;
+    $("mnKeys").innerHTML=K.length?`<span class="kh">In 30 seconds</span>`+K.map(ptHTML).join(""):"";
+    $("mnBody").innerHTML=(n.sections||[]).filter(x=>n.bottom_line||!/bottom line/i.test(x.title||"")).map(x=>{
+      const t=toneOf(x.tone);
+      const body=x.points?`${x.summary?`<p class="sum">${mdLite(x.summary)}</p>`:""}<div class="pts">${x.points.map(ptHTML).join("")}</div>`
+        :String(x.body||"").split(/\n+/).filter(Boolean).map(p=>`<p class="para">${mdLite(p)}</p>`).join("");
+      return `<div class="mn-sec ${x.tone?t:""}"><div class="sh"><h3>${esc(x.title)}</h3>${x.tone?`<span class="tp ${t}">${TONES[t]}</span>`:""}</div>${body}</div>`;}).join("");
+    const W=(n.watch||[]).map(w=>typeof w==="string"?{time:"",text:w}:w);
+    $("mnWatch").hidden=!W.length;
+    $("mnWatch").innerHTML=W.length?`<h4>What to watch today</h4>`+W.map(w=>`<div class="wt"><span class="t">${esc(w.time||"Today")}</span><span>${mdLite(w.text)}</span></div>`).join(""):"";
+    const L=n.levels; const hasL=L&&(L.ceiling||L.floor); $("mnLevels").hidden=!hasL;
+    $("mnLevels").innerHTML=hasL?`<h4>Key levels for Nifty</h4>${L.ceiling?`<div class="lvl ceil"><span>Ceiling (sellers defend)</span><b>${fmt(L.ceiling)}</b></div>`:""}${L.floor?`<div class="lvl floor"><span>Floor (buyers defend)</span><b>${fmt(L.floor)}</b></div>`:""}${L.note?`<p>${mdLite(L.note)}</p>`:""}`:"";
+    $("mnRow").style.display=(W.length||hasL)?"":"none";
+    if(!hasL&&W.length) $("mnRow").style.gridTemplateColumns="1fr";
+    const bl=n.bottom_line||((n.sections||[]).find(x=>/bottom line/i.test(x.title||""))||{}).body;
+    $("mnBottom").hidden=!bl; if(bl) $("mnBottom").innerHTML=`<h4>Bottom line</h4>${mdLite(bl)}`;
     $("mnSrc").innerHTML=(n.sources||[]).map(x=>{const u=String(x.url||"");return `<li>${/^https?:\/\//.test(u)?`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(x.title||u)}</a>`:esc(x.title||u)}</li>`;}).join("");
     $("mnCard").hidden=false;
   }catch(e){}
