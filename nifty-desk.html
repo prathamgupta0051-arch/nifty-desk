@@ -309,6 +309,13 @@ td input{width:92px;border:1px solid var(--line);background:var(--surface);color
   .mn-bottom{margin:0 14px 14px;padding:14px;font-size:14px}.mn-foot{padding:10px 14px}
   .pt,.mn-sec .pt{font-size:13.5px}.mn-sec h3{font-size:15px}.mn-sec .sum{font-size:14px}
 }
+.on-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px 24px}
+.on-grp h4{margin:0 0 6px;font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.on-row{display:grid;grid-template-columns:12px 1fr auto auto;gap:8px;align-items:center;padding:5px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.on-row:last-child{border-bottom:0}
+.on-row .v{color:var(--muted);font-size:12.5px}
+.on-row .c{font-weight:700;min-width:58px;text-align:right}
+.on-row.stale{opacity:.55}
 .alert-strip{display:flex;align-items:center;gap:12px;flex-wrap:wrap;text-decoration:none;color:var(--ink);background:var(--bear-soft);border:1px solid #F5C2C2;border-radius:12px;padding:12px 18px;font-size:14px}
 .alert-strip.amber{background:var(--warn-soft);border-color:#F3D9AE}
 .alert-strip b{font-weight:700}
@@ -831,6 +838,10 @@ html,body{overflow-x:hidden}
       <div class="card">
         <div class="card-h"><h2>What the world is telling Indian markets</h2><span class="pill" id="mxPill">—</span></div>
         <div class="card-b"><p class="reading" id="mxRead">Loading global data…</p><p class="hint" id="mxUpd"></p></div>
+      </div>
+      <div class="card" id="onCard" hidden>
+        <div class="card-h"><h2>What changed overnight</h2><span class="hint" id="onNote"></span></div>
+        <div class="card-b"><div class="on-grid" id="onGrid"></div></div>
       </div>
       <div class="card" id="mxAlertCard" hidden>
         <div class="card-h"><h2>⚑ Changes to watch</h2><span class="hint">Re-checked with every data update</span></div>
@@ -1715,11 +1726,19 @@ async function loadNote(){
     $("mnCard").hidden=false;
   }catch(e){}
 }
+function renderOvernight(o){
+  if(!o||!o.items||!o.items.length){$("onCard").hidden=true;return;} $("onCard").hidden=false;
+  const groups={}; o.items.forEach(i=>(groups[i.group]=groups[i.group]||[]).push(i));
+  const ch=i=>{const m=i.sinceRef!=null?i.sinceRef:i.dayChg; if(m==null) return "—"; return i.kind==="abs"?`${m>=0?"+":"−"}${Math.abs(m).toFixed(2)} pts`:pp(m,2);};
+  const cl=t=>t==="good"?"up":t==="bad"?"dn":"";
+  $("onGrid").innerHTML=Object.entries(groups).map(([g,xs])=>`<div class="on-grp"><h4>${g}</h4>`+xs.map(i=>`<div class="on-row${i.stale?" stale":""}" title="${i.stale?"Market closed today: last price is from an earlier day":""}"><i class="tone ${i.tone}"></i><span>${i.label}</span><span class="v">${i.kind==="abs"?fmt(i.last,2)+"%":fmt(i.last,i.last>1000?0:2)}</span><span class="c ${cl(i.tone)}">${ch(i)}</span></div>`).join("")+`</div>`).join("");
+  $("onNote").textContent=(o.ref&&o.ref[0]?`Change since ${o.ref[1]} on ${o.ref[0]} (after India's close) · `:"Each market's latest daily change · ")+`${o.good} good, ${o.bad} bad for Indian stocks · ${o.updated}`;
+}
 async function pollCtx(){
   try{
     const r=await fetch("api/context",{cache:"no-store"}); if(!r.ok) throw 0;
     const j=await r.json(); CTXD=j;
-    renderMacro(j.macro); renderFlows(j.flows); renderResults(j.results); renderEvents(j.events);
+    renderMacro(j.macro); renderFlows(j.flows); renderResults(j.results); renderEvents(j.events); renderOvernight(j.overnight);
     if(j.flows) renderSectors(j.flows.sectors);
     if(!j.macro) $("mxRead").textContent="Fetching global data… (the first load takes about a minute)";
     if(!j.results) $("rsKpis").innerHTML='<div class="card kpi"><span class="label">Results</span><b>Loading…</b><span class="sub">first load takes a few minutes</span></div>';

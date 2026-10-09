@@ -38,7 +38,7 @@ def main():
         status["nse"] = "failed"
 
     # 2. market context. Results first (events use its calendar), events before macro (Fed flags use events).
-    for key, fn in (("results", cf.build_results), ("events", cf.build_events), ("macro", cf.build_macro), ("flows", cf.build_flows)):
+    for key, fn in (("results", cf.build_results), ("events", cf.build_events), ("macro", cf.build_macro), ("flows", cf.build_flows), ("overnight", cf.build_overnight)):
         try:
             cf.CTX[key] = fn()
             status["steps"][key] = "ok"
@@ -46,7 +46,7 @@ def main():
             traceback.print_exc()
             cf.CTX["errors"][key] = str(e)
             status["steps"][key] = f"failed: {e}"
-    cf.CTX["updated"] = {k: ds.now_ist().strftime("%H:%M") for k in ("macro", "flows", "results", "events")}
+    cf.CTX["updated"] = {k: ds.now_ist().strftime("%H:%M") for k in ("macro", "flows", "results", "events", "overnight")}
 
     # 3. write the site. If NSE failed, keep yesterday's framework data rather than publishing nothing.
     data_path = os.path.join(SITE, "api", "data")

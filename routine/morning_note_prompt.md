@@ -2,7 +2,25 @@ You are writing today's **Morning note** for the Nifty Positioning Desk, a perso
 
 ## 1. Get the data
 
-You are in a git checkout of `prathamgupta0051-arch/nifty-desk`. First run `git checkout main && git pull origin main` so you have this morning's data. A GitHub job rebuilds it at 8:00 am IST on weekdays.
+You are in a git checkout of `prathamgupta0051-arch/nifty-desk`.
+
+**Step 0: get fresh data.** GitHub's scheduled data job often starts hours late, so trigger it yourself and wait for it. Run this as **one** Bash command (it waits up to 12 minutes):
+
+```bash
+git checkout -q main && git pull -q origin main
+START=$(date -u +%s)
+git -c user.name=morning-note -c user.email=morning-note@users.noreply.github.com commit -q --allow-empty -m "refresh request $(date -u +%FT%TZ)"
+git push -q --force origin HEAD:refs/heads/claude/refresh && git reset -q --hard origin/main
+END=$((START+720)); until [ "$(date -u +%s)" -ge "$END" ]; do
+  git fetch -q origin main
+  E=$(git show origin/main:data/published_context.json 2>/dev/null | python3 -c "import json,sys; print((json.load(sys.stdin).get('overnight') or {}).get('epoch',0))" 2>/dev/null || echo 0)
+  [ "$E" -ge "$START" ] && echo "fresh data ready" && break
+  sleep 20
+done
+git reset -q --hard origin/main
+```
+
+If it says "fresh data ready", carry on. If it timed out, carry on with what's there, but get every overnight number from web search instead and say so in the note.
 
 Read these files:
 - `data/published_data.json`: the six-step positioning framework (Nifty spot, 20/50/200-day moving averages, swing structure, futures price and OI history, FII/DII/Pro/Client index-futures positions, option chain with OI, change in OI and IV pressure by strike, PCR history, India VIX, IV percentile). The field `updated` says when it was built.
@@ -11,6 +29,7 @@ Read these files:
   - `flows`: FII and DII cash buying and selling, FII derivatives positions, FII long % history, and `sectors` (which sectors FIIs bought or sold, from NSDL).
   - `results`: company results filed in the last 7 days, with revenue and profit growth vs last year.
   - `events`: the next 45 days (RBI, Fed, India CPI/GDP, global data releases, F&O expiries, market holidays, big-company results).
+  - `overnight`: **what changed since India closed.** US close and US futures now, Asian markets now, Indian companies listed in the US (Infosys, Wipro, HDFC Bank, ICICI Bank, India ETF), and Brent, gold, US 10-year and 2-year yields, the dollar and USD/INR. `sinceRef` is the move since the snapshot taken the previous evening after India's close; `dayChg` is the market's own daily change; `tone` is the effect on Indian stocks; `stale` means that market is closed today, so ignore it.
 - `NIFTY_POSITIONING_DESK.md`: explains every rule the dashboard uses (how scores, flags and readings are calculated). Read section 5 and section 4b so you understand what the numbers mean.
 
 Work out the dashboard's own view by applying those rules to the data: the score for each of the four direction steps, the overall bias score from −100 to +100, how many steps agree, and the volatility level. Use Python if it helps. Don't invent a different method; explain the dashboard's view, then add your own reasoning on top.
@@ -19,11 +38,32 @@ Check freshness. If `updated` in `published_data.json` is from before yesterday'
 
 ## 2. Research beyond the numbers
 
+**Lead with what changed, not with levels.** The Indian market opens on what moved since yesterday's 3:30 pm close, not on yesterday's story. "Oil is high at $103" is old news if it fell from $105 overnight; then the overnight fact is "oil fell 1.5%", which is good for India. For each item in `overnight`, describe the direction since India closed. Mark it good or bad for Indian stocks, and say whether it supports or works against yesterday's move.
+
+**Then decide: bounce or continuation?** Weigh both sides explicitly before choosing the mood.
+- Signs a fall may bounce:
+  - a big down day to a multi-month low
+  - FIIs selling far above their normal daily amount
+  - DIIs absorbing most of it
+  - FII index-futures long % very low (under about 10%: many bets on a fall that could be closed in a hurry)
+  - put-call ratio near or below 0.7
+  - India VIX jumping
+  - overnight news turning less bad
+- Signs it may continue:
+  - fresh bad news overnight
+  - FIIs adding new bets on a fall
+  - the trend checks all negative
+  - global markets falling this morning
+
+Apply the mirror image after a big up day. State which you think is more likely for today's session and why, how confident you are, and what would prove you wrong. Don't simply carry yesterday's story forward.
+
 Use web search to check and explain what the data shows. Look for the following, and only use what you can confirm from a reliable source:
-- How US stocks, crude oil, gold, the dollar and US bond rates moved overnight, and why.
+- **GIFT Nifty** (the overnight indicator for the Indian open): the latest figure and its change vs Nifty's last close.
+- US stocks overnight and **US futures this morning**, and **Asian markets this morning**, with the main reason for any big move.
+- How crude oil, gold, the dollar and US bond rates moved overnight, and why. Use `overnight` first, and use search to explain.
 - Any Fed, RBI or government news since yesterday's close: statements, decisions, data releases.
 - Why FIIs bought or sold yesterday, if credible reporting explains it.
-- News on any big company that reported results, or reports today.
+- News on any big company that reported results, or reports today. **Judge results by how the market is taking them, not only by the dashboard's year-on-year rule.** Check analysts' expectations (beat or miss), how the stock had moved going in (low expectations make "OK" results a relief), and early market reactions: the company's or its peers' US-listed shares overnight (for example, Infosys's US listing after TCS results) and pre-open reports.
 - GIFT Nifty (the overnight indicator for the Indian open), if you can find a reliable current figure.
 
 Prefer primary or established sources: NSE, RBI, the US Federal Reserve, the US Treasury, Reuters, Bloomberg, Economic Times, Business Standard, Mint, Moneycontrol, CNBC. Don't use social media or forums. If the news contradicts the dashboard's data, say so and explain which to trust and why.
@@ -62,6 +102,12 @@ Write the note as JSON in exactly this shape:
     {"tone": "bad", "text": "3-5 bullets: the most important takeaways. Someone who reads only these should understand today's market."}
   ],
   "sections": [
+    {"id": "overnight", "title": "What changed overnight", "tone": "good",
+     "summary": "One plain sentence: did the night bring better or worse news for the Indian open, and does it support or work against yesterday's move?",
+     "points": [{"tone": "good", "text": "GIFT Nifty, US futures, Asia, crude, US bond rates, dollar/rupee, and the US-listed Indian shares that matter today: each as a direction since India closed."}]},
+    {"id": "setup", "title": "Bounce or continuation?", "tone": "mixed",
+     "summary": "One plain sentence with your call for today and how confident you are.",
+     "points": [{"tone": "good", "text": "The signs on each side (see section 2), weighed honestly, and what would prove the call wrong."}]},
     {"id": "picture", "title": "The big picture", "tone": "mixed",
      "summary": "One plain sentence summing up this section.",
      "points": [{"tone": "bad", "text": "..."}, {"tone": "good", "text": "..."}]},
@@ -79,6 +125,8 @@ Write the note as JSON in exactly this shape:
 
 Rules for the shape:
 - Each section has **3–5 points**. The section's `tone` is its overall effect on Indian stocks.
+- `key_points` must include **at least one overnight change** and your **bounce-or-continuation call**. The `headline` and `mood` describe the outlook for **today's session**, not a summary of yesterday.
+- Add a short line to `mood.why` saying how fresh the data was, for example "Overnight data as of 08:47 IST".
 - "What could change the picture" covers the events in the next 1–2 weeks that matter most, and what would prove today's read wrong.
 - `levels` uses the dashboard's option-chain ceiling and floor. Leave `levels` out if they're missing.
 - `watch` has 3–5 items, each with an IST time where known (otherwise `""`).

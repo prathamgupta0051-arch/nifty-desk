@@ -14,7 +14,7 @@ from urllib.request import Request
 import desk_server as ds
 
 DATA = ds.DATA
-CTX = {"macro": None, "flows": None, "results": None, "events": None, "errors": {}, "updated": {}}
+CTX = {"macro": None, "flows": None, "results": None, "events": None, "overnight": None, "errors": {}, "updated": {}}
 LOCK = threading.Lock()
 
 
@@ -281,6 +281,70 @@ def build_macro():
     verdict = "Headwinds" if score <= -20 else "Tailwinds" if score >= 20 else "Mixed"
     return {"flags": flags, "items": items, "fed": fed, "heads": heads, "tails": tails, "total": total, "score": score, "verdict": verdict,
             "updated": ds.now_ist().strftime("%d %b %Y, %H:%M IST")}
+
+
+# ================================================================ overnight: what changed since India closed
+OVERNIGHT = [
+    # group, CNBC symbol, label, effect of a RISE on Indian stocks (+1 good, -1 bad), kind
+    ("US stocks · last close", ".SPX", "S&P 500", 1, "pct"),
+    ("US stocks · last close", ".IXIC", "Nasdaq", 1, "pct"),
+    ("US futures · now", "@SP.1", "S&P 500 futures", 1, "pct"),
+    ("US futures · now", "@ND.1", "Nasdaq 100 futures", 1, "pct"),
+    ("Asia · now", ".N225", "Japan (Nikkei)", 1, "pct"),
+    ("Asia · now", ".HSI", "Hong Kong (Hang Seng)", 1, "pct"),
+    ("Asia · now", ".SSEC", "China (Shanghai)", 1, "pct"),
+    ("Asia · now", ".KS11", "Korea (Kospi)", 1, "pct"),
+    ("Asia · now", ".TWII", "Taiwan", 1, "pct"),
+    ("Indian shares in the US · last close", "INFY", "Infosys (US listing)", 1, "pct"),
+    ("Indian shares in the US · last close", "WIT", "Wipro (US listing)", 1, "pct"),
+    ("Indian shares in the US · last close", "HDB", "HDFC Bank (US listing)", 1, "pct"),
+    ("Indian shares in the US · last close", "IBN", "ICICI Bank (US listing)", 1, "pct"),
+    ("Indian shares in the US · last close", "INDA", "iShares MSCI India ETF", 1, "pct"),
+    ("Oil, rates, currency · now", "@LCO.1", "Brent crude", -1, "pct"),
+    ("Oil, rates, currency · now", "@GC.1", "Gold", -1, "pct"),
+    ("Oil, rates, currency · now", "US10Y", "US 10-year yield", -1, "abs"),
+    ("Oil, rates, currency · now", "US2Y", "US 2-year yield", -1, "abs"),
+    ("Oil, rates, currency · now", ".DXY", "US dollar index", -1, "pct"),
+    ("Oil, rates, currency · now", "INR=", "USD / INR", -1, "pct"),
+]
+
+
+def build_overnight():
+    """Latest global prices plus their change since the previous Indian evening.
+    The first build after India's 3:30 pm close saves a reference snapshot; the morning
+    build measures every move against it, so the note reads changes, not levels."""
+    now = ds.now_ist()
+    q = cnbc_quotes([o[1] for o in OVERNIGHT])
+    ref_path = os.path.join(DATA, "overnight_ref.json")
+    ref = ds.read_cache(ref_path) or {}
+    after_close = now.weekday() < 5 and (now.hour, now.minute) >= (15, 35)
+    items = []
+    for grp, sym, label, sign, kind in OVERNIGHT:
+        v = q.get(sym) or {}
+        last = v.get("last")
+        if last is None:
+            continue
+        r = (ref.get("prices") or {}).get(sym)
+        since = None
+        if r and not after_close:
+            since = (last - r) if kind == "abs" else (last / r - 1) * 100
+        move = since if since is not None else (v.get("chg") if kind == "abs" else v.get("chgPct"))
+        thr = 0.03 if kind == "abs" else 0.25
+        tone = "neutral" if move is None or abs(move) < thr else ("good" if move * sign > 0 else "bad")
+        t = str(v.get("time") or "")[:10]
+        stale = "now" in grp and bool(t) and t < now.date().isoformat() and t < (now - timedelta(hours=20)).date().isoformat()
+        if stale:
+            tone = "neutral"  # market closed today: yesterday's price, not an overnight move
+        items.append({"stale": stale, "group": grp, "sym": sym, "label": label, "last": last, "kind": kind,
+                      "dayChg": v.get("chg") if kind == "abs" else v.get("chgPct"), "sinceRef": since,
+                      "asof": v.get("time"), "tone": tone})
+    if after_close and ref.get("d") != now.date().isoformat():
+        ds.write_cache(ref_path, {"d": now.date().isoformat(), "t": now.strftime("%H:%M IST"),
+                                  "prices": {o[1]: (q.get(o[1]) or {}).get("last") for o in OVERNIGHT}})
+    good = sum(1 for i in items if i["tone"] == "good")
+    bad = sum(1 for i in items if i["tone"] == "bad")
+    return {"items": items, "good": good, "bad": bad, "ref": None if after_close else (ref.get("d"), ref.get("t")),
+            "updated": now.strftime("%d %b %Y, %H:%M IST"), "epoch": int(time.time())}
 
 
 # ================================================================ FII / DII flows
@@ -786,7 +850,7 @@ def build_results(days=7):
 
 
 # ================================================================ refresh loop
-EVERY = {"macro": 15 * 60, "flows": 30 * 60, "results": 30 * 60, "events": 30 * 60}
+EVERY = {"macro": 15 * 60, "flows": 30 * 60, "results": 30 * 60, "events": 30 * 60, "overnight": 15 * 60}
 
 
 def notify_new_flags(m):
@@ -812,7 +876,7 @@ def notify_new_flags(m):
 
 def worker():
     last = {k: 0 for k in EVERY}
-    builders = {"macro": build_macro, "flows": build_flows, "results": build_results, "events": build_events}
+    builders = {"macro": build_macro, "flows": build_flows, "results": build_results, "events": build_events, "overnight": build_overnight}
     while True:
         for k, fn in builders.items():
             if time.time() - last[k] >= EVERY[k] or CTX.get("force"):
@@ -840,4 +904,4 @@ def start():
 
 def snapshot():
     with LOCK:
-        return json.dumps({k: CTX[k] for k in ("macro", "flows", "results", "events", "errors", "updated")}).encode()
+        return json.dumps({k: CTX[k] for k in ("macro", "flows", "results", "events", "overnight", "errors", "updated")}).encode()
