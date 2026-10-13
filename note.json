@@ -1,246 +1,96 @@
 {
- "version": 2,
- "date": "2026-10-12",
- "generated": "08:51 IST",
- "headline": "The night brought mildly good news: oil fell about 1.8% and US futures are up, so Nifty looks set to open around 100 points higher. The real test is whether Friday's bounce can hold while foreign funds keep selling.",
- "mood": {
-  "label": "Mixed",
-  "tone": "mixed",
-  "confidence": "Low",
-  "why": "The dashboard scores −15 on a −100 to +100 scale (neutral), with only 2 of 4 checks agreeing. Data built 08:47 IST, overnight data as of 08:48 IST."
- },
- "key_points": [
-  {
-   "tone": "good",
-   "text": "Brent crude fell **1.8%** to about $103 on Russia-Ukraine truce hopes. India imports most of its oil, so this helps."
-  },
-  {
-   "tone": "good",
-   "text": "GIFT Nifty was near 22,625 around 8 am, about 100 points above Nifty's Friday close of 22,520, and US futures are up 0.3%."
-  },
-  {
-   "tone": "mixed",
-   "text": "My call: a small follow-through on Friday's 1.3% bounce, with low confidence. Sellers wait near 23,000."
-  },
-  {
-   "tone": "mixed",
-   "text": "India inflation data at 4 pm, five days after RBI raised rates to 5.50%."
-  }
- ],
- "sections": [
-  {
-   "id": "overnight",
-   "title": "What changed overnight",
-   "tone": "good",
-   "summary": "Mostly better news for India, supporting Friday's bounce; Korea is the weak spot.",
-   "points": [
-    {
-     "tone": "good",
-     "text": "US stocks rose 0.6% on Friday and US futures are up another **0.3%** this morning."
-    },
-    {
-     "tone": "good",
-     "text": "Brent is down **1.8%** at $102.8 on the truce news, which neither Russia nor Ukraine has confirmed. Tanker attacks near Hormuz keep it above $100."
-    },
-    {
-     "tone": "bad",
-     "text": "Asia is mixed: Korea's Kospi is down **2.5%**, Hong Kong is up 0.3% and China is flat. Japan is closed for a holiday."
-    },
-    {
-     "tone": "neutral",
-     "text": "The dollar is flat and US bond markets are shut for a holiday. Infosys, Wipro and HDFC Bank shares in the US rose 0.3–1.8% on Friday."
-    }
-   ]
-  },
-  {
-   "id": "setup",
-   "title": "Bounce or continuation?",
-   "tone": "mixed",
-   "summary": "After Friday's 1.3% jump off a multi-month low, I lean to mild follow-through, low confidence.",
-   "points": [
-    {
-     "tone": "good",
-     "text": "For more bounce: oil falling, US futures up, India VIX (the fear gauge) down from 15.3 to 14.4."
-    },
-    {
-     "tone": "good",
-     "text": "Only **9.6%** of FII index-futures bets are on a rise, up from 8.5%. Below 10%, bets on a fall can be closed in a hurry, which lifts prices."
-    },
-    {
-     "tone": "bad",
-     "text": "For a fade: the trend is still down and FIIs are still selling shares every day."
-    },
-    {
-     "tone": "mixed",
-     "text": "Proof I'm wrong: Nifty falling back below **22,500**, or below Thursday's 22,232."
-    }
-   ]
-  },
-  {
-   "id": "picture",
-   "title": "The big picture",
-   "tone": "mixed",
-   "summary": "The trend is still down, but the bets in options and futures no longer point clearly lower.",
-   "points": [
-    {
-     "tone": "bad",
-     "text": "Price trend scores the worst possible **−2**: Nifty is below its 20, 50 and 200-day averages (22,972, 23,726, 24,266), with lower highs and lows."
-    },
-    {
-     "tone": "good",
-     "text": "Put-call ratio (bets on a fall compared with bets on a rise) jumped from 0.77 to **1.14** in five sessions; option sellers moved their floor up from 22,000 to 22,500."
-    },
-    {
-     "tone": "neutral",
-     "text": "Overall bias **−15** (neutral), 2 of 4 checks agree. VIX at 14.4 is middling, 70th percentile of the year."
-    }
-   ]
-  },
-  {
-   "id": "investors",
-   "title": "What big investors are doing",
-   "tone": "mixed",
-   "summary": "Foreign funds keep selling, Indian funds keep buying more, and foreign futures bets are slightly less negative.",
-   "points": [
-    {
-     "tone": "bad",
-     "text": "FIIs sold ₹3,569 crore on Friday after a huge **₹12,944 crore** on Thursday; ₹25,595 crore in October so far."
-    },
-    {
-     "tone": "good",
-     "text": "Indian funds (DIIs) bought ₹4,743 crore on Friday, more than FIIs sold, and **₹25,132 crore** this month."
-    },
-    {
-     "tone": "mixed",
-     "text": "FIIs trimmed futures bets on a fall by 13,121 contracts, but still hold about **2.94 lakh** more bets on a fall than a rise."
-    }
-   ]
-  },
-  {
-   "id": "world",
-   "title": "What the world is telling India",
-   "tone": "bad",
-   "summary": "Outside India the picture is still a headwind, mainly from high US interest rates and dear oil.",
-   "points": [
-    {
-     "tone": "bad",
-     "text": "Dashboard macro view: **Headwinds** (4 of 10 items hurt, 2 help); oil is still up 21% in three months."
-    },
-    {
-     "tone": "bad",
-     "text": "US 6-month bills pay 4.32% vs the Fed's 3.88%, so markets expect a **Fed hike**, which pulls money from India."
-    },
-    {
-     "tone": "bad",
-     "text": "The rupee is weak at 96.76 per dollar; the US 10-year rate is very high at **5.24%**."
-    }
-   ]
-  },
-  {
-   "id": "results",
-   "title": "Company results",
-   "tone": "good",
-   "summary": "Results season has started reasonably well, led by TCS.",
-   "points": [
-    {
-     "tone": "good",
-     "text": "TCS: profit +14.9%, revenue +11.2% from last year, slightly above estimates. The stock rose **5.5%** Friday because hopes were low."
-    },
-    {
-     "tone": "neutral",
-     "text": "DMart: revenue +17.8%, profit +8.5%, in line. I couldn't confirm the market reaction."
-    },
-    {
-     "tone": "mixed",
-     "text": "HCL Tech reports after the close today, a test of whether IT relief spreads."
-    }
-   ]
-  },
-  {
-   "id": "ahead",
-   "title": "What could change the picture",
-   "tone": "mixed",
-   "summary": "A busy two weeks: inflation in India and the US, bank results, and the Fed.",
-   "points": [
-    {
-     "tone": "bad",
-     "text": "Wed 14 Oct: US inflation, expected up to **3.6%** from 3.4%. Higher would firm up Fed hike bets."
-    },
-    {
-     "tone": "mixed",
-     "text": "Fri 17 Oct: HDFC Bank, ICICI Bank and Axis Bank results; banks are Nifty's biggest part."
-    },
-    {
-     "tone": "neutral",
-     "text": "Holiday 20 Oct, Infosys 23 Oct, monthly expiry 27 Oct, Fed decision early 29 Oct."
-    },
-    {
-     "tone": "bad",
-     "text": "Oil back above $105, or the truce collapsing, would undo today's good news."
-    }
-   ]
-  }
- ],
- "levels": {
-  "ceiling": 23000,
-  "floor": 22500,
-  "note": "A close above 23,000 would also put Nifty above its 20-day average and break the run of lower highs; a close below 22,500 would mean put sellers have given up and the bounce has failed."
- },
- "watch": [
-  {
-   "time": "09:15",
-   "text": "Does Nifty hold a higher open near 22,600?"
-  },
-  {
-   "time": "16:00",
-   "text": "India CPI. Above August's 4.82% would hurt banks."
-  },
-  {
-   "time": "",
-   "text": "HCL Tech results after the close."
-  },
-  {
-   "time": "",
-   "text": "Brent: does the fall hold?"
-  },
-  {
-   "time": "",
-   "text": "Weekly expiry tomorrow; moves near 22,500 and 23,000 can be sharp."
-  }
- ],
- "bottom_line": "Cheaper oil, firmer US futures and GIFT Nifty about 100 points higher point to a positive start. But the dashboard is only neutral (−15, 2 of 4 checks agree): the trend is down, FIIs keep selling, and US rates and the rupee still work against India. My read is a mild follow-through toward 22,700–23,000, with low confidence. Main risks: today's inflation number and oil rebounding.",
- "sources": [
-  {
-   "title": "Business Standard: Stock market live, 12 Oct 2026 (GIFT Nifty, Asia)",
-   "url": "https://www.business-standard.com/markets/news/stock-market-live-october-12-bse-sensex-today-nifty50-gift-nifty-crude-oil-prices-q2-results-today-126101200057_1.html"
-  },
-  {
-   "title": "Upstox: GIFT Nifty hints at positive opening, 12 Oct",
-   "url": "https://upstox.com/news/market-news/stocks/gift-nifty-futures-hint-a-positive-opening-on-october-12-key-things-to-know-before-stock-market-opens/article-201646"
-  },
-  {
-   "title": "Washington Post/AP: How US indexes fared, 9 Oct 2026",
-   "url": "https://www.washingtonpost.com/business/2026/10/09/wall-street-stocks-dow-nasdaq/63e004dc-c41e-11f1-8170-681419af1cc9_story.html"
-  },
-  {
-   "title": "Yahoo Finance: Oil falls on Russia-Ukraine energy ceasefire hopes",
-   "url": "https://finance.yahoo.com/energy/articles/oil-climbs-mideast-conflict-tanker-232559304.html"
-  },
-  {
-   "title": "Motilal Oswal: RBI raises rate by 0.25%",
-   "url": "https://www.motilaloswal.com/learning-centre/2026/10/rbi-raises-rate-by-0-25-percent-what-it-means-for-the-economy"
-  },
-  {
-   "title": "IndiaInfoline: TCS shares jump 5.46% after Q2 FY27 results",
-   "url": "https://www.indiainfoline.com/news/companies/tcs-share-price-jumps-5-46-after-q2-fy27-results-net-profit-rises-4-qoq-to-13884-crore"
-  },
-  {
-   "title": "Multibagg: HCL Tech Q2 FY27 results on 12 Oct",
-   "url": "https://www.multibagg.ai/market-pulse/articles/hcl-tech-q2-fy27-results-dividend-cmu5k1c40000h2ul724chs0ob"
-  },
-  {
-   "title": "Nifty Positioning Desk data (NSE, CNBC, New York Fed feeds)",
-   "url": "https://github.com/prathamgupta0051-arch/nifty-desk"
-  }
- ]
+  "version": 2,
+  "date": "2026-10-13",
+  "generated": "08:58 IST",
+  "headline": "Asia is selling off hard this morning (Korea down about 7% on a chip-stock crash), while news closer to India is a bit better: oil and US bond rates eased and Indian shares in New York rose. My read is a weak, choppy session with more downside than upside, but low confidence because bets on a fall are already very crowded.",
+  "mood": {"label": "Negative", "tone": "bad", "confidence": "Low", "why": "The dashboard's bias score is −42 (bearish), with 3 of 4 direction checks agreeing; overnight news is split, so I lower confidence. Data as of 08:46 IST, built from Monday's close."},
+  "key_points": [
+    {"tone": "bad", "text": "Overnight, Asia fell sharply: Korea's Kospi was down **about 7%** and Japan's Nikkei 2.5% by mid-morning, led by a crash in memory-chip stocks; Nasdaq futures are down 0.9%."},
+    {"tone": "good", "text": "India-specific news improved: Brent crude slipped **1.4% to about $105**, the US 10-year bond rate eased, and HDFC Bank, ICICI Bank and Infosys rose 0.6–1.4% in New York."},
+    {"tone": "mixed", "text": "My call: **mild continuation more likely than a bounce**, low confidence. Trend and positioning still point down, but FIIs are so heavily bet on a fall that a sharp bounce can come on any good news."},
+    {"tone": "mixed", "text": "FIIs sold for a **5th straight day** (₹1,708 crore on Monday) but much less than their recent ₹6,399 crore average, and domestic funds bought ₹3,045 crore, more than covering it."},
+    {"tone": "neutral", "text": "Today is the weekly options expiry, so expect bigger swings near the close. Option sellers mark **22,600** as the ceiling and **22,000** as the floor."}
+  ],
+  "sections": [
+    {"id": "overnight", "title": "What changed overnight", "tone": "mixed",
+     "summary": "The night was bad for Asian tech but slightly good for India's own big worries (oil and rates), so it mostly works with Monday's fall, not against it.",
+     "points": [
+      {"tone": "bad", "text": "Korea's Kospi fell **about 7%**, triggering a pause in automated selling. Reports link it to Samsung and SK Hynix falling 6–8% after a Chinese chipmaker (CXMT) showed progress on memory chips, raising fears of more competition."},
+      {"tone": "bad", "text": "Japan fell 2.5%, Taiwan 1.9%, Hong Kong and Shanghai about 0.9%. In the US, the S&P 500 was flat on Monday but the Nasdaq fell 0.4%, and **Nasdaq futures are down 0.9%** this morning."},
+      {"tone": "good", "text": "Brent crude is **down 1.4% to about $105** after topping $106 on Monday on Middle East supply fears. India buys most of its oil abroad, so cheaper oil helps."},
+      {"tone": "good", "text": "The US 10-year bond rate eased to **5.19%** (down 0.05 points) and the dollar index dipped 0.2%. Lower US rates make India a bit more attractive to foreign money."},
+      {"tone": "good", "text": "Indian shares listed in the US rose on Monday: HDFC Bank **+1.4%**, Infosys +0.9%, the India ETF +0.7%, ICICI Bank +0.6%. Early reports put GIFT Nifty near 22,420, slightly above Monday's close, but I couldn't confirm a reliable figure taken after Asia's slide."}
+     ]},
+    {"id": "setup", "title": "Bounce or continuation?", "tone": "mixed",
+     "summary": "Slightly more likely to drift lower or stay weak, but low confidence; a bounce needs Asia to calm down.",
+     "points": [
+      {"tone": "good", "text": "For a bounce: FIIs hold only **8.95%** of their index-futures bets as bets on a rise. Below 10% has often come before a rush to close bets on a fall, which pushes prices up quickly."},
+      {"tone": "good", "text": "Also for a bounce: domestic funds bought **178%** of what FIIs sold, FII selling is slowing, and the put-call ratio (bets on a fall compared with bets on a rise) is low at 0.73, a sign of gloomy mood that often comes near lows."},
+      {"tone": "bad", "text": "For continuation: Asia is falling hard **this morning**, FIIs added a little more to bets on a fall on Monday, and Nifty is below its 20, 50 and 200-day averages with lower highs and lower lows."},
+      {"tone": "bad", "text": "India VIX (the fear gauge) rose to **15.2** and is in the top 30% of the past year, so traders expect bigger swings, not calm."},
+      {"tone": "mixed", "text": "What would prove me wrong: Nifty holding above Monday's close and **closing above 22,500**. A close below the 22,232 low of 8 October would confirm the fall is continuing."}
+     ]},
+    {"id": "picture", "title": "The big picture", "tone": "bad",
+     "summary": "The trend is clearly down, and only the option chain gives a small positive signal.",
+     "points": [
+      {"tone": "bad", "text": "Nifty closed Monday at **22,363**, down 0.7%, near its lowest close in about six months (22,232 on 8 October). It sits 8% below its 200-day average of 24,249."},
+      {"tone": "bad", "text": "Price trend check scores **−2 of −2**: below all three averages, with lower highs and lower lows."},
+      {"tone": "bad", "text": "Futures check scores −0.75: price fell and open futures bets dipped 0.7%, meaning some bets on a rise were closed, and FIIs remain heavily bet on a fall."},
+      {"tone": "bad", "text": "Put-call ratio check scores −1: it fell from **0.94 to 0.73** in five sessions, a sign bulls are giving up."},
+      {"tone": "good", "text": "Option chain check scores **+0.4**: sellers added fresh puts at 21,900–22,200, building a floor below the price."}
+     ]},
+    {"id": "investors", "title": "What big investors are doing", "tone": "mixed",
+     "summary": "Foreign funds keep selling and betting on a fall, while domestic funds keep buying even more.",
+     "points": [
+      {"tone": "bad", "text": "FIIs sold ₹1,708 crore of shares on Monday and **₹27,304 crore so far in October**."},
+      {"tone": "good", "text": "Domestic funds bought ₹3,045 crore on Monday and **₹28,177 crore this month**, more than all the FII selling."},
+      {"tone": "mixed", "text": "FIIs hold **3.3 lakh** index-futures bets on a fall against just 32,268 on a rise. That is a strong bearish view, but also fuel for a sharp bounce if they close it."},
+      {"tone": "bad", "text": "FIIs raised their net holding of put options (insurance against a fall) by about **46,000** contracts on Monday, so they are still protecting against more downside."}
+     ]},
+    {"id": "world", "title": "What the world is telling India", "tone": "bad",
+     "summary": "The dashboard reads the global backdrop as working against India, though the rupee got some help from the RBI.",
+     "points": [
+      {"tone": "bad", "text": "The US 10-year bond rate is at **5.19%**, higher than 96% of the past year. High US rates pull money out of markets like India."},
+      {"tone": "bad", "text": "Markets expect a **US rate rise**: 6-month US bills pay 4.32%, 0.44 points above the Fed's 3.88% rate. US inflation data comes on Wednesday."},
+      {"tone": "bad", "text": "Brent is still up **24% in three months**, even after the overnight dip, which keeps pressure on India's import bill and inflation."},
+      {"tone": "good", "text": "The rupee was about **₹95.8 per dollar** on Monday, firmer than Friday's ₹96.73, after the RBI said it will supply dollars directly to state oil companies from 12 October."}
+     ]},
+    {"id": "results", "title": "Company results", "tone": "good",
+     "summary": "Results season has started well for IT, but the big banks report later this week.",
+     "points": [
+      {"tone": "good", "text": "HCLTech (Nifty 50) reported after Monday's close: profit up **21%** to ₹5,132 crore, revenue up 11.5%, new deal bookings up 27%. Forbes India reports profit beat estimates; I couldn't confirm the exact estimates."},
+      {"tone": "good", "text": "Infosys's US shares rose 0.9% on Monday, a small hint that the market likes the IT picture ahead of Infosys's own results on 23 October."},
+      {"tone": "mixed", "text": "DMart's revenue rose 17.8% but profit only **8.5%**, so its margins shrank; this was flagged as a margin miss."},
+      {"tone": "good", "text": "RBL Bank's profit jumped **159%** from a weak base last year."}
+     ]},
+    {"id": "ahead", "title": "What could change the picture", "tone": "mixed",
+     "summary": "US inflation data and the big bank results this week can make or break the bounce case.",
+     "points": [
+      {"tone": "mixed", "text": "**Wednesday 18:00 IST:** US inflation, expected at 3.6% vs 3.4% before. A hotter number would push US rates up and hurt India."},
+      {"tone": "neutral", "text": "Thursday: Tech Mahindra, Nestlé India, Jio Financial and HDFC Life results. Friday 16 October, 09:00: Fed Chair Warsh speaks."},
+      {"tone": "mixed", "text": "Saturday 17 October: **HDFC Bank, ICICI Bank and Axis Bank** results. Banks are the biggest part of Nifty."},
+      {"tone": "neutral", "text": "Market holiday on 20 October (Dussehra). Monthly expiry on 27 October, then the Fed decision late on 28 October (India time)."},
+      {"tone": "good", "text": "If Asia steadies and FIIs start closing bets on a fall (their long share rising 3 points or more), the dashboard would flip quickly toward a bounce."}
+     ]}
+  ],
+  "levels": {"ceiling": 22600, "floor": 22000, "note": "A close above 22,600 would break the sellers' ceiling and point to a bounce; a close below 22,000 would break the floor and open more downside."},
+  "watch": [
+    {"time": "09:15", "text": "The open vs Monday's 22,363 close: does India follow Asia's fall or hold up on cheaper oil?"},
+    {"time": "09:15", "text": "HCLTech's first reaction to its results; a strong move can lift IT stocks."},
+    {"time": "", "text": "Korea and Japan through the day: a further slide would add pressure, a recovery would ease it."},
+    {"time": "15:30", "text": "Weekly expiry: big swings near the close around 22,300–22,500."},
+    {"time": "18:00", "text": "FII and DII buying and selling numbers for today."}
+  ],
+  "bottom_line": "The dashboard leans bearish (bias −42, 3 of 4 checks agree): Nifty is in a clear downtrend and FIIs are still betting on a fall. Overnight, India's own worries eased a little (oil and US rates down, Indian shares up in New York), but the chip crash across Asia is likely to weigh on the open. My read is a weak or choppy day, with low confidence. The main risk to this read is a sudden bounce: with FIIs this heavily bet on a fall, any calming in Asia could force them to close those bets and lift the market fast.",
+  "sources": [
+    {"title": "Business Standard: Asian stocks dive, Kospi falls 6%", "url": "https://www.business-standard.com/markets/news/asian-stocks-dive-as-earnings-geopolitics-rattle-markets-kospi-falls-6-126101300078_1.html"},
+    {"title": "Bloomingbit: Kospi sidecar, Samsung and SK Hynix fall, CXMT news", "url": "https://en.bloomingbit.io/feed/news/122082"},
+    {"title": "Business Standard: Sensex sheds 548 pts, Nifty ends at 22,363", "url": "https://www.business-standard.com/markets/news/stock-market-live-october-12-bse-sensex-today-nifty50-gift-nifty-crude-oil-prices-q2-results-today-126101200057_1.html"},
+    {"title": "Motley Fool: Dow gains as memory stocks weigh on Nasdaq (12 Oct)", "url": "https://www.fool.com/coverage/stock-market-today/2026/10/12/stock-market-today-oct-12-dow-gains-as-memory-stocks-weigh-on-nasdaq/"},
+    {"title": "Kotak Neo: HCLTech Q2 FY27 results", "url": "https://www.kotakneo.com/news/stocks/hcltech-q2-fy27-results-revenue-profit-and-deal-wins/"},
+    {"title": "Forbes India: HCL Tech profits beat estimates", "url": "https://www.forbesindia.com/article/news/hcl-tech-profits-beat-estimates-fy27-growth-guidance-revised-upwards/2999369/1"},
+    {"title": "Tribune: India unveils dollar curbs to defend rupee", "url": "https://tribune.com.pk/story/2634139/india-unveils-dollar-curbs-to-defend-rupee"},
+    {"title": "NiftyTrader: Stocks to watch Oct 12 (HCLTech, DMart margin miss)", "url": "https://www.niftytrader.in/markets/stocks-to-watch-today-oct-12-2026-hcltech/"},
+    {"title": "Nifty Positioning Desk data (NSE, CNBC, New York Fed, NSDL)", "url": "https://github.com/prathamgupta0051-arch/nifty-desk"}
+  ]
 }
