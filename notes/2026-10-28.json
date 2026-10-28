@@ -1,0 +1,250 @@
+{
+  "version": 2,
+  "date": "2026-10-28",
+  "generated": "09:02 IST",
+  "headline": "Nifty looks set to open lower, near 22,600, because oil rose back above $115 overnight. The test today is whether it can get back above 22,700.",
+  "mood": {
+    "label": "Negative",
+    "tone": "bad",
+    "confidence": "Low",
+    "why": "The bias score is −27 (mildly bearish), but only 2 of 4 checks agree. Overnight data as of 08:46 IST."
+  },
+  "key_points": [
+    {
+      "tone": "bad",
+      "text": "GIFT Nifty was near **22,613** at 08:33 IST, about 0.6% below Tuesday's close of 22,750."
+    },
+    {
+      "tone": "bad",
+      "text": "Brent crude rose **1.3%** overnight to $115 after missile claims against a Saudi refinery. India imports most of its oil."
+    },
+    {
+      "tone": "good",
+      "text": "FIIs bought **₹4,240 crore** of shares on Tuesday. They have still sold ₹34,505 crore this month."
+    },
+    {
+      "tone": "mixed",
+      "text": "My call: a **weak start, then sideways trade**. Tuesday was flat, so there's no big move to bounce from. Confidence is low."
+    },
+    {
+      "tone": "mixed",
+      "text": "The US Fed decides at **23:30 IST**. No change is expected, but a December rate rise looks likely."
+    }
+  ],
+  "sections": [
+    {
+      "id": "overnight",
+      "title": "What changed overnight",
+      "tone": "mixed",
+      "summary": "Global stocks rose, but oil climbed and India-linked signals were weak. That points to a lower open after a flat Tuesday.",
+      "points": [
+        {
+          "tone": "good",
+          "text": "US stocks rose: the S&P 500 gained 0.6% and the Nasdaq **1.2%**, led by chip stocks. Japan is up about 1.3% and Korea about 6% this morning."
+        },
+        {
+          "tone": "bad",
+          "text": "Brent crude is up **1.3%** at $115.4, close to its highest level in a year. That's bad for the rupee, for inflation, and for oil, paint and airline companies."
+        },
+        {
+          "tone": "bad",
+          "text": "Indian shares listed in the US fell: Infosys **−2.6%**, Wipro −2.4%, HDFC Bank −1.6%. That's a weak sign for IT and banks. I couldn't confirm why they fell."
+        },
+        {
+          "tone": "mixed",
+          "text": "The US 10-year bond rate is a little higher at **5.02%**, and the dollar is firmer. Higher US rates can pull foreign money away from India."
+        }
+      ]
+    },
+    {
+      "id": "setup",
+      "title": "Bounce or continuation?",
+      "tone": "mixed",
+      "summary": "I expect a lower open and then sideways trade, with low confidence.",
+      "points": [
+        {
+          "tone": "bad",
+          "text": "Against Nifty: higher oil, GIFT Nifty about **136 points** lower, weak US-listed Indian shares, and a weak trend."
+        },
+        {
+          "tone": "good",
+          "text": "For Nifty: big FII buying, rising US and Asian stocks, and option sellers moving their main support up to **22,700** from 22,500."
+        },
+        {
+          "tone": "mixed",
+          "text": "An open near 22,613 would start **below** that support. If Nifty can't get back above it, 22,500 is the next level. A move back above 22,800, or oil below $113, would prove me wrong."
+        }
+      ]
+    },
+    {
+      "id": "picture",
+      "title": "The big picture",
+      "tone": "bad",
+      "summary": "The trend is down, but option sellers are building support. Overall the dashboard reads mildly bearish.",
+      "points": [
+        {
+          "tone": "bad",
+          "text": "Nifty (22,750) is below its 50-day and 200-day averages (**24,084**), and its recent peaks and lows keep getting lower. Trend score: −1.33."
+        },
+        {
+          "tone": "mixed",
+          "text": "Open futures positions rose **11%** while the price was flat, which the dashboard reads as new bets on a fall (−1.75). But Tuesday was the monthly expiry, so this may just be positions moving to the next month."
+        },
+        {
+          "tone": "good",
+          "text": "Option sellers made many bets that Nifty stays above levels from 22,200 to 22,700 (score **+0.95**). The put-call ratio (bets on a fall compared with bets on a rise) is steady at 1.06."
+        },
+        {
+          "tone": "mixed",
+          "text": "India VIX (the fear gauge) is **16.5** and rising, higher than on 76% of days in the last year. Expect bigger swings."
+        }
+      ]
+    },
+    {
+      "id": "investors",
+      "title": "What big investors are doing",
+      "tone": "mixed",
+      "summary": "FIIs bought heavily for one day, but their bigger bets still point to a fall.",
+      "points": [
+        {
+          "tone": "good",
+          "text": "FIIs bought a net **₹4,240 crore** on Tuesday after selling on Monday. That is a big day by the dashboard's rule."
+        },
+        {
+          "tone": "mixed",
+          "text": "Domestic funds sold ₹1,250 crore, which is unusual, but they have bought **₹45,246 crore** this month."
+        },
+        {
+          "tone": "bad",
+          "text": "Only **11.7%** of FII index-futures positions are bets on a rise, and they added protection against a fall. A rush to close these bets could lift Nifty, but it hasn't started."
+        }
+      ]
+    },
+    {
+      "id": "world",
+      "title": "What the world is telling India",
+      "tone": "bad",
+      "summary": "The dashboard's world check reads Headwinds, mainly because of oil and the strong dollar.",
+      "points": [
+        {
+          "tone": "bad",
+          "text": "Brent is up **30%** in three months, because of tension around Iran and the Strait of Hormuz."
+        },
+        {
+          "tone": "bad",
+          "text": "The dollar is near its highest level in a year, and the rupee is weak at **₹95.1** per dollar."
+        },
+        {
+          "tone": "mixed",
+          "text": "US bill rates show markets expect a Fed rate rise. Reports put the chance of one in December at about **75%**."
+        }
+      ]
+    },
+    {
+      "id": "results",
+      "title": "Company results",
+      "tone": "mixed",
+      "summary": "Mixed: strong at L&T and Bajaj Auto, weak profits at Maruti and Cipla.",
+      "points": [
+        {
+          "tone": "good",
+          "text": "L&T's profit rose about **27–33%** (the figure depends on how it's measured). Bajaj Auto's profit rose about 60%."
+        },
+        {
+          "tone": "bad",
+          "text": "Maruti's sales rose 26%, but its profit fell **26%** on higher costs. Cipla's profit fell 37%."
+        },
+        {
+          "tone": "neutral",
+          "text": "I couldn't confirm analysts' forecasts. HUL reports today, and Jio Platforms lists after its **$3.1 billion** share sale."
+        }
+      ]
+    },
+    {
+      "id": "ahead",
+      "title": "What could change the picture",
+      "tone": "mixed",
+      "summary": "The Fed tonight, then other central banks and Reliance's results.",
+      "points": [
+        {
+          "tone": "mixed",
+          "text": "If the Fed hints at a **December rate rise** tonight, the dollar could get stronger and FIIs could keep selling."
+        },
+        {
+          "tone": "mixed",
+          "text": "Thursday: US growth and inflation data, and the European Central Bank's decision. Friday: the Bank of Japan's decision and **Reliance** results."
+        },
+        {
+          "tone": "neutral",
+          "text": "The next weekly options expiry is **3 November**. India's inflation data comes on 12 November."
+        }
+      ]
+    }
+  ],
+  "levels": {
+    "ceiling": 23000,
+    "floor": 22700,
+    "note": "A close above 23,000 would point to a recovery. A close below 22,700 would bring 22,500 into view."
+  },
+  "watch": [
+    {
+      "time": "09:15",
+      "text": "Does Nifty open below **22,700**, and can it climb back?"
+    },
+    {
+      "time": "10:00",
+      "text": "Jio Platforms listing. A weak debut could weigh on Reliance."
+    },
+    {
+      "time": "16:00",
+      "text": "India industrial output (IIP) data."
+    },
+    {
+      "time": "23:30",
+      "text": "US Fed decision and what it says about December."
+    }
+  ],
+  "bottom_line": "Nifty is likely to open lower because oil rose back above $115 and the India-linked signals overnight were weak, even though US and Asian stocks rose. The dashboard leans mildly bearish (−27), but only 2 of 4 checks agree, so confidence is low. FII buying and new support at 22,700 are why the picture isn't worse. The main risk to this read is oil falling or a calm Fed, which could bring buyers back quickly.",
+  "sources": [
+    {
+      "title": "Business Standard: GIFT Nifty indicates lower open as oil tops $115 (28 Oct)",
+      "url": "https://www.business-standard.com/markets/news/stock-market-live-oct-28-nse-bse-sensex-today-nifty-gift-nifty-us-iran-tension-iran-strikes-brent-crude-ipos-jio-listing-jio-share-price-it-stocks-maruti-share-price-q1-result-today-share-market-today-126102800114_1.html"
+    },
+    {
+      "title": "5paisa: GIFT Nifty live",
+      "url": "https://www.5paisa.com/share-market-today/gift-nifty"
+    },
+    {
+      "title": "Business Standard: Market close, 27 Oct",
+      "url": "https://www.business-standard.com/amp/markets/news/stock-market-live-october-27-nse-bse-sensex-today-nifty50-gift-nifty-crude-oil-prices-jio-ipo-listing-price-126102700086_1.html"
+    },
+    {
+      "title": "CNBC: US stocks, 27 Oct",
+      "url": "https://www.cnbc.com/2026/10/26/stock-market-today-live-updates.html"
+    },
+    {
+      "title": "CNBC: What to expect from the October Fed meeting",
+      "url": "https://www.cnbc.com/2026/10/26/fed-decision-expectations-october-meeting.html"
+    },
+    {
+      "title": "Kiplinger: Fed meeting live updates (FedWatch odds)",
+      "url": "https://www.kiplinger.com/investing/live/fed-meeting-updates-and-commentary-october-2026"
+    },
+    {
+      "title": "Business Today Malaysia: Asia stocks rally ahead of Fed",
+      "url": "https://www.businesstoday.com.my/2026/10/28/asia-stocks-rally-on-ai-optimism-ahead-of-fed-decision/"
+    },
+    {
+      "title": "Business Standard: Stocks to watch, 28 Oct",
+      "url": "https://www.business-standard.com/amp/markets/news/stocks-to-watch-october-28-jio-platforms-hul-adani-enterprises-maruti-suzuki-l-t-126102800115_1.html"
+    },
+    {
+      "title": "Upstox: Q2 results live (L&T, Maruti, Cipla)",
+      "url": "https://upstox.com/news/market-news/earnings/q2-results-live-updates-l-and-t-maruti-suzuki-bajaj-auto-waaree-energies-tata-steel-cipla-tata-capital-jsw-infra-mazagon-dock-others-to-declare-earnings-on-oct-27/liveblog-202440/"
+    },
+    {
+      "title": "NSE data via Nifty Positioning Desk (published_data.json, published_context.json)",
+      "url": "https://www.nseindia.com"
+    }
+  ]
+}
