@@ -1,0 +1,254 @@
+{
+ "version": 2,
+ "date": "2026-11-02",
+ "generated": "09:00 IST",
+ "headline": "Oil fell about 3% after Iran offered to reopen the Strait of Hormuz, and US futures are up after Friday's tech sell-off. Expect a steady to slightly higher start, but Nifty is still stuck between 22,500 and 23,500.",
+ "mood": {
+  "label": "Mixed",
+  "tone": "mixed",
+  "confidence": "Low",
+  "why": "Dashboard Neutral (+14, 2 of 4 checks agree); FIIs still mostly bet on a fall. Overnight data as of 08:49 IST."
+ },
+ "key_points": [
+  {
+   "tone": "good",
+   "text": "Brent crude is down **2.9%** to about $110 after Iran offered to reopen Hormuz. Cheaper oil helps India, which imports most of its oil."
+  },
+  {
+   "tone": "mixed",
+   "text": "US stocks fell hard on Friday (Nasdaq −2.9%), but US futures are up this morning."
+  },
+  {
+   "tone": "good",
+   "text": "FIIs bought **₹3,599 crore** of shares on Friday, a big buying day."
+  },
+  {
+   "tone": "mixed",
+   "text": "My call: a small continuation of Friday's rise is slightly more likely than a pullback, staying within 23,000 to 23,500. Low confidence."
+  }
+ ],
+ "sections": [
+  {
+   "id": "overnight",
+   "title": "What changed overnight",
+   "tone": "good",
+   "summary": "Since Friday's close the news has mostly improved, which supports Friday's rise.",
+   "points": [
+    {
+     "tone": "neutral",
+     "text": "GIFT Nifty (Nifty futures traded overseas) was near **23,260**, about flat on its own Friday close, per a pre-market report."
+    },
+    {
+     "tone": "good",
+     "text": "US futures are up after Trump said the Iran war will end soon, partly reversing Friday's −1.8% S&P 500 fall. Asia is mixed."
+    },
+    {
+     "tone": "good",
+     "text": "Oil is down **2.9%**, while US bond rates (4.93%) and the dollar are flat, so there is no new pressure from rates."
+    },
+    {
+     "tone": "good",
+     "text": "US-listed Infosys (+2.9%), HDFC Bank (+1.7%) and ICICI Bank (+1.1%) rose on Friday, which is a good sign for IT and banks."
+    }
+   ]
+  },
+  {
+   "id": "setup",
+   "title": "Bounce or continuation?",
+   "tone": "mixed",
+   "summary": "After Friday's +0.5% day, a small continuation looks slightly more likely than a pullback, with low confidence.",
+   "points": [
+    {
+     "tone": "good",
+     "text": "For more gains: oil is falling, US futures are up and FIIs bought. Option sellers also built a floor at **23,000** (68,220 new put contracts)."
+    },
+    {
+     "tone": "bad",
+     "text": "Against: only 11.1% of FII index-futures bets are on a rise, and on Friday they added bets on a fall and bought protection."
+    },
+    {
+     "tone": "mixed",
+     "text": "The put-call ratio (bets on a fall compared with bets on a rise) jumped from 0.81 to **1.42** in a week, close to the 1.5 level the dashboard calls over-excited."
+    },
+    {
+     "tone": "neutral",
+     "text": "I'm wrong if Nifty closes below 23,000 or Iran attacks ships again."
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The big picture",
+   "tone": "mixed",
+   "summary": "The dashboard sees no clear direction: price is in a sideways range.",
+   "points": [
+    {
+     "tone": "mixed",
+     "text": "Bias score is **+14** (Neutral). Option chain (+0.4) and put-call ratio (+1.0) lean up, while price trend (−0.3) and futures/FII (0.0) don't."
+    },
+    {
+     "tone": "bad",
+     "text": "Nifty (23,053) is above its 20-day average but below its 50-day (23,255) and 200-day (24,035) averages, so the longer trend is still down."
+    },
+    {
+     "tone": "mixed",
+     "text": "India VIX (the fear gauge) is 15.45, higher than 72% of the past year, but falling."
+    }
+   ]
+  },
+  {
+   "id": "investors",
+   "title": "What big investors are doing",
+   "tone": "mixed",
+   "summary": "FIIs bought shares but kept most of their bets on a fall.",
+   "points": [
+    {
+     "tone": "good",
+     "text": "FIIs bought ₹3,599 crore on Friday, after selling ₹944 crore on Thursday. Domestic funds sold ₹818 crore."
+    },
+    {
+     "tone": "bad",
+     "text": "October was still **₹30,978 crore** of FII selling, while domestic funds bought ₹46,997 crore."
+    },
+    {
+     "tone": "mixed",
+     "text": "FIIs at 11.1% long are near the under-10% zone where bets on a fall have often been closed in a rush, but there is no sign of that yet."
+    }
+   ]
+  },
+  {
+   "id": "world",
+   "title": "What the world is telling India",
+   "tone": "mixed",
+   "summary": "Oil is the biggest risk and it eased this morning, but high US interest rates still pull money away from India.",
+   "points": [
+    {
+     "tone": "bad",
+     "text": "Even after today's fall, Brent near $110 is still up about 14% in a month."
+    },
+    {
+     "tone": "mixed",
+     "text": "Iran wants sanctions relief in return for reopening Hormuz, and the US says new strikes are still possible. A deal isn't done yet."
+    },
+    {
+     "tone": "bad",
+     "text": "Six-month US Treasury bills pay 4.25%, above the Fed's 3.75–4.00% range, so the market expects **another rate hike**."
+    }
+   ]
+  },
+  {
+   "id": "results",
+   "title": "Company results",
+   "tone": "good",
+   "summary": "The big weekend results were mostly strong, led by Reliance.",
+   "points": [
+    {
+     "tone": "good",
+     "text": "Reliance profit rose **33.8%** to ₹29,550 crore, filed after Friday's close. I couldn't confirm analysts' estimates."
+    },
+    {
+     "tone": "good",
+     "text": "NTPC profit rose 40.7%, Power Grid's 8.4%, and Indian Oil's nearly tripled."
+    },
+    {
+     "tone": "bad",
+     "text": "Sun Pharma's profit fell **36%** because of a one-time loss, missing estimates of about ₹3,100 crore."
+    }
+   ]
+  },
+  {
+   "id": "ahead",
+   "title": "What could change the picture",
+   "tone": "mixed",
+   "summary": "A busy week: the US election, the Iran talks, an expiry and US jobs data.",
+   "points": [
+    {
+     "tone": "mixed",
+     "text": "US midterm elections tomorrow. Reports say fighting with Iran could restart around the vote."
+    },
+    {
+     "tone": "mixed",
+     "text": "Nifty weekly expiry tomorrow, with the biggest bets sitting at 23,000 and 23,500."
+    },
+    {
+     "tone": "mixed",
+     "text": "US jobs data on Friday (19:00 IST). Strong numbers would make another Fed hike more likely."
+    }
+   ]
+  }
+ ],
+ "levels": {
+  "ceiling": 23500,
+  "floor": 22500,
+  "note": "A close above 23,500 or below 22,500 would break the range the option sellers are defending."
+ },
+ "watch": [
+  {
+   "time": "09:15",
+   "text": "First reaction to Reliance's 33.8% profit jump."
+  },
+  {
+   "time": "",
+   "text": "ITC and Marico results; SBI tomorrow."
+  },
+  {
+   "time": "20:30",
+   "text": "US factory survey (ISM manufacturing)."
+  },
+  {
+   "time": "",
+   "text": "Any Iran or Hormuz news before the US vote."
+  }
+ ],
+ "bottom_line": "The night was good for India: oil fell, US futures rose and FIIs turned buyers. But the dashboard is only Neutral (+14) and FIIs still hold mostly bets on a fall, so this looks like a range market rather than a new uptrend. My read is a steady to slightly higher day between 23,000 and 23,500, with low confidence. The main risk is Iran: new attacks around the US vote would push oil, and Indian stocks, the other way.",
+ "sources": [
+  {
+   "title": "CNBC: US stock futures tick higher ahead of earnings, jobs data and midterms (1 Nov)",
+   "url": "https://www.cnbc.com/2026/11/01/stock-market-today-live-updates.html"
+  },
+  {
+   "title": "Benzinga: Trump says Iran war will end; Dow futures rise, Brent near $111",
+   "url": "https://www.benzinga.com/markets/economic-data/26/11/62767505/trump-iran-war-midterms-dow-futures-rise-brent-crude-111"
+  },
+  {
+   "title": "Investing.com: Iran offers 48-hour Hormuz reopening plan",
+   "url": "https://www.investing.com/news/economy-news/iran-offers-48hour-hormuz-reopening-plan-as-trump-signals-progress-in-talks-4989413"
+  },
+  {
+   "title": "CNBC: Iran claims tankers struck mines in Hormuz; strike fears after midterms (30 Oct)",
+   "url": "https://www.cnbc.com/2026/10/30/iran-trump-hormuz-oil-middle-east-.html"
+  },
+  {
+   "title": "TheStreet: Nasdaq sinks nearly 3% on Intel, Reddit results (30 Oct)",
+   "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-30-2026"
+  },
+  {
+   "title": "Yahoo Finance: Tech sell-off, Intel drops 30%, gold at one-year low (30 Oct)",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-nasdaq-p-123540419.html"
+  },
+  {
+   "title": "ScanX: Trade setup, GIFT Nifty steady (2 Nov)",
+   "url": "https://scanx.trade/stock-market-news/markets/market-today-morning-bell-update-nifty50-share-price-sensex-share-price-crude-fii-gift-nifty-rupee-latest-02-11-2026/55132245"
+  },
+  {
+   "title": "Reliance Q2 FY27 results filing (NSE)",
+   "url": "https://nsearchives.nseindia.com/corporate/kavinavora_30102026194315_SE_30102026_MR.pdf"
+  },
+  {
+   "title": "NTPC Q2 FY27 results filing (NSE)",
+   "url": "https://nsearchives.nseindia.com/corporate/9425178051_31102026144738_QFRQ2FY27_Final.pdf"
+  },
+  {
+   "title": "Hans India: Sun Pharma Q2 profit drops 36% on one-time loss",
+   "url": "https://www.thehansindia.com/business/sun-pharmas-q2-profit-drops-36-pc-to-rs-1989-crore-on-one-time-loss-1137501"
+  },
+  {
+   "title": "Upstox: Q2 results on 2 Nov (ITC, Marico, NALCO and others)",
+   "url": "https://upstox.com/news/market-news/earnings/q2-results-nov-2-itc-marico-nalco-upl-nlc-india-tata-investment-corp-esds-software-solution-others-to-post-earnings/article-202773/"
+  },
+  {
+   "title": "Nifty Positioning Desk data (NSE, CNBC quotes, NY Fed), built 2 Nov 08:49 IST",
+   "url": "https://github.com/prathamgupta0051-arch/nifty-desk"
+  }
+ ]
+}
