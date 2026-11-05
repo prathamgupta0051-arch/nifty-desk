@@ -1,0 +1,242 @@
+{
+  "version": 2,
+  "date": "2026-11-05",
+  "generated": "08:55 IST",
+  "headline": "Nifty is set to open about 1.3% higher, near 24,280, as oil keeps falling and US stocks jumped. The test is whether it holds above 24,000.",
+  "mood": {
+    "label": "Positive",
+    "tone": "good",
+    "confidence": "Medium",
+    "why": "The dashboard scores a mildly bullish +24, but only 1 of 4 checks clearly agrees, so most of today's lift comes from overnight news. Overnight data as of 08:46 IST."
+  },
+  "key_points": [
+    {
+      "tone": "good",
+      "text": "GIFT Nifty (Nifty futures traded overnight) was near **24,280** early today, about 1.3% above yesterday's close of 23,960."
+    },
+    {
+      "tone": "good",
+      "text": "Brent crude is at $94, down about **18% this week** on US–Iran deal hopes. Cheaper oil helps India, which imports most of its oil."
+    },
+    {
+      "tone": "good",
+      "text": "FIIs (foreign investors) bought a net **₹7,284 crore** yesterday, more than twice their normal day, and their fourth buying day in a row."
+    },
+    {
+      "tone": "mixed",
+      "text": "My call: the rise likely **continues at the open**, but it may stall between 24,300 and 24,500. Asia's chip sell-off is the main risk."
+    }
+  ],
+  "sections": [
+    {
+      "id": "overnight",
+      "title": "What changed overnight",
+      "tone": "good",
+      "summary": "Mostly better news overnight, which supports yesterday's rise.",
+      "points": [
+        {
+          "tone": "good",
+          "text": "The S&P 500 rose **1.6%** and the Dow about 3% after Democrats won Congress and oil fell. US futures are flat now."
+        },
+        {
+          "tone": "good",
+          "text": "Indian shares in the US rose: the India ETF **2.7%**, HDFC Bank 5.6%, ICICI Bank 3.8% and Infosys 2.6%."
+        },
+        {
+          "tone": "good",
+          "text": "The US 10-year bond rate fell to 4.85%, down **0.20 points this week**, and the dollar slipped 0.3%. Both tend to pull foreign money into India."
+        },
+        {
+          "tone": "bad",
+          "text": "Korea is down **3.5%**, Taiwan 1.3% and Nasdaq 100 futures 0.6%, as traders move out of chip and AI stocks."
+        }
+      ]
+    },
+    {
+      "id": "setup",
+      "title": "Bounce or continuation?",
+      "tone": "mixed",
+      "summary": "Continuation at the open, with medium confidence it holds all day.",
+      "points": [
+        {
+          "tone": "good",
+          "text": "For continuation: good news overnight and steady FII buying. FIIs hold only **13.6%** of their index futures as bets on a rise, so many bets on a fall could be closed in a hurry."
+        },
+        {
+          "tone": "mixed",
+          "text": "Against: Nifty is up about **6%** in two weeks, and domestic funds (DIIs) sold ₹3,712 crore yesterday, which looks like profit-taking."
+        },
+        {
+          "tone": "bad",
+          "text": "Professional traders cut their bets on a rise in index futures by **11 points** yesterday, so some fast money expects a pullback."
+        },
+        {
+          "tone": "mixed",
+          "text": "What would prove me wrong: Nifty falling back below **24,000** in the first hour, or Asia's chip sell-off spreading here."
+        }
+      ]
+    },
+    {
+      "id": "picture",
+      "title": "The big picture",
+      "tone": "mixed",
+      "summary": "The trend is improving, but it isn't confirmed yet.",
+      "points": [
+        {
+          "tone": "good",
+          "text": "Nifty is above its 20-day and 50-day averages, and today's open should lift it above the **200-day average (24,004)**, the long-term trend line."
+        },
+        {
+          "tone": "neutral",
+          "text": "Swings are still a sideways range (a lower high but a higher low), so the price-trend score is only +0.33."
+        },
+        {
+          "tone": "good",
+          "text": "Traders sold many puts (bets on a fall) at 23,400–23,900, which builds a floor. The option score of **+1.26** is the strongest check."
+        },
+        {
+          "tone": "mixed",
+          "text": "India VIX (the fear gauge) is 15.3, at the **70th percentile** of the past year, so options are fairly expensive. The put-call ratio (bets on a fall vs bets on a rise) is a calm 1.15."
+        }
+      ]
+    },
+    {
+      "id": "investors",
+      "title": "What big investors are doing",
+      "tone": "good",
+      "summary": "Foreign investors are buying while domestic funds take profits.",
+      "points": [
+        {
+          "tone": "good",
+          "text": "FIIs have bought **₹17,236 crore** so far in November."
+        },
+        {
+          "tone": "mixed",
+          "text": "DIIs have sold ₹7,783 crore this month. Domestic funds are selling into foreign buying, the reverse of October."
+        },
+        {
+          "tone": "mixed",
+          "text": "FIIs still have far more futures bets on a fall than on a rise, but that gap shrank by **16,778** contracts yesterday."
+        }
+      ]
+    },
+    {
+      "id": "world",
+      "title": "What the world is telling India",
+      "tone": "good",
+      "summary": "Cheaper oil helps most. The US Fed is still a risk.",
+      "points": [
+        {
+          "tone": "good",
+          "text": "Oil fell after Iran offered to reopen the Strait of Hormuz and restart talks, but it rests on **hopes, not a signed deal**."
+        },
+        {
+          "tone": "good",
+          "text": "The rupee has gained **1.9%** against the dollar in a month, which makes Indian shares more attractive to foreign buyers."
+        },
+        {
+          "tone": "bad",
+          "text": "Six-month US Treasury bills pay **4.25%**, above the Fed's 3.88% rate. This suggests markets still expect a US rate rise."
+        }
+      ]
+    },
+    {
+      "id": "results",
+      "title": "Company results",
+      "tone": "good",
+      "summary": "Yesterday's results looked strong, but I couldn't confirm what analysts expected.",
+      "points": [
+        {
+          "tone": "good",
+          "text": "Apollo Hospitals: profit up **33.5%** from a year ago and revenue up 20.8%."
+        },
+        {
+          "tone": "good",
+          "text": "BSE Ltd: profit up **45%**, revenue up 34%."
+        },
+        {
+          "tone": "mixed",
+          "text": "Zydus Lifesciences: revenue up 29%, but profit down **25%**. Hindalco reports on 6 November and Tata Steel on 7 November."
+        }
+      ]
+    },
+    {
+      "id": "ahead",
+      "title": "What could change the picture",
+      "tone": "mixed",
+      "summary": "US jobs data, oil and a holiday-broken week.",
+      "points": [
+        {
+          "tone": "mixed",
+          "text": "US jobs report on Friday at **19:00 IST**. Strong numbers could revive fears of a US rate rise."
+        },
+        {
+          "tone": "bad",
+          "text": "If the US–Iran talks fail, oil could bounce fast. Brent has traded between **$72 and $126** since the war began."
+        },
+        {
+          "tone": "neutral",
+          "text": "There's a weekly expiry on 9 November, then a market holiday on 10 November. India CPI inflation comes out on 12 November."
+        }
+      ]
+    }
+  ],
+  "levels": {
+    "ceiling": 24500,
+    "floor": 23500,
+    "note": "Call sellers moved their wall up from 24,000 to 24,500. A close above 24,500 would mean they gave up; a close below 23,500 would break the floor."
+  },
+  "watch": [
+    {
+      "time": "09:15",
+      "text": "Does the gap-up hold above **24,000**?"
+    },
+    {
+      "time": "",
+      "text": "IT stocks: the Infosys gain in the US vs the chip sell-off in Asia."
+    },
+    {
+      "time": "",
+      "text": "Brent crude. Back above $100 would hurt paints, airlines and oil marketers."
+    },
+    {
+      "time": "19:30",
+      "text": "FII/DII figures. A fifth day of FII buying would support the rally."
+    }
+  ],
+  "bottom_line": "The night was clearly good for India: cheaper oil, strong US stocks, lower US bond rates and heavy FII buying. The dashboard is only mildly bullish (+24, 1 of 4 checks agreeing), so today's strength comes from news, not a confirmed trend. The main risks are a stall near 24,500 and Asia's chip sell-off spreading.",
+  "sources": [
+    {
+      "title": "Kotak Neo pre-market, 5 Nov 2026 (GIFT Nifty 24,270.50 at 7:58 am)",
+      "url": "https://www.kotakneo.com/news/market-news/pre-market-5-november-2026-gift-nifty-hints-at-gap-up-opening/"
+    },
+    {
+      "title": "Business Standard live blog, 5 Nov 2026 (GIFT Nifty, Brent, Kospi)",
+      "url": "https://www.business-standard.com/markets/news/stock-market-live-november-5-nse-bse-sensex-today-nifty50-gift-nifty-crude-oil-prices-ipo-today-126110500085_1.html"
+    },
+    {
+      "title": "Business Standard: market close, 4 Nov 2026",
+      "url": "https://www.business-standard.com/amp/markets/news/stock-market-live-november-4-nse-bse-sensex-today-nifty50-gift-nifty-crude-oil-prices-q2-results-ipo-today-126110400107_1.html"
+    },
+    {
+      "title": "CNBC: Dow soars 1,500 points on Democratic win and falling oil",
+      "url": "https://www.cnbc.com/2026/11/03/stock-market-today-live-updates.html"
+    },
+    {
+      "title": "Invezz: Brent falls below $100 on Iran deal hopes",
+      "url": "https://invezz.com/ng/news/2026/11/04/brent-crude-price-falls-below-dollar100-as-iran-deal-hopes-outweigh-eia-draw/"
+    },
+    {
+      "title": "Gulf News: crude slides as Trump rules out immediate Iran strikes",
+      "url": "https://gulfnews.com/business/energy/crude-slides-toward-93-wti-drops-to-87-as-trump-rules-out-immediate-iran-strikes-1.500736498"
+    },
+    {
+      "title": "BusinessToday: Brent plunges 18% this week",
+      "url": "https://www.businesstoday.in/markets/stocks/story/brent-oil-price-plunges-18-this-week-stock-market-impact-stocks-to-watch-565783-2026-11-05"
+    },
+    {
+      "title": "Dashboard data files (NSE, NSDL, CNBC quotes, New York Fed)",
+      "url": "https://github.com/prathamgupta0051-arch/nifty-desk"
+    }
+  ]
+}
