@@ -1,0 +1,100 @@
+{
+  "version": 2,
+  "date": "2026-11-10",
+  "generated": "08:55 IST",
+  "headline": "Indian markets are **closed today** (Tuesday) for Diwali-Balipratipada. The night brought clearly good news: US stocks jumped over 2%, Asia is rising and oil fell about 6%, so Wednesday's open looks set to start higher, but US inflation data tonight can still change that.",
+  "mood": {"label": "Positive", "tone": "good", "confidence": "Medium",
+           "why": "The dashboard scores +30 (mildly bullish) with 3 of 4 checks agreeing, and the night's news supports it; options are expensive and fear is rising, which keeps confidence at medium. Overnight data as of 08:47 IST."},
+  "key_points": [
+    {"tone": "neutral", "text": "NSE and BSE are shut today for Diwali-Balipratipada. Everything below is about **Wednesday's open**, and global markets have one more day to move before then."},
+    {"tone": "good", "text": "Since India closed on Monday, the S&P 500 rose **2.3%**, Korea's Kospi is up 4.6%, Japan's Nikkei 1.7%, and Brent crude fell 5.7% to about $92. All of this is good for Indian stocks."},
+    {"tone": "good", "text": "FIIs (foreign funds) bought **₹7,212 crore** of Indian shares on Monday, almost 2 times their normal daily amount. They have bought about ₹53,000 crore so far in November."},
+    {"tone": "mixed", "text": "My call: the rally is more likely to **continue at Wednesday's open** than to reverse, with medium confidence. A hot US inflation number tonight is the main thing that could prove this wrong."},
+    {"tone": "mixed", "text": "Nifty has climbed about 10% in eight sessions to 25,045, its highest close in over eight months. Domestic funds are selling into the rise, so the market is stretched and quick dips are possible."}
+  ],
+  "sections": [
+    {"id": "overnight", "title": "What changed overnight", "tone": "good",
+     "summary": "The night brought better news for India, and it supports Monday's small gain and the bigger rally before it.",
+     "points": [
+       {"tone": "good", "text": "US stocks had their best day since April: S&P 500 **+2.35%**, Nasdaq +2.74%. Reports say lower oil and a bounce after last week's tech sell-off drove it. US futures are up a little more (+0.1% to +0.3%)."},
+       {"tone": "good", "text": "Asia is following: Korea **+4.6%** and Japan +1.7% this morning, led by chip stocks. Hong Kong, China and Taiwan had no fresh figures in the data yet."},
+       {"tone": "good", "text": "Brent crude is down **5.7%** since India closed, to about $91.8. Reuters-linked reports say this came after President Trump said he would hold off new strikes on Iran. India buys most of its oil, so cheaper oil helps."},
+       {"tone": "mixed", "text": "US-listed Indian shares: HDFC Bank **+2.7%**, ICICI Bank +1.7%, India ETF +1.0%, which is good for banks. But Infosys and Wipro fell about 0.9%, so IT may lag."},
+       {"tone": "neutral", "text": "The US 10-year bond rate (4.87%), the dollar and gold barely moved. I couldn't confirm a reliable current GIFT Nifty figure (the overnight indicator for India's open), so I can't give its exact signal."}
+     ]},
+    {"id": "setup", "title": "Bounce or continuation?", "tone": "mixed",
+     "summary": "After a big up run, I think continuation at Wednesday's open is more likely than a pullback, with medium confidence.",
+     "points": [
+       {"tone": "good", "text": "For continuation: overnight news is positive across the board, FIIs are still buying in big amounts, and futures show **new buying** (price up with more open contracts on Monday)."},
+       {"tone": "good", "text": "FIIs still hold more bets on a fall than on a rise in index futures: only **27% long**, up from 10.6% a week ago. If they keep closing those bets, it adds fuel to the rise."},
+       {"tone": "bad", "text": "For a pause: Nifty is up about **10% in eight sessions**, and domestic funds sold ₹7,173 crore on Monday, almost exactly matching FII buying. Reports also say Nifty fell sharply during Monday before recovering."},
+       {"tone": "bad", "text": "India VIX (the fear gauge) is rising (**17.4**, higher than 79% of the past year) even as prices rise. That is unusual and means traders are paying more for protection."},
+       {"tone": "mixed", "text": "What would prove me wrong: US core inflation above the 0.2% monthly forecast tonight, oil jumping back up, or Nifty closing below **25,000** on Wednesday."}
+     ]},
+    {"id": "picture", "title": "The big picture", "tone": "good",
+     "summary": "The dashboard reads mildly bullish (+30 out of 100), with three of four checks agreeing.",
+     "points": [
+       {"tone": "good", "text": "Price trend: Nifty is above its 20-, 50- and 200-day averages (23,374, 23,283 and **23,988**). The swing pattern is still read as a sideways range, so this step scores +1 of 2."},
+       {"tone": "good", "text": "Futures: on Monday the price rose and open contracts rose **1.8%**, which the dashboard reads as new buying (+1.25). Over 5 sessions, contracts fell 14% as price rose, a sign that much of the rally came from bears closing their bets."},
+       {"tone": "good", "text": "Option chain: sellers of put options (people betting Nifty won't fall below a level) added the most at **25,000** and 24,900. The dashboard reads this as bullish (+1.1)."},
+       {"tone": "bad", "text": "Put-call ratio (bets on a fall compared with bets on a rise) slid from 1.40 to **1.23** in 5 sessions. The dashboard reads this as put sellers pulling back, a bearish sign (−1), and the one check that disagrees."},
+       {"tone": "mixed", "text": "Volatility is **high** (79th percentile) and rising, so option prices are expensive. Big swings both ways are more likely than usual."}
+     ]},
+    {"id": "investors", "title": "What big investors are doing", "tone": "good",
+     "summary": "Foreign funds are buying heavily while domestic funds take profits, and FIIs still have bets on a fall left to close.",
+     "points": [
+       {"tone": "good", "text": "FIIs bought **₹7,212 crore** net on Monday. Their normal daily flow over the last 20 days was about ₹3,750 crore, so this was a large day."},
+       {"tone": "good", "text": "FII buying this month totals about **₹53,200 crore**. News reports say global investors are moving money out of AI-linked stocks abroad and into India, seen as a non-AI market with steady earnings."},
+       {"tone": "mixed", "text": "Domestic funds (DIIs) sold **₹7,173 crore** on Monday and about ₹32,000 crore this month. They are selling into the rally, which could cap gains if FII buying slows."},
+       {"tone": "mixed", "text": "FIIs remain net short **90,741** index-futures contracts, but they cut that by 9,675 on Monday. They are slowly turning less negative, not yet positive."},
+       {"tone": "good", "text": "NSDL data for late October showed FIIs bought IT (**₹10,915 crore**) and telecom (₹11,065 crore) and sold FMCG, autos and oil & gas. This is older data and may not match this month's buying."}
+     ]},
+    {"id": "world", "title": "What the world is telling India", "tone": "good",
+     "summary": "Cheaper oil and calmer markets help India, but a likely US rate hike is the main worry.",
+     "points": [
+       {"tone": "good", "text": "Brent crude is down about **12%** in a month. Cheaper oil lowers India's import bill and inflation and helps companies that use fuel, like airlines and paint makers."},
+       {"tone": "good", "text": "The rupee has strengthened about **2.9%** against the dollar in a month (₹93.93 per dollar), and the US 10-year bond rate is down 0.36 points. Both make India more attractive to foreign money."},
+       {"tone": "bad", "text": "The data shows US 6-month bills pay 0.38 points more than the Fed's rate, which means markets expect the **Fed to raise rates**. Reports put the chance of a December hike at roughly 75–85%. Higher US rates can pull money out of India."},
+       {"tone": "mixed", "text": "Nvidia fell about **4%** on Monday after its board began investigating CEO Jensen Huang over a relationship with an alleged foreign spy. It didn't stop the wider rally, but it adds risk to AI stocks."},
+       {"tone": "neutral", "text": "The dashboard's overall global reading is **Tailwinds**: 4 factors help India, 2 hurt it."}
+     ]},
+    {"id": "results", "title": "Company results", "tone": "good",
+     "summary": "Most Nifty 50 companies that reported this week showed strong profit growth.",
+     "points": [
+       {"tone": "good", "text": "Hindalco's profit rose **59%** and revenue 39% from last year. Reports disagree on whether the stock rose or fell after it, so I couldn't confirm the market's reaction."},
+       {"tone": "good", "text": "Titan's profit more than doubled (**+114%**), and Bharti Airtel (+24%), ONGC (+47%) and Apollo Hospitals (+34%) also rated Strong on the dashboard's rule."},
+       {"tone": "neutral", "text": "Tata Steel's profit grew **16%** on 11.5% higher revenue, an in-line result. I couldn't find reliable reporting on how the stock reacted."},
+       {"tone": "neutral", "text": "The data shows M&M's figures as zero growth, which looks like a data problem, so I couldn't judge its result."},
+       {"tone": "mixed", "text": "Next Nifty 50 results: **Eicher Motors**, Grasim and Tata Motors Passenger Vehicles on Friday, 13 November."}
+     ]},
+    {"id": "ahead", "title": "What could change the picture", "tone": "mixed",
+     "summary": "Two inflation reports this week, US tonight and India on Thursday, are the big tests for the rally.",
+     "points": [
+       {"tone": "mixed", "text": "**US inflation tonight (7 pm IST)**: forecasts are +0.3% for the month overall and +0.2% for core prices (excluding food and fuel). A higher number would raise the chance of a US rate hike and could undo some of the overnight gains."},
+       {"tone": "mixed", "text": "**India's CPI inflation on Thursday, 12 November, 4 pm**: lower oil should help. A low number would support hopes for easier RBI policy at its 4 December meeting."},
+       {"tone": "mixed", "text": "US producer prices on Friday, then the Nifty weekly expiry on **17 November** and the monthly expiry on 23 November, when options-related swings can get bigger."},
+       {"tone": "bad", "text": "If FII buying slows while domestic funds keep selling, the rally could stall. Watch whether FIIs stay net buyers on Wednesday."},
+       {"tone": "neutral", "text": "The Fed's next decision lands around midnight IST on **10 December**, and markets expect a hike."}
+     ]}
+  ],
+  "levels": {"ceiling": 25500, "floor": 25000, "note": "A close above 25,500 would break the biggest wall of call sellers and open more room up; a close below 25,000 would break the main put-seller floor, just 45 points under Monday's close, and suggest the rally is tiring."},
+  "watch": [
+    {"time": "14:30", "text": "Fed Governor Waller speaks. Any hint of a December rate hike matters for foreign flows."},
+    {"time": "19:00", "text": "US inflation (CPI) for October. Core above 0.2% would be bad news for Wednesday's open."},
+    {"time": "", "text": "Oil overnight: Brent staying near $92 or lower helps; a jump back toward $97 would hurt."},
+    {"time": "09:15", "text": "Wednesday open: does Nifty hold above 25,000, and do FIIs keep buying?"},
+    {"time": "", "text": "Nvidia and chip stocks in the US: a deeper AI sell-off has been pushing global money toward India."}
+  ],
+  "bottom_line": "Indian markets are closed today, and the night brought good news: strong US and Asian markets, much cheaper oil and gains in US-listed Indian banks. The dashboard is mildly bullish (+30, 3 of 4 checks agree), and heavy FII buying supports it, so a higher start on Wednesday looks more likely than a fall. Confidence is medium because Nifty has already run up about 10% in eight sessions, domestic funds are selling, and fear (VIX) is rising. The main risk is a hot US inflation number tonight, which would boost US rate-hike bets and could erase the overnight gains before India reopens.",
+  "sources": [
+    {"title": "NSE holiday: 10 Nov 2026, Diwali-Balipratipada (Angel One)", "url": "https://www.angelone.in/news/market-updates/stock-market-nse-bse-holidays-this-month-november-2026"},
+    {"title": "Wall Street rally on 9 Nov (CNBC live updates)", "url": "https://www.cnbc.com/2026/11/08/stock-market-today-live-updates.html"},
+    {"title": "Nvidia falls as board probes CEO (CNBC)", "url": "https://www.cnbc.com/2026/11/09/nvidia-jensen-huang-chinese-spy-investigation.html"},
+    {"title": "Asian stocks climb as oil slides (Reuters via Investing.com)", "url": "https://www.investing.com/news/economy-news/asian-stocks-climb-as-sliding-oil-prices-buoy-sentiment-5013939"},
+    {"title": "Sensex, Nifty close at 8-month highs on 9 Nov (Kotak Neo)", "url": "https://www.kotakneo.com/news/market-news/sensex-and-nifty-make-maginal-gains/"},
+    {"title": "Global AI sell-off brings FPIs back to India (ANI via Tribune)", "url": "https://www.tribuneindia.com/news/business/global-ai-sell-off-triggers-fpi-return-to-indian-markets-rs-38971-crore-equity-inflows-this-week"},
+    {"title": "US CPI preview (investingLive)", "url": "https://investinglive.com/stocks/us-cpi-preview-energy-set-to-lift-inflation-to-3-7-core-seen-steady-at-2-4/"},
+    {"title": "Hindalco Q2 FY27 results (Kotak Neo)", "url": "https://www.kotakneo.com/news/stocks/hindalco-q2-fy-27-results-shares-in-focus/"},
+    {"title": "Dashboard data: published_data.json and published_context.json, updated 10 Nov 08:47 IST", "url": "https://github.com/prathamgupta0051-arch/nifty-desk"}
+  ]
+}
