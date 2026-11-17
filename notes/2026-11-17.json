@@ -1,0 +1,97 @@
+{
+  "version": 2,
+  "date": "2026-11-17",
+  "generated": "08:58 IST",
+  "headline": "US stocks fell hard overnight on an AI-chip selloff, but India looks set to open flat: oil fell almost 4% and foreign investors have been buying Indian shares for days. Today is a weekly expiry day, so expect choppy moves between about 25,000 and 25,500.",
+  "mood": {"label": "Mixed", "tone": "mixed", "confidence": "Low",
+           "why": "The price trend is strongly up, but the put-call ratio dropped and option sellers have capped 25,500, so the dashboard's score is +16.5, just short of bullish, with only 1 of 4 steps agreeing. Overnight data as of 08:46 IST."},
+  "key_points": [
+    {"tone": "bad", "text": "Overnight the US Nasdaq fell **2.5%** and chip stocks fell about 5%, and Asian markets are down 0.5–1.6% this morning. This is the main risk to the open."},
+    {"tone": "good", "text": "Brent crude has fallen **3.9%** since India closed, to $91.7. India imports most of its oil, so cheaper oil helps prices, the rupee and company costs."},
+    {"tone": "good", "text": "Foreign investors (FIIs) bought **₹4,865 crore** of Indian shares on Monday, their 5th straight day of buying, and about ₹84,000 crore so far in November."},
+    {"tone": "mixed", "text": "My call: a **flat, sideways day** is more likely than a fall or a new high, with low confidence. India has been shrugging off global selling, but the rally is stretched and today is expiry day."}
+  ],
+  "sections": [
+    {"id": "overnight", "title": "What changed overnight", "tone": "mixed",
+     "summary": "The night was bad for world stocks but good for oil, and the early signal for India is a flat open, so it neither undoes nor extends Monday's 0.6% gain.",
+     "points": [
+       {"tone": "neutral", "text": "GIFT Nifty (an overnight Nifty contract traded in Gujarat) was about **25,290–25,300** before 9 am, almost exactly where Nifty closed (25,291). Markets are pointing to a flat start."},
+       {"tone": "bad", "text": "US stocks: S&P 500 fell 1.9% and Nasdaq **2.5%**. Reports blame Nvidia's leadership turmoil after its CEO quit, new US limits on AI chip sales to China, and Fed Chair Warsh warning that an AI bust could cost jobs."},
+       {"tone": "mixed", "text": "US futures are flat to slightly up this morning (Nasdaq futures **+0.4%**), so the selling has paused. They are still about 1.5% below where they were when India closed."},
+       {"tone": "bad", "text": "Asia is lower: Taiwan **−1.6%**, Japan −1.2%, Korea −1.1%, Hong Kong −0.9%. These are chip-heavy markets, which India is not."},
+       {"tone": "good", "text": "Brent crude fell **3.9%** since India's close, on fears of too much oil supply. US bond rates, the dollar and the rupee (93.92 per dollar) barely moved overnight."}
+     ]},
+    {"id": "setup", "title": "Bounce or continuation?", "tone": "mixed",
+     "summary": "After a strong up day, I expect a sideways session today rather than more gains or a sharp drop, with low confidence.",
+     "points": [
+       {"tone": "good", "text": "For more upside: FIIs keep buying in cash, oil is falling, and Monday India rose even though Korea fell 3.6%. India is being treated as a place to hide from the AI selloff. HDFC Bank's US shares even rose **1.8%** overnight."},
+       {"tone": "good", "text": "Nifty futures rose while open bets fell **2.2%**. That means people who had bet on a fall were closing those bets, which pushes prices up."},
+       {"tone": "bad", "text": "For a pause or dip: Nifty is **6%** above its 20-day average after rising from about 22,700 to 25,291 in three weeks. That is a fast move and close to the last high of 25,424."},
+       {"tone": "bad", "text": "FIIs stopped adding new bets on a rise in index futures: their long share stayed at **34%** on Monday after jumping from 10.6% on 2 November."},
+       {"tone": "mixed", "text": "What would prove me wrong: a close above **25,500** with FIIs adding new rise bets means the rally is continuing. A close below 25,000 means a real pullback has started."}
+     ]},
+    {"id": "picture", "title": "The big picture", "tone": "mixed",
+     "summary": "The trend is clearly up, but option traders are less confident than a week ago.",
+     "points": [
+       {"tone": "good", "text": "Nifty is above its 20-, 50- and 200-day averages and is making higher highs and higher lows. The trend check gets the **maximum score (+2)**."},
+       {"tone": "bad", "text": "The put-call ratio (bets on a fall compared with bets on a rise) dropped from 1.47 to **1.03** in five sessions. The dashboard reads this as fewer people willing to back the market with sold puts."},
+       {"tone": "mixed", "text": "Option sellers built a ceiling at **25,500** (the most call bets) and a floor at 25,000 (the most put bets). Neither level moved on Monday."},
+       {"tone": "mixed", "text": "Fresh puts were sold at 25,200 and 25,300, which supports the market. But traders also bought puts at 24,800–25,000 as protection, so the option data is **slightly negative** overall."},
+       {"tone": "neutral", "text": "India VIX (expected swings) is 15.7, higher than 71% of the past year but falling. Options are fairly expensive."}
+     ]},
+    {"id": "investors", "title": "What big investors are doing", "tone": "good",
+     "summary": "Foreign money is coming in fast while Indian funds are taking profit.",
+     "points": [
+       {"tone": "good", "text": "FIIs bought a net **₹4,865 crore** in cash shares on Monday. That is about their average daily size lately, and their 5th buying day in a row."},
+       {"tone": "mixed", "text": "Domestic funds (DIIs) sold **₹3,519 crore**. They have sold about ₹52,600 crore this month while FIIs bought about ₹84,200 crore, which is the reverse of October."},
+       {"tone": "mixed", "text": "In index futures, FIIs still hold about **2 bets on a fall for every 1 on a rise** (34% long). There is room to close more of those fall bets, which could support prices, but they did not do so on Monday."},
+       {"tone": "neutral", "text": "Reports link the buying to cheaper oil, better earnings and investors leaving crowded AI stocks. FIIs are still net sellers for 2026 overall, so the buying could reverse quickly."}
+     ]},
+    {"id": "world", "title": "What the world is telling India", "tone": "mixed",
+     "summary": "Cheaper oil helps India, but high US bond rates and the AI selloff are real risks.",
+     "points": [
+       {"tone": "good", "text": "Brent is down **16.5%** in a month. This is the single biggest help for India right now and the main reason the dashboard's world check reads favourable."},
+       {"tone": "bad", "text": "The US 10-year bond rate is 5.13%, up **0.27 points** this week. When US bonds pay this much, foreign money has less reason to buy Indian shares."},
+       {"tone": "bad", "text": "Short-term US bond prices suggest the market now expects the Fed's **next move to be a rate hike**, not a cut. That would usually pull money away from countries like India."},
+       {"tone": "bad", "text": "The US fear gauge (VIX) jumped **19%** to 22.9. When US investors get scared, they often sell abroad too."},
+       {"tone": "good", "text": "The rupee is about 1.1% stronger than a month ago at **93.92** per dollar, which makes Indian shares worth more to foreign investors."}
+     ]},
+    {"id": "results", "title": "Company results", "tone": "mixed",
+     "summary": "Recent Nifty 50 results are a mixed bag, and most big reporting is now done.",
+     "points": [
+       {"tone": "good", "text": "Eicher Motors: revenue up 20%, profit up **15%** from a year ago. That is solid, though it does not meet the dashboard's 'strong' bar of 20%."},
+       {"tone": "bad", "text": "Grasim: revenue up 26% but profit down **31%**, so costs grew much faster than sales."},
+       {"tone": "bad", "text": "Tata Motors Passenger Vehicles made a loss of about **₹5,451 crore**. The year-ago profit was inflated by a one-time gain from splitting the company, so the 107% fall exaggerates the problem. I couldn't confirm how the stock reacted."},
+       {"tone": "neutral", "text": "No Nifty 50 company reports in the next week. The big result to watch is **Nvidia**, after the US close tonight (early Wednesday in India)."}
+     ]},
+    {"id": "ahead", "title": "What could change the picture", "tone": "mixed",
+     "summary": "The next few days are about US tech and US rates more than India's own news.",
+     "points": [
+       {"tone": "mixed", "text": "Nvidia's results come early Wednesday India time. A good report could calm the AI selloff. A bad one could drag world markets lower again, though India has been holding up."},
+       {"tone": "mixed", "text": "US retail sales at **7 pm IST** today and Fed meeting minutes at 12:30 am Thursday IST. Strong numbers would add to fears of a US rate hike."},
+       {"tone": "neutral", "text": "The monthly F&O expiry is on **23 November**, and markets are shut on 24 November for Guru Nanak Jayanti."},
+       {"tone": "neutral", "text": "India GDP on 30 November, RBI policy on **4 December**, Fed decision early 10 December IST."},
+       {"tone": "bad", "text": "If FIIs turn sellers again, it would undo the main reason for the rally, especially with domestic funds already selling."}
+     ]}
+  ],
+  "levels": {"ceiling": 25500, "floor": 25000, "note": "A close above 25,500 would mean call sellers have given up and the rally is extending. A close below 25,000 would break the main support and point to a deeper pullback."},
+  "watch": [
+    {"time": "09:15", "text": "The first 15 minutes: does Nifty hold near 25,290, or do Asia's losses pull it down?"},
+    {"time": "15:30", "text": "Weekly expiry close: option bets at 25,200–25,500 can cause sharp moves late in the day."},
+    {"time": "18:00", "text": "Provisional FII and DII figures: a 6th day of FII buying would support the rally."},
+    {"time": "19:00", "text": "US retail sales: strong numbers would push US bond rates higher, which is bad for foreign flows into India."},
+    {"time": "", "text": "Nvidia results after the US close (early Wednesday India time)."}
+  ],
+  "bottom_line": "The trend is up and foreign money is flowing in, helped by much cheaper oil. But the dashboard's checks don't agree (score +16.5, just short of bullish, with low conviction): option traders have capped 25,500 and the put-call ratio has dropped. With US tech falling and the GIFT Nifty flat, my read is a sideways expiry day between 25,000 and 25,500. The main risk is the AI selloff spreading, or a bad Nvidia report, turning FIIs back into sellers.",
+  "sources": [
+    {"title": "Business Standard: Stock Market LIVE, 17 Nov (GIFT Nifty, Asia)", "url": "https://business-standard.com/markets/news/stock-market-live-november-17-nse-bse-sensex-today-nifty50-gift-nifty-crude-oil-prices-bse-share-price-126111700071_1.html"},
+    {"title": "Business Standard: Market close, 16 Nov", "url": "https://www.business-standard.com/amp/markets/news/stock-market-live-nse-bse-sensex-today-nifty50-gift-nifty-crude-oil-prices-november-16-126111600051_1.html"},
+    {"title": "CNN: Stocks slide to kick off major week for Wall Street", "url": "https://www.cnn.com/2026/11/16/business/stocks-nvidia-ai-anthropic"},
+    {"title": "Korea Times: Wall Street slumps on AI jitters ahead of Nvidia results", "url": "https://www.koreatimes.co.kr/world/20261117/nasdaq-sp-500-fall-over-1-in-run-up-to-nvidia-results-anthropic-debut"},
+    {"title": "The Star / Reuters: Asia shares slide on tech weakness ahead of Nvidia earnings", "url": "https://www.thestar.com.my/business/business-news/2026/11/17/asia-shares-slide-on-tech-weakness-ahead-of-nvidia-earnings"},
+    {"title": "Oilprice.com: Oil prices fall as fears of a global supply glut return", "url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Fall-as-Fears-of-a-Global-Supply-Glut-Return.html"},
+    {"title": "Kotak Neo: FII buying in November 2026 crosses ₹84,000 crore", "url": "https://www.kotakneo.com/news/market-news/fiis-buy-84290-crore-in-november-after-two-months-of-selling/"},
+    {"title": "Upstox: What's driving the FII inflows", "url": "https://upstox.com/news/market-news/stocks/fii-s-pump-22-693-crore-into-indian-equities-after-5-day-buying-streak-what-s-driving-the-massive-inflows/article-203137/"},
+    {"title": "Nifty Positioning Desk data (NSE, CNBC, NY Fed feeds), 17 Nov 08:46 IST", "url": "https://github.com/prathamgupta0051-arch/nifty-desk"}
+  ]
+}
