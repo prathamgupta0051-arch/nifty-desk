@@ -1,0 +1,94 @@
+{
+  "version": 2,
+  "date": "2026-11-24",
+  "generated": "08:58 IST",
+  "headline": "Indian markets are **closed today** (Guru Nanak Jayanti). Since Monday's 1.75% fall, the world has turned sharply better: US stocks jumped 4.7% and Asia is up strongly. The next Indian session on Wednesday 25 Nov is more likely to bounce than keep falling.",
+  "mood": {"label": "Positive", "tone": "good", "confidence": "Medium",
+           "why": "The dashboard itself is neutral (bias +17 out of 100, only 1 of 4 checks agree, low conviction) because the price trend is strong but FIIs added big bets on a fall; the overnight global rebound tips my read to positive for Wednesday. Overnight data as of 08:46 IST."},
+  "key_points": [
+    {"tone": "neutral", "text": "NSE and BSE are **shut today, 24 Nov**, for Guru Nanak Jayanti. Trading resumes Wednesday, so two nights of world news will be priced in at once."},
+    {"tone": "good", "text": "Overnight, the S&P 500 rose **4.7%** and the Nasdaq 6.5% after Nvidia brought back Jensen Huang as CEO; Taiwan (+9%), Korea (+6.7%) and Japan (+4%) followed this morning."},
+    {"tone": "bad", "text": "On Monday, FIIs cut their share of bets on a rise in index futures from 34% to **20%**, while futures open positions jumped 15%. That is fresh betting on a fall, not just profit-taking."},
+    {"tone": "good", "text": "My call for Wednesday: a **bounce is more likely** than a further fall, with medium confidence, because Monday's drop was tied to a global tech scare that has now reversed."},
+    {"tone": "mixed", "text": "Banks led Monday's fall (Bank Nifty −3.2%) and HDFC Bank's US shares fell another 1.1% overnight, so a bounce may be led by IT, not banks."}
+  ],
+  "sections": [
+    {"id": "overnight", "title": "What changed overnight", "tone": "good",
+     "summary": "The night brought clearly better news for Indian stocks, working against Monday's fall.",
+     "points": [
+       {"tone": "good", "text": "US stocks had their best day since April 2025: S&P 500 **+4.7%**, Nasdaq +6.5%, as Nvidia jumped about 31%. US futures are flat this morning, so the gain is holding."},
+       {"tone": "good", "text": "Asia is up sharply this morning: Taiwan **+9%**, Korea +6.7%, Japan +4%, China +0.6%; Hong Kong is flat. Reuters calls it a revival of the AI trade."},
+       {"tone": "good", "text": "Brent crude fell **2.3%** since India closed, to about $89 a barrel. Cheaper oil lowers India's import bill and helps inflation."},
+       {"tone": "mixed", "text": "The US 10-year bond rate slipped 0.04 points to 4.91% (good), but the dollar index rose 0.4% (bad, as a strong dollar tends to pull money out of markets like India)."},
+       {"tone": "mixed", "text": "India-linked shares in the US were split: Infosys +0.6% and Wipro +1.5%, but HDFC Bank **−1.1%** and the India ETF −1.7%. I couldn't confirm a current GIFT Nifty figure for this morning."}
+     ]},
+    {"id": "setup", "title": "Bounce or continuation?", "tone": "good",
+     "summary": "For Wednesday I lean towards a bounce, with medium confidence; FII futures selling is the main thing that could prove me wrong.",
+     "points": [
+       {"tone": "good", "text": "For a bounce: Monday's fall came from a global tech scare, and that scare **reversed overnight** with the biggest US rally in 19 months."},
+       {"tone": "good", "text": "For a bounce: FIIs still **bought ₹5,673 crore** of Indian shares in cash on Monday, their 10th straight buying day. They are hedging with futures, not dumping stocks."},
+       {"tone": "good", "text": "For a bounce: FIIs now hold many bets on a fall. If prices rise, they may close them in a hurry, and that buying can push prices up faster. Their long share is **20%**, low but not yet under the 10% 'panic' zone."},
+       {"tone": "bad", "text": "For more falls: futures open positions rose **15%** while price fell, which the dashboard reads as new bets on a fall. India VIX (the fear gauge) is rising at 17.9, higher than 81% of the past year."},
+       {"tone": "mixed", "text": "What would prove me wrong: Nifty closing below **25,000** on Wednesday, or the US and Asian rally fading tonight."}
+     ]},
+    {"id": "picture", "title": "The big picture", "tone": "mixed",
+     "summary": "The trend is still up, but Monday showed how quickly it can wobble.",
+     "points": [
+       {"tone": "good", "text": "The data shows Nifty at 25,350, above its 20-day (24,526), 50-day (23,551) and 200-day (23,996) averages, with higher highs and higher lows. Trend score: **+2**, the maximum."},
+       {"tone": "bad", "text": "Positioning score: **−2**, the minimum. Price fell, open bets rose, and FIIs cut their long share by 14 points in one day."},
+       {"tone": "good", "text": "Option writers added fresh puts at 25,000 and 24,800, which shows sellers are willing to defend those levels. The dashboard reads this as **bullish** (+1.3)."},
+       {"tone": "neutral", "text": "Put-call ratio (bets on a fall compared with bets on a rise) is **0.92**, not stretched either way, so it gives no signal."},
+       {"tone": "mixed", "text": "Overall dashboard bias is **+17**, just short of the +20 bullish line, with low agreement. Options are expensive, so the model favours an iron condor (a bet that Nifty stays in a range)."}
+     ]},
+    {"id": "investors", "title": "What big investors are doing", "tone": "mixed",
+     "summary": "FIIs are buying shares but hedging with futures; local funds are selling into their buying.",
+     "points": [
+       {"tone": "good", "text": "FIIs have bought **₹1,17,622 crore** in cash this month, a very large amount, and have been buyers for 10 days in a row."},
+       {"tone": "mixed", "text": "Domestic funds (DIIs) sold ₹2,760 crore on Monday and **₹64,547 crore** this month. They are taking profits as FIIs buy."},
+       {"tone": "bad", "text": "In index futures FIIs now hold about **4 bets on a fall for every 1 on a rise**, and they also bought more puts (protection against a fall)."},
+       {"tone": "mixed", "text": "Professional traders also cut their long share from 56% to **30%**, while small investors raised theirs to 70%. When small traders buy and pros sell, it is a warning sign."}
+     ]},
+    {"id": "world", "title": "What the world is telling India", "tone": "mixed",
+     "summary": "Cheaper oil and a firmer rupee help, but a likely US rate rise in December is a real worry.",
+     "points": [
+       {"tone": "bad", "text": "Markets expect the US Fed to **raise** rates on 8-9 December; CNBC reported traders put the chance near 98%. Higher US rates can pull foreign money out of India."},
+       {"tone": "good", "text": "Brent crude is down **23%** in a month to about $89. That is one of the biggest helps for India right now."},
+       {"tone": "good", "text": "The rupee has strengthened **2.1%** in a month to 92.91 per dollar, which makes Indian shares more attractive to foreign buyers."},
+       {"tone": "mixed", "text": "The US 10-year rate fell 0.21 points this week to 4.91%, but the dollar index is at its **highest level in a year** (104.3)."}
+     ]},
+    {"id": "results", "title": "Company results", "tone": "neutral",
+     "summary": "The results season is over, so company news is not a big driver this week.",
+     "points": [
+       {"tone": "neutral", "text": "No Nifty 50 company reported in the last 7 days; the **14 filings** in the dashboard are all small companies."},
+       {"tone": "good", "text": "Nifty IT rose about **2%** on Monday even as the market fell, and Infosys and Wipro's US shares rose overnight. The AI rebound may help IT again."},
+       {"tone": "bad", "text": "Metals and PSU banks were the worst sectors on Monday, according to Business Standard. These are the areas to watch for a weak bounce."}
+     ]},
+    {"id": "ahead", "title": "What could change the picture", "tone": "mixed",
+     "summary": "US inflation data this week, then India GDP, the RBI and the Fed in the next two weeks.",
+     "points": [
+       {"tone": "mixed", "text": "Wednesday 25 Nov, 7:00 pm: US **core PCE inflation** and GDP. Hotter inflation would firm up the Fed hike bets."},
+       {"tone": "mixed", "text": "Monday 30 Nov, 4:00 pm: **India GDP** for July-September."},
+       {"tone": "mixed", "text": "Friday 4 Dec, 10:00 am: **RBI policy** decision. A tougher tone would hurt banks most."},
+       {"tone": "bad", "text": "About midnight on 9-10 Dec IST: **Fed decision**. Fed Governor Waller has said a half-point rise may be needed, which would be a bigger shock."},
+       {"tone": "mixed", "text": "If Nvidia and Asian chip stocks give back their gains, today's better mood would fade fast."}
+     ]}
+  ],
+  "levels": {"ceiling": 25500, "floor": 25000, "note": "A close above 25,500 would mean call writers are being forced back and the bounce has strength; a close below 25,000 would break the put writers' floor and point to more falls."},
+  "watch": [
+    {"time": "20:30", "text": "Tonight: US consumer confidence. A weak number could cool the US rally."},
+    {"time": "", "text": "Tonight: whether US stocks and Nvidia hold Monday's gains. India will open on two nights of US moves."},
+    {"time": "09:15", "text": "Wednesday open: watch if banks join the bounce, or if it is only IT."},
+    {"time": "19:00", "text": "Wednesday: US core PCE inflation and GDP."},
+    {"time": "", "text": "Wednesday evening: whether FIIs keep adding futures bets on a fall or start closing them."}
+  ],
+  "bottom_line": "Indian markets are closed today, and since Monday's 1.75% fall the global news has turned clearly better: a huge US tech rally, strong Asia and cheaper oil. My read is that Wednesday is more likely to bounce, with medium confidence. The dashboard itself is neutral because the strong uptrend clashes with heavy new FII bets on a fall in futures. The main risk is that the AI rally fades or US inflation data on Wednesday hardens the case for a Fed rate rise.",
+  "sources": [
+    {"title": "CNBC: stock market news for Nov 23, 2026", "url": "https://www.cnbc.com/2026/11/22/stock-market-today-live-updates.html"},
+    {"title": "Yahoo Finance: best day since April 2025 as Nvidia soars on Huang's return", "url": "https://sg.finance.yahoo.com/news/live/stock-market-today-monday-november-23-dow-sp-500-nasdaq-surge-after-nvidia-reinstates-jensen-huang-182039397.html"},
+    {"title": "Reuters via Investing.com: Asian stocks rally as Huang's Nvidia return revives AI trade", "url": "https://www.investing.com/news/economy-news/asian-stocks-rally-as-huangs-nvidia-return-revives-ai-trade-5046823"},
+    {"title": "Business Standard: Sensex tanks 1,484 pts, Nifty ends at 25,350", "url": "https://www.business-standard.com/markets/news/stock-market-live-november-23-nse-bse-sensex-today-nifty50-gift-nifty-crude-oil-prices-ipo-today-126112300084_1.html"},
+    {"title": "Business Today: NSE, BSE closed on Nov 24 for Guru Nanak Jayanti", "url": "https://www.businesstoday.in/markets/stocks/story/stock-market-holiday-on-november-24-are-nse-bse-closed-for-guru-nanak-jayanti-569145-2026-11-23"},
+    {"title": "CNBC: Treasury yields, Waller comments and Fed hike odds", "url": "https://www.cnbc.com/2026/11/18/treasury-yields-bonds-fed.html"},
+    {"title": "Nifty Positioning Desk data (NSE, CNBC feeds), built 24 Nov 08:46 IST", "url": "https://github.com/prathamgupta0051-arch/nifty-desk"}
+  ]
+}
