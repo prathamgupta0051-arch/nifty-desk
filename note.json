@@ -1,94 +1,258 @@
 {
-  "version": 2,
-  "date": "2026-11-25",
-  "generated": "08:58 IST",
-  "headline": "India reopens after Tuesday's holiday with GIFT Nifty pointing to a gap-up of roughly 1%, as it catches up with the global rebound it missed. But Asian tech stocks are crashing again this morning, so the early gain may not hold.",
-  "mood": {"label": "Mixed", "tone": "mixed", "confidence": "Low",
-           "why": "The dashboard's four direction checks add up to +17 out of 100 (neutral), and they disagree two against two, so conviction is low. Market data as of Monday's close; overnight data as of 08:46 IST."},
-  "key_points": [
-    {"tone": "good", "text": "GIFT Nifty was around **25,710–25,773** near 8 am, well above Monday's Nifty close of 25,350, so a higher open looks likely as India catches up after the holiday."},
-    {"tone": "bad", "text": "Asian chip stocks are falling hard this morning (Taiwan **−7.4%**, Korea −6%, Japan −3.3%) after Nvidia fell about 6% in the US. This is the main threat to the gap-up."},
-    {"tone": "good", "text": "Foreign investors (FIIs) bought ₹5,673 crore of Indian shares on Monday even as Nifty fell 1.75%. Monday's fall came from local selling and profit-taking, not from foreigners leaving."},
-    {"tone": "mixed", "text": "My call: a bounce at the open is more likely than a fall, but I have low confidence it lasts all day. A slide back below 25,350 would show the bounce failed."},
-    {"tone": "bad", "text": "Reports say the US plans new tariffs on 16 countries, with India possibly facing a higher rate than Japan or Europe. Nothing official yet."}
-  ],
-  "sections": [
-    {"id": "overnight", "title": "What changed overnight", "tone": "mixed",
-     "summary": "India gets the good news it missed on Tuesday, but this morning's news is worse, so the night works only partly against Monday's fall.",
-     "points": [
-       {"tone": "good", "text": "GIFT Nifty was up about **1.1%** on its own last price at 8 am. Part of its gap over Nifty is the normal futures premium of about 40 points, so the real signal is roughly a 300–400 point higher open."},
-       {"tone": "good", "text": "Indian shares listed in the US rose on Tuesday while India was shut: Infosys **+3.2%**, HDFC Bank +1.6%, ICICI Bank +1.2%, and the India fund (INDA) +1.2%."},
-       {"tone": "bad", "text": "Since Tuesday evening, the Nasdaq fell **1.5%** and the S&P 500 fell 0.5%. Nasdaq futures are down another 1.4% this morning, led by chip stocks."},
-       {"tone": "bad", "text": "Asia this morning: Taiwan −7.4% and Korea −6% (after a record jump on Tuesday), Japan −3.3%, Shanghai −1.1%. Only Hong Kong is up (+0.6%)."},
-       {"tone": "neutral", "text": "Brent crude is at $90, up 0.6% since Tuesday evening, but down 22% over the past month. Gold fell 2.3%. The US 10-year rate and the dollar barely moved."}
-     ]},
-    {"id": "setup", "title": "Bounce or continuation?", "tone": "mixed",
-     "summary": "A bounce at the open looks more likely, but with low confidence that it holds through the day.",
-     "points": [
-       {"tone": "good", "text": "For a bounce: Monday's 1.75% fall came while FIIs were buying (a 10-day buying streak in the dashboard data), and Nifty is still above all three of its moving averages."},
-       {"tone": "good", "text": "For a bounce: India missed Tuesday's global rally, and US-listed Indian shares rose 1–3%. GIFT Nifty is already pricing this in."},
-       {"tone": "bad", "text": "For a fall: Asian tech shares are being sold hard right now, US futures are lower, and fresh US tariff talk names India."},
-       {"tone": "mixed", "text": "Fear is rising: India VIX (expected swings) is **17.9**, higher than 81% of the past year. Big moves in both directions are more likely than usual."},
-       {"tone": "neutral", "text": "What would prove me wrong: if the gap-up fades and Nifty falls back below Monday's close of 25,350, sellers are still in charge, and 25,000 is the next level to watch."}
-     ]},
-    {"id": "picture", "title": "The big picture", "tone": "mixed",
-     "summary": "The longer trend is still up, but positioning in futures turned weaker on Monday.",
-     "points": [
-       {"tone": "good", "text": "Price trend (+2 of 2): Nifty at 25,350 is above its 20-day (24,526), 50-day and 200-day averages, with higher highs and higher lows."},
-       {"tone": "bad", "text": "Futures (−2 of 2): prices fell while open contracts rose 15%, and FII bets on a rise fell from 34% to **20%** of their index futures. Monday was probably the November contract's last day (moved up for the holiday), which can distort these numbers."},
-       {"tone": "good", "text": "Options (+1.3 of 2): option sellers added protection-selling (put writing) at 24,800–25,000, building a floor there. Traders also bought calls at 25,500–25,900."},
-       {"tone": "neutral", "text": "Put-call ratio (how many bets on a fall vs bets on a rise) is 0.92, down from 1.03 five days ago. Not stretched either way, so score 0."}
-     ]},
-    {"id": "investors", "title": "What big investors are doing", "tone": "good",
-     "summary": "Foreigners keep buying Indian shares in cash, while domestic funds took profits.",
-     "points": [
-       {"tone": "good", "text": "FIIs bought a net **₹5,673 crore** on Monday, almost the size of their 20-day average daily flow (₹6,153 crore). They have bought ₹1.18 lakh crore so far in November."},
-       {"tone": "mixed", "text": "Domestic funds (DIIs) sold ₹2,760 crore on Monday and ₹64,547 crore this month. Usually it is the other way round, so this is unusual."},
-       {"tone": "good", "text": "NSDL data shows FIIs bought ₹10,915 crore of IT shares and ₹11,065 crore of telecom shares in the second half of October."},
-       {"tone": "bad", "text": "In index futures, FIIs now hold about four bets on a fall for every bet on a rise (20% long). That is lower than last week but not in the under-10% zone where a fast reversal usually starts."}
-     ]},
-    {"id": "world", "title": "What the world is telling India", "tone": "bad",
-     "summary": "Fear about AI stocks and possible US rate hikes is the main global worry, while cheaper oil helps India.",
-     "points": [
-       {"tone": "bad", "text": "Nvidia fell about 6% on Tuesday after a 31% jump on Monday, when Jensen Huang returned as CEO. Doubts about returns on AI spending are hitting chip-heavy markets like Taiwan and Korea hardest."},
-       {"tone": "bad", "text": "US 6-month Treasury bills pay **4.46%**, well above the Fed rate of 3.88%. This suggests the market expects the Fed to raise rates, which usually pulls money out of countries like India."},
-       {"tone": "bad", "text": "US fear gauge (VIX) is at 26.4, higher than 95% of the past year. The S&P 500 is down 6% in a month."},
-       {"tone": "good", "text": "Brent crude is down **22%** in a month, to $90. Cheaper oil lowers India's import bill and inflation."},
-       {"tone": "good", "text": "The rupee is 2.4% stronger against the dollar in a month (₹92.91), which makes Indian shares more attractive to foreigners."}
-     ]},
-    {"id": "results", "title": "Company results", "tone": "neutral",
-     "summary": "No Nifty 50 company reported this week, so results won't move the index today.",
-     "points": [
-       {"tone": "neutral", "text": "11 small companies filed results in the last 7 days. None are in the Nifty 50."},
-       {"tone": "neutral", "text": "The calendar shows no Nifty 50 results due in the next two weeks."},
-       {"tone": "good", "text": "Infosys's US listing rose 3.2% on Tuesday, so IT stocks may start the day firm. The selloff in Asia is in chipmakers, which India has very few of."}
-     ]},
-    {"id": "ahead", "title": "What could change the picture", "tone": "mixed",
-     "summary": "US inflation data tonight, India's GDP on Monday and the RBI on 4 December are the big events.",
-     "points": [
-       {"tone": "mixed", "text": "Tonight 7 pm IST: US core PCE inflation (forecast 0.3%) and US GDP. A hot inflation number would add to fears of a Fed rate hike."},
-       {"tone": "mixed", "text": "Mon 30 Nov, 4 pm: India's quarterly GDP. A big surprise either way can move the whole market."},
-       {"tone": "mixed", "text": "Fri 4 Dec, 10 am: RBI rate decision. Then the US Fed decides on 10 Dec (around midnight IST)."},
-       {"tone": "bad", "text": "Any official US tariff announcement naming India at a higher rate would hurt exporters and could stall the India-US trade deal."}
-     ]}
-  ],
-  "levels": {"ceiling": 25500, "floor": 25000, "note": "A close above 25,500 would mean call sellers there gave way and the uptrend is back on; a close below 25,000 would break the put floor and point to a deeper fall."},
-  "watch": [
-    {"time": "09:15", "text": "How much of the GIFT Nifty gap-up shows up at the open, and whether it holds in the first hour."},
-    {"time": "", "text": "Bank stocks: they led Monday's fall (Bank Nifty −3%). HDFC Bank and ICICI rose in the US on Tuesday."},
-    {"time": "", "text": "Taiwan and Korea through the day. A deeper slide there could drag the rest of Asia, India included."},
-    {"time": "19:00", "text": "US core PCE inflation and GDP. A hot number would raise Fed hike fears."},
-    {"time": "", "text": "Evening FII/DII data: does the FII buying streak continue?"}
-  ],
-  "bottom_line": "India should open higher as it catches up with the global rebound it missed on Tuesday, and foreigners are still buying. But Asian tech stocks are crashing this morning, US futures are lower, and US tariff news names India, so the gap-up may fade. The dashboard is neutral (+17) with its checks split two against two, so confidence is low. The main risk is the AI-stock selloff spreading, and a slip back below 25,350 would mean the bounce failed.",
-  "sources": [
-    {"title": "Business Standard: Stock market live, 25 Nov (GIFT Nifty, Kospi)", "url": "https://www.business-standard.com/markets/news/stock-market-live-november-25-gift-nifty-bse-sensex-today-nifty50-crude-oil-prices-ipo-today-126112500069_1.html"},
-    {"title": "Newsdrum: GIFT Nifty flashes green as Asia bleeds", "url": "https://www.newsdrum.in/business/gift-nifty-flashes-green-as-asia-bleeds-will-sensex-and-nifty-defy-global-selloff-12839049"},
-    {"title": "Univest: Closing bell, 23 Nov (Sensex −1,484, Bank Nifty −3%)", "url": "https://univest.in/blogs/closing-bell-sensex-nifty-bank-nifty-23-november-2026"},
-    {"title": "Yahoo Finance: Stock market today, 24 Nov (Nvidia −6%)", "url": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-24-dow-sp-500-nasdaq-chip-stocks-nvidia-140629923.html"},
-    {"title": "BNN Bloomberg: Nvidia and other AI stocks fall", "url": "https://www.bnnbloomberg.ca/investing/market-outlook/2026/11/24/tech-stocks-wane-a-day-after-a-huang-rally-as-anthropic-tumbles-below-its-initial-offering-price/"},
-    {"title": "Korea JoongAng Daily: Kospi plunges, sell sidecar triggered", "url": "https://koreajoongangdaily.com/business/kospi-tumbles-46-triggering-sellside-trading-curb/12989718"},
-    {"title": "Business Standard: US planning to hike tariffs on India, 15 other countries", "url": "https://www.business-standard.com/world-news/us-planning-to-hike-tariffs-against-india-15-other-countries-report-126112401230_1.html"},
-    {"title": "Nifty Positioning Desk data (NSE, CNBC feeds, NSDL, New York Fed)", "url": "https://github.com/prathamgupta0051-arch/nifty-desk"}
-  ]
+ "version": 2,
+ "date": "2026-11-26",
+ "generated": "08:49 IST",
+ "headline": "Nifty looks set to open about 1% higher, near **26,000**, after Asia and US futures bounced. But 26,000 is the biggest wall of option sellers and oil jumped 4% overnight, so the rise may stall there.",
+ "mood": {
+  "label": "Positive",
+  "tone": "good",
+  "confidence": "Medium",
+  "why": "Dashboard score +34 (leaning up), but only 2 of 4 checks agree; overnight news supports the open. Overnight data as of 08:47 IST."
+ },
+ "key_points": [
+  {
+   "tone": "good",
+   "text": "GIFT Nifty (overnight Nifty futures) was near 26,070 at 7 am, about **1% above** yesterday's close of 25,819."
+  },
+  {
+   "tone": "bad",
+   "text": "Brent crude rose **4.3%** since India closed, to $94.84, on a claimed Houthi attack on a Saudi refinery. Cheaper oil helped yesterday's rally, so this works against it."
+  },
+  {
+   "tone": "bad",
+   "text": "The US proposed a tariff of up to **25%** on Indian goods (17% with a trade deal), likely not before January."
+  },
+  {
+   "tone": "mixed",
+   "text": "My call: the rally **continues at the open** but stalls near 26,000. A fall back below 25,819 would prove me wrong."
+  },
+  {
+   "tone": "good",
+   "text": "FIIs bought ₹4,479 crore yesterday, their **11th buying day in a row**, and Indian funds bought ₹4,019 crore too."
+  }
+ ],
+ "sections": [
+  {
+   "id": "overnight",
+   "title": "What changed overnight",
+   "tone": "good",
+   "summary": "Mostly good news for the open, supporting yesterday's rise; oil and tariffs are the clear negatives.",
+   "points": [
+    {
+     "tone": "good",
+     "text": "GIFT Nifty points to a gap-up of about **+250 points**. US markets are shut today for Thanksgiving, so Asia will set the tone."
+    },
+    {
+     "tone": "good",
+     "text": "US stocks closed slightly lower after hot US inflation data, but US futures are up this morning (S&P 500 **+0.6%**)."
+    },
+    {
+     "tone": "good",
+     "text": "Asia is bouncing as tech recovers: Hong Kong **+2.2%**, Japan +1.5%, Taiwan +1.6%."
+    },
+    {
+     "tone": "good",
+     "text": "Indian shares listed in the US rose: Infosys **+4.2%**, Wipro +3.3%, HDFC Bank +2.9%. I couldn't confirm a specific reason for the IT jump."
+    },
+    {
+     "tone": "bad",
+     "text": "Brent is up **4.3%** and gold 1.6% since India's close. The refinery damage is unconfirmed, so oil could ease, but for now it hurts India, a big oil importer."
+    }
+   ]
+  },
+  {
+   "id": "setup",
+   "title": "Bounce or continuation?",
+   "tone": "mixed",
+   "summary": "Continuation at the open, slowing near 26,000; medium confidence for the open, low for the close.",
+   "points": [
+    {
+     "tone": "good",
+     "text": "For more upside: every overnight signal points up, and FIIs have bought **₹1.22 lakh crore** of shares so far in November."
+    },
+    {
+     "tone": "good",
+     "text": "Futures traders added bets on a rise: price up 1.85% with open contracts up **2.6%**."
+    },
+    {
+     "tone": "bad",
+     "text": "Against: a 1% gap-up lands right at **26,000**, where the most call options are sold. Sellers usually defend that level."
+    },
+    {
+     "tone": "bad",
+     "text": "Also against: oil's jump, the tariff threat and a likely US rate hike. Yesterday's 'cheaper oil' support is gone."
+    },
+    {
+     "tone": "mixed",
+     "text": "Proof I'm wrong: a slide below **25,819** means the gap-up failed; a close above 26,000 means the rally is stronger than I think."
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The big picture",
+   "tone": "good",
+   "summary": "The trend is up, but the checks underneath disagree.",
+   "points": [
+    {
+     "tone": "good",
+     "text": "Nifty is above its 20-, 50- and 200-day averages and keeps making higher tops and bottoms: the price check scores the **maximum +2**."
+    },
+    {
+     "tone": "bad",
+     "text": "The option check scores **−1.29**: fresh calls were sold at 25,900–26,200, and many new puts look like worried protection buying, not a solid floor."
+    },
+    {
+     "tone": "neutral",
+     "text": "Put-call ratio (bets on a fall vs bets on a rise) is **1.02**, a normal level with no signal."
+    },
+    {
+     "tone": "mixed",
+     "text": "India VIX (expected swings) is 17.7, higher than **80%** of the last year's days and rising. Expect bigger moves both ways."
+    }
+   ]
+  },
+  {
+   "id": "investors",
+   "title": "What big investors are doing",
+   "tone": "good",
+   "summary": "Foreign and Indian funds both bought yesterday, which is rare this month.",
+   "points": [
+    {
+     "tone": "good",
+     "text": "FIIs bought **₹4,479 crore** net, a big day by the dashboard's rule (₹3,000 crore or more)."
+    },
+    {
+     "tone": "good",
+     "text": "Indian funds bought ₹4,019 crore after selling ₹60,528 crore earlier this month. **Both buying together** is a stronger sign."
+    },
+    {
+     "tone": "mixed",
+     "text": "In index futures FIIs are still mostly betting on a fall: only **23.8%** of their positions are bets on a rise, up from 20.1%."
+    }
+   ]
+  },
+  {
+   "id": "world",
+   "title": "What the world is telling India",
+   "tone": "mixed",
+   "summary": "Markets are calmer this morning, but US rates and oil are real worries.",
+   "points": [
+    {
+     "tone": "bad",
+     "text": "Dashboard red flag: 6-month US bills pay 4.44% vs the Fed's 3.88%, so markets expect a **US rate hike** in December."
+    },
+    {
+     "tone": "good",
+     "text": "The US 10-year bond rate fell about **0.20 points** this week to 4.86%, which usually helps foreign money flow to India."
+    },
+    {
+     "tone": "bad",
+     "text": "The US fear gauge (VIX) is high at **28.3**, mostly on worries about AI-linked tech stocks."
+    }
+   ]
+  },
+  {
+   "id": "results",
+   "title": "Company results",
+   "tone": "neutral",
+   "summary": "No Nifty 50 company reported, so results won't move the index today.",
+   "points": [
+    {
+     "tone": "good",
+     "text": "Siemens Energy India: revenue up 30%, profit up **81%** from last year. I couldn't confirm analysts' expectations."
+    },
+    {
+     "tone": "neutral",
+     "text": "Other filings were from small companies and don't affect Nifty."
+    },
+    {
+     "tone": "neutral",
+     "text": "No big-company results are due in the next week."
+    }
+   ]
+  },
+  {
+   "id": "ahead",
+   "title": "What could change the picture",
+   "tone": "mixed",
+   "summary": "OPEC+, India's GDP, the RBI and the Fed all land in the next two weeks.",
+   "points": [
+    {
+     "tone": "mixed",
+     "text": "OPEC+ (big oil producers) meets **Sunday, Nov 29**; it can cool or lift oil."
+    },
+    {
+     "tone": "mixed",
+     "text": "India's quarterly **GDP** is out Monday, Nov 30 at 4 pm; weekly expiry is Tuesday, Dec 1."
+    },
+    {
+     "tone": "mixed",
+     "text": "RBI rate decision on **Dec 4**; US Fed on the night of Dec 9–10. A US hike could slow FII buying."
+    },
+    {
+     "tone": "bad",
+     "text": "Any news on the US tariff plan or India–US trade talks: a deal cuts the proposed rate to 17%."
+    }
+   ]
+  }
+ ],
+ "levels": {
+  "ceiling": 26000,
+  "floor": 25500,
+  "note": "A close above 26,000 would mean buyers beat the biggest wall of call sellers and the rally has room; a close below 25,500 would break the floor and undo yesterday's rise."
+ },
+ "watch": [
+  {
+   "time": "09:15",
+   "text": "Does Nifty open near 26,000 and hold above 25,819 in the first hour?"
+  },
+  {
+   "time": "",
+   "text": "Brent crude: back toward $90 helps, above $95 hurts."
+  },
+  {
+   "time": "",
+   "text": "IT stocks, after Infosys and Wipro rose 3–4% in the US."
+  },
+  {
+   "time": "18:00",
+   "text": "FII and DII flow data. A 12th straight FII buying day would support the trend."
+  }
+ ],
+ "bottom_line": "The trend is up, both foreign and Indian funds are buying, and overnight signals point to an open near 26,000. My read: the rise continues at the open but slows near 26,000, where option sellers are strongest. The dashboard leans up (+34) with low confidence, as only 2 of 4 checks agree. Main risks are oil and the US tariff proposal; a fall below 25,819 would show the gap-up failed.",
+ "sources": [
+  {
+   "title": "Business Standard: Stock market live, Nov 26 (GIFT Nifty, Asia)",
+   "url": "https://www.business-standard.com/markets/news/stock-market-live-november-26-nse-bse-sensex-today-nifty50-gift-nifty-crude-oil-prices-ipo-today-126112600049_1.html"
+  },
+  {
+   "title": "Business Standard: US proposes up to 25% tariff on India",
+   "url": "https://www.business-standard.com/economy/news/us-proposes-up-to-25-tariff-on-india-offers-17-upon-trade-deal-126112501255_1.html"
+  },
+  {
+   "title": "The Week: India pushes back against US tariff proposal",
+   "url": "https://www.theweek.in/news/biz-tech/2026/11/26/tariff-india-rejects-us-excess-capacity-allegations.html"
+  },
+  {
+   "title": "OilPrice.com: Oil jumps as Saudi Arabia downs drones over Ras Tanura",
+   "url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Jumps-Over-2-as-Saudi-Arabia-Downs-Drones-Over-Ras-Tanura.html"
+  },
+  {
+   "title": "5paisa: Sensex and Nifty close, Nov 25",
+   "url": "https://www.5paisa.com/blog/sensex-nifty-market-close-25-nov-2026"
+  },
+  {
+   "title": "Newsweek: US stock market closed for Thanksgiving 2026",
+   "url": "https://www.newsweek.com/stock-market-thanksgiving-2026-12761725"
+  },
+  {
+   "title": "DSIJ: Pre-market update, US tariff proposal and crude in focus",
+   "url": "https://insights.dsij.in/dsijarticledetail/pre-market-update-gift-nifty-signals-positive-start-us-tariff-proposal-crude-oil-in-focus-60625"
+  },
+  {
+   "title": "Nifty Positioning Desk data files (NSE, CNBC feeds, NSDL)",
+   "url": "https://github.com/prathamgupta0051-arch/nifty-desk"
+  }
+ ]
 }
